@@ -1,0 +1,80 @@
+<footer class="lx-footer" aria-label="Site footer">
+  <div class="container">
+    <div class="row g-5">
+      <!-- Brand column -->
+      <div class="col-lg-4">
+        <div class="footer-brand-name mb-1">
+          Lunex <span class="accent">Presents</span>
+        </div>
+        <p class="footer-tagline">Digital Creative Agency</p>
+        <p class="text-grey mt-3" style="font-size:0.85rem; line-height:1.7;">
+          We craft premium websites, brand identities, and social media visuals that help local businesses make a lasting impression.
+        </p>
+        <div class="footer-social mt-3">
+          <a href="https://instagram.com/lunex.presents" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Lunex Presents on Instagram">
+            <i class="bi bi-instagram" aria-hidden="true"></i>
+          </a>
+          <a href="mailto:lunex.presents@gmail.com" class="social-link" aria-label="Email Lunex Presents">
+            <i class="bi bi-envelope" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Pages -->
+      <div class="col-6 col-lg-2">
+        <p class="footer-heading">Pages</p>
+        <ul class="footer-links">
+          <li><a href="{% url 'core:home' %}">Home</a></li>
+          <li><a href="{% url 'services:services' %}">Services</a></li>
+          <li><a href="{% url 'portfolio:work' %}">Work</a></li>
+          <li><a href="{% url 'core:about' %}">About</a></li>
+          <li><a href="{% url 'contact:contact' %}">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Services -->
+      <div class="col-6 col-lg-3">
+        <p class="footer-heading">Services</p>
+        <ul class="footer-links">
+          <li><a href="{% url 'services:services' %}">Website Design &amp; Development</a></li>
+          <li><a href="{% url 'services:services' %}">Logo &amp; Brand Identity</a></li>
+          <li><a href="{% url 'services:services' %}">Posters &amp; Social Media</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div class="col-lg-3">
+        <p class="footer-heading">Get in Touch</p>
+        <ul class="footer-links">
+          <li>
+            <a href="mailto:lunex.presents@gmail.com">
+              <i class="bi bi-envelope me-1" aria-hidden="true"></i>
+              lunex.presents@gmail.com
+            </a>
+          </li>
+          <li>
+            <a href="https://instagram.com/lunex.presents" target="_blank" rel="noopener noreferrer">
+              <i class="bi bi-instagram me-1" aria-hidden="true"></i>
+              @lunex.presents
+            </a>
+          </li>
+        </ul>
+        <div class="mt-3">
+          <a href="{% url 'contact:contact' %}" class="btn btn-primary btn-sm">
+            Start a Project
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer bottom bar -->
+    <div class="footer-bottom d-flex flex-column flex-sm-row align-items-start align-items-sm-center justify-content-between gap-2">
+      <p class="footer-copy mb-0">
+        &copy; {% now "Y" %} Lunex Presents. All rights reserved.
+      </p>
+      <p class="footer-copy mb-0">
+        Built with passion by Lunex Presents.
+      </p>
+    </div>
+  </div>
+</footer>

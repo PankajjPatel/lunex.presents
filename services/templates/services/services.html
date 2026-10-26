@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- Page Hero -->
+<section class="page-hero" aria-labelledby="services-page-title">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-7">
+        <span class="section-eyebrow">Services</span>
+        <h1 class="page-hero-title" id="services-page-title">Digital Services That Deliver</h1>
+        <p class="page-hero-subtitle mt-3">
+          Everything your brand needs to look premium, work flawlessly, and stand out in a crowded market.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr style="margin:0; border-color:var(--lx-border);">
+
+<!-- Services List -->
+<section class="section-py" aria-labelledby="services-list-heading">
+  <div class="container">
+    <h2 class="visually-hidden" id="services-list-heading">Our Services</h2>
+
+    {% if services %}
+      {% for service in services %}
+      <div class="row align-items-center g-5 mb-5 pb-5 {% if not forloop.last %}border-bottom border-subtle{% endif %} reveal">
+        <div class="col-lg-{% if forloop.counter|divisibleby:2 %}6 order-lg-2{% else %}6{% endif %}">
+          <div class="service-icon-wrap" style="width:60px;height:60px;font-size:1.6rem;" aria-hidden="true">
+            <i class="{{ service.icon_class }}"></i>
+          </div>
+          <h2 class="h3 mt-3 mb-3">{{ service.title }}</h2>
+          <p style="color:var(--lx-grey-light);line-height:1.8;">{{ service.full_description }}</p>
+          <a href="{% url 'contact:contact' %}" class="btn btn-primary mt-3">
+            Enquire About This Service <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
+          </a>
+        </div>
+        <div class="col-lg-{% if forloop.counter|divisibleby:2 %}6 order-lg-1{% else %}6{% endif %}">
+          <div class="lx-card" style="text-align:center;min-height:220px;display:flex;align-items:center;justify-content:center;font-size:5rem;color:var(--lx-accent);opacity:0.15;">
+            <i class="{{ service.icon_class }}" aria-hidden="true"></i>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    {% else %}
+      <!-- Default services when no DB entries -->
+      <!-- Website Development -->
+      <div class="row align-items-center g-5 mb-5 pb-5 border-bottom border-subtle reveal">
+        <div class="col-lg-6">
+          <div class="service-icon-wrap" style="width:60px;height:60px;font-size:1.6rem;" aria-hidden="true"><i class="bi bi-code-slash"></i></div>
+          <h2 class="h3 mt-3 mb-3">Website Design &amp; Development</h2>
+          <p style="color:var(--lx-grey-light);line-height:1.8;">
+            Your website is your most important digital asset — and we build it to perform. We design and develop custom websites that are visually stunning, fast-loading, mobile-first, and optimized for search engines.
+          </p>
+          <p style="color:var(--lx-grey-light);line-height:1.8;">
+            Whether it's a single landing page or a full multi-page business site, every line of code and every design decision is made with your audience in mind.
+          </p>
+          <ul style="color:var(--lx-grey);font-size:0.9rem;line-height:2;">
+            <li>Custom responsive design — no templates</li>
+            <li>Mobile-first &amp; cross-browser tested</li>
+            <li>SEO-optimized structure &amp; clean code</li>
+            <li>Fast load times &amp; performance focused</li>
+            <li>Content management &amp; easy updates</li>
+          </ul>
+          <a href="{% url 'contact:contact' %}" class="btn btn-primary mt-3">
+            Enquire About This Service <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
+          </a>
+        </div>
+        <div class="col-lg-6">
+          <div class="lx-card" style="text-align:center;min-height:220px;display:flex;align-items:center;justify-content:center;font-size:5rem;color:var(--lx-accent);opacity:0.15;">
+            <i class="bi bi-code-slash" aria-hidden="true"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Logo & Brand Identity -->
+      <div class="row align-items-center g-5 mb-5 pb-5 border-bottom border-subtle reveal">
+        <div class="col-lg-6 order-lg-2">
+          <div class="service-icon-wrap" style="width:60px;height:60px;font-size:1.6rem;" aria-hidden="true"><i class="bi bi-pen"></i></div>
+          <h2 class="h3 mt-3 mb-3">Logo &amp; Brand Identity</h2>
+          <p style="color:var(--lx-grey-light);line-height:1.8;">
+            Your logo is the first thing people see — and the last thing they forget. We create distinctive logos and comprehensive brand identity systems that capture the essence of your business and make it instantly recognizable.
+          </p>
+          <p style="color:var(--lx-grey-light);line-height:1.8;">
+            From initial concept to final brand guidelines, we give you everything you need to present your brand consistently and confidently.
+          </p>
+          <ul style="color:var(--lx-grey);font-size:0.9rem;line-height:2;">
+            <li>Custom logo design (multiple concepts)</li>
+            <li>Full brand identity system</li>
+            <li>Colour palette &amp; typography guidelines</li>
+            <li>Business card &amp; stationery design</li>
+            <li>Files in all formats (SVG, PNG, PDF)</li>
+          </ul>
+          <a href="{% url 'contact:contact' %}" class="btn btn-primary mt-3">
+            Enquire About This Service <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
+          </a>
+        </div>
+        <div class="col-lg-6 order-lg-1">
+          <div class="lx-card" style="text-align:center;min-height:220px;display:flex;align-items:center;justify-content:center;font-size:5rem;color:var(--lx-accent);opacity:0.15;">
+            <i class="bi bi-pen" aria-hidden="true"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Social Media -->
+      <div class="row align-items-center g-5 reveal">
+        <div class="col-lg-6">
+          <div class="service-icon-wrap" style="width:60px;height:60px;font-size:1.6rem;" aria-hidden="true"><i class="bi bi-images"></i></div>
+          <h2 class="h3 mt-3 mb-3">Posters &amp; Social Media Creatives</h2>
+          <p style="color:var(--lx-grey-light);line-height:1.8;">
+            In a feed full of noise, you need content that stops the scroll. We design eye-catching posters, social media graphics, and promotional creatives that get noticed, drive engagement, and stay on-brand.
+          </p>
+          <p style="color:var(--lx-grey-light);line-height:1.8;">
+            From one-off event posters to full social media content kits — we design assets that work on every platform.
+          </p>
+          <ul style="color:var(--lx-grey);font-size:0.9rem;line-height:2;">
+            <li>Instagram, Facebook &amp; LinkedIn graphics</li>
+            <li>Event &amp; promotional posters</li>
+            <li>Story &amp; reel cover templates</li>
+            <li>Social media content kits</li>
+            <li>On-brand, scroll-stopping designs</li>
+          </ul>
+          <a href="{% url 'contact:contact' %}" class="btn btn-primary mt-3">
+            Enquire About This Service <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
+          </a>
+        </div>
+        <div class="col-lg-6">
+          <div class="lx-card" style="text-align:center;min-height:220px;display:flex;align-items:center;justify-content:center;font-size:5rem;color:var(--lx-accent);opacity:0.15;">
+            <i class="bi bi-images" aria-hidden="true"></i>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-py" style="background:var(--lx-bg-alt)" aria-labelledby="services-cta-heading">
+  <div class="container">
+    <div class="cta-band reveal">
+      <h2 class="section-title" id="services-cta-heading">Not Sure What You Need?</h2>
+      <p class="section-subtitle mx-auto mb-4">Tell us about your project and we'll figure it out together.</p>
+      <a href="{% url 'contact:contact' %}" class="btn btn-primary btn-lg" id="services-cta-btn">
+        <i class="bi bi-chat-dots me-2" aria-hidden="true"></i>Start a Conversation
+      </a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

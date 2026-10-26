@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- Page Hero -->
+<section class="page-hero" aria-labelledby="work-title">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-7">
+        <span class="section-eyebrow">Portfolio</span>
+        <h1 class="page-hero-title" id="work-title">Our Work</h1>
+        <p class="page-hero-subtitle mt-3">
+          A selection of projects we've delivered — websites, identities, and visual content built with intention.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr style="margin:0; border-color:var(--lx-border);">
+
+<!-- Portfolio Grid -->
+<section class="section-py" aria-label="Portfolio grid">
+  <div class="container">
+
+    <!-- Category Filters -->
+    {% if categories %}
+    <nav class="portfolio-filters" aria-label="Portfolio category filters">
+      <button class="filter-btn active" data-filter="all" id="filter-all">All Work</button>
+      {% for cat in categories %}
+      <button
+        class="filter-btn {% if selected_category == cat.slug %}active{% endif %}"
+        data-filter="{{ cat.slug }}"
+        id="filter-{{ cat.slug }}"
+      >{{ cat.name }}</button>
+      {% endfor %}
+    </nav>
+    {% endif %}
+
+    <!-- Projects -->
+    <div class="row g-4 position-relative" id="portfolio-grid">
+      {% if projects %}
+        {% for project in projects %}
+        <div
+          class="col-md-6 col-lg-4 portfolio-item reveal"
+          data-category="{{ project.category.slug|default:'uncategorized' }}"
+        >
+          <article class="project-card">
+            <div class="project-thumbnail">
+              {% if project.thumbnail %}
+                <img
+                  src="{{ project.thumbnail.url }}"
+                  alt="{{ project.title }}"
+                  loading="lazy"
+                >
+              {% else %}
+                <div class="project-thumbnail-placeholder">
+                  <i class="bi bi-image" aria-hidden="true"></i>
+                </div>
+              {% endif %}
+              <div class="project-overlay" aria-hidden="true">
+                <a href="{{ project.get_absolute_url }}" class="btn btn-primary btn-sm">View Project</a>
+              </div>
+            </div>
+            <div class="project-body">
+              {% if project.category %}
+              <div class="project-category">{{ project.category.name }}</div>
+              {% endif %}
+              <h2 class="project-title">{{ project.title }}</h2>
+              <p class="project-desc">{{ project.short_description }}</p>
+              <div class="project-meta">
+                {% if project.is_concept %}
+                <span class="badge-concept" title="This is a concept project">Concept</span>
+                {% endif %}
+                <a href="{{ project.get_absolute_url }}" class="btn btn-outline-primary btn-sm ms-auto">
+                  View <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    <!-- Empty state -->
+    <div id="portfolio-empty" class="empty-state {% if projects %}d-none{% endif %}">
+      <i class="bi bi-folder2-open d-block" aria-hidden="true"></i>
+      <h3 class="h5 text-grey">No projects here yet</h3>
+      <p class="text-grey" style="font-size:0.9rem;">Projects will appear here once they're added. Check back soon.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-py-sm" style="background:var(--lx-bg-alt)" aria-labelledby="work-cta-heading">
+  <div class="container">
+    <div class="cta-band reveal">
+      <h2 class="section-title" id="work-cta-heading">Want Work Like This?</h2>
+      <p class="section-subtitle mx-auto mb-4">Every project starts with a conversation. Let's have one.</p>
+      <a href="{% url 'contact:contact' %}" class="btn btn-primary btn-lg" id="work-cta-btn">
+        <i class="bi bi-arrow-right-circle me-2" aria-hidden="true"></i>Start a Project
+      </a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

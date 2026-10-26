@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Server Error — Lunex Presents{% endblock %}
+
+{% block content %}
+<section style="min-height:75vh;display:flex;align-items:center;" aria-labelledby="error-500-heading">
+  <div class="container text-center">
+    <div style="max-width:480px;margin:0 auto;">
+      <div style="font-size:7rem;font-weight:900;color:var(--lx-accent);opacity:0.15;line-height:1;letter-spacing:-0.05em;">500</div>
+      <h1 class="section-title mt-n3" id="error-500-heading" style="margin-top:-1.5rem;">Something Went Wrong</h1>
+      <p style="color:var(--lx-grey);margin-bottom:2rem;">
+        We're experiencing a temporary issue on our end. Please try again in a moment.
+      </p>
+      <div class="d-flex gap-3 justify-content-center flex-wrap">
+        <a href="/" class="btn btn-primary" id="error-500-home-btn">
+          <i class="bi bi-house me-2" aria-hidden="true"></i>Go Home
+        </a>
+        <a href="mailto:lunex.presents@gmail.com" class="btn btn-outline-light">
+          <i class="bi bi-envelope me-2" aria-hidden="true"></i>Contact Us
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

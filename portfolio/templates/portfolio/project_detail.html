@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ project.title }} — Lunex Presents{% endblock %}
+{% block meta_description %}{{ project.short_description }}{% endblock %}
+
+{% block content %}
+
+<!-- Breadcrumb -->
+<nav class="py-3 border-bottom border-subtle" aria-label="Breadcrumb">
+  <div class="container">
+    <ol class="breadcrumb mb-0" style="font-size:0.85rem;">
+      <li class="breadcrumb-item"><a href="{% url 'core:home' %}" style="color:var(--lx-grey);">Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'portfolio:work' %}" style="color:var(--lx-grey);">Work</a></li>
+      <li class="breadcrumb-item active" style="color:var(--lx-text);" aria-current="page">{{ project.title }}</li>
+    </ol>
+  </div>
+</nav>
+
+<section class="section-py" aria-labelledby="project-title">
+  <div class="container">
+    <div class="row g-5">
+
+      <!-- Main content -->
+      <div class="col-lg-8">
+        <!-- Header -->
+        <div class="mb-4 reveal">
+          {% if project.category %}
+          <div class="project-category mb-1">{{ project.category.name }}</div>
+          {% endif %}
+          <h1 class="page-hero-title" id="project-title" style="font-size:clamp(1.8rem,3.5vw,2.5rem);">
+            {{ project.title }}
+          </h1>
+          {% if project.is_concept %}
+          <span class="badge-concept ms-0 mt-2 d-inline-block">Concept Project</span>
+          {% endif %}
+        </div>
+
+        <!-- Hero image -->
+        <div class="project-detail-hero reveal">
+          {% if project.thumbnail %}
+            <img src="{{ project.thumbnail.url }}" alt="{{ project.title }}">
+          {% else %}
+            <div class="project-detail-placeholder">
+              <i class="bi bi-image" aria-hidden="true"></i>
+            </div>
+          {% endif %}
+        </div>
+
+        <!-- Description -->
+        <div class="reveal">
+          <h2 class="h4 mb-3">About This Project</h2>
+          <div style="color:var(--lx-grey-light);line-height:1.9;white-space:pre-line;">{{ project.description }}</div>
+        </div>
+
+        {% if project.get_deliverables_list %}
+        <div class="mt-4 reveal">
+          <h2 class="h5 mb-3">Deliverables</h2>
+          <div>
+            {% for item in project.get_deliverables_list %}
+            <span class="deliverable-tag">{{ item }}</span>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+
+        <!-- Back to work -->
+        <div class="mt-5 reveal">
+          <a href="{% url 'portfolio:work' %}" class="btn btn-outline-light">
+            <i class="bi bi-arrow-left me-2" aria-hidden="true"></i>Back to All Work
+          </a>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="col-lg-4">
+        <div class="project-info-block reveal sticky-top" style="top:6rem;">
+          {% if project.client_name %}
+          <div class="mb-3">
+            <div class="info-label">Client</div>
+            <div class="info-value">{{ project.client_name }}</div>
+          </div>
+          {% endif %}
+
+          {% if project.category %}
+          <div class="mb-3">
+            <div class="info-label">Category</div>
+            <div class="info-value">{{ project.category.name }}</div>
+          </div>
+          {% endif %}
+
+          {% if project.created_date %}
+          <div class="mb-3">
+            <div class="info-label">Project Date</div>
+            <div class="info-value">{{ project.created_date|date:"F Y" }}</div>
+          </div>
+          {% endif %}
+
+          <div class="mb-3">
+            <div class="info-label">Type</div>
+            <div class="info-value">
+              {% if project.is_concept %}
+                <span class="badge-concept">Concept Project</span>
+              {% else %}
+                Client Project
+              {% endif %}
+            </div>
+          </div>
+
+          <hr style="border-color:var(--lx-border);">
+
+          <p style="font-size:0.85rem;color:var(--lx-grey);margin-bottom:1rem;">
+            Interested in similar work for your brand?
+          </p>
+          <a href="{% url 'contact:contact' %}" class="btn btn-primary w-100" id="project-cta-btn">
+            Start a Project <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Related projects -->
+    {% if related_projects %}
+    <div class="mt-6 pt-5 border-top border-subtle reveal">
+      <h2 class="h4 mb-4">More Work</h2>
+      <div class="row g-4">
+        {% for rp in related_projects %}
+        <div class="col-md-4">
+          <article class="project-card">
+            <div class="project-thumbnail">
+              {% if rp.thumbnail %}
+                <img src="{{ rp.thumbnail.url }}" alt="{{ rp.title }}" loading="lazy">
+              {% else %}
+                <div class="project-thumbnail-placeholder"><i class="bi bi-image" aria-hidden="true"></i></div>
+              {% endif %}
+              <div class="project-overlay" aria-hidden="true">
+                <a href="{{ rp.get_absolute_url }}" class="btn btn-primary btn-sm">View</a>
+              </div>
+            </div>
+            <div class="project-body">
+              <h3 class="project-title">{{ rp.title }}</h3>
+              <p class="project-desc">{{ rp.short_description }}</p>
+              <a href="{{ rp.get_absolute_url }}" class="btn btn-outline-primary btn-sm">
+                View <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
+              </a>
+            </div>
+          </article>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+{% endblock %}

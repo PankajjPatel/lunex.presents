@@ -1,0 +1,74 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- Title & Meta -->
+  <title>{% block title %}{{ page_title|default:"Lunex Presents — Digital Creative Agency" }}{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}{{ meta_description|default:"Lunex Presents crafts premium websites, logos, and social media visuals for local businesses and brands." }}{% endblock %}">
+  <meta name="author" content="Lunex Presents">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Lunex Presents">
+  <meta property="og:title" content="{% block og_title %}{{ page_title|default:"Lunex Presents" }}{% endblock %}">
+  <meta property="og:description" content="{% block og_description %}{{ meta_description|default:"Lunex Presents crafts premium websites, logos, and social media visuals." }}{% endblock %}">
+  <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/og-image.png' %}">
+  <meta property="og:url" content="{{ request.build_absolute_uri }}">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{% block twitter_title %}{{ page_title|default:"Lunex Presents" }}{% endblock %}">
+  <meta name="twitter:description" content="{{ meta_description|default:"Lunex Presents crafts premium websites, logos, and social media visuals." }}">
+  <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/og-image.png' %}">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
+  <link rel="apple-touch-icon" href="{% static 'images/favicon.png' %}">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <!-- Lunex Custom CSS -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+  <!-- Skip to content (accessibility) -->
+  <a href="#main-content" class="visually-hidden-focusable position-absolute top-0 start-0 p-2 m-2 bg-primary text-white rounded">
+    Skip to main content
+  </a>
+
+  <!-- Navbar -->
+  {% include "components/navbar.html" %}
+
+  <!-- Main content -->
+  <main id="main-content">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Footer -->
+  {% include "components/footer.html" %}
+
+  <!-- Bootstrap 5 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Lunex Main JS -->
+  <script src="{% static 'js/main.js' %}"></script>
+
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

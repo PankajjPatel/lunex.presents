@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- Page Hero -->
+<section class="page-hero" aria-labelledby="contact-title">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-7">
+        <span class="section-eyebrow">Contact</span>
+        <h1 class="page-hero-title" id="contact-title">Start a Project</h1>
+        <p class="page-hero-subtitle mt-3">
+          Tell us what you're working on. We'll get back to you within 24 hours.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr style="margin:0; border-color:var(--lx-border);">
+
+<section class="section-py" aria-label="Contact form and information">
+  <div class="container">
+    <div class="row g-5">
+
+      <!-- Form -->
+      <div class="col-lg-7 reveal">
+        <div class="lx-card">
+          <h2 class="h4 mb-1">Send Us a Message</h2>
+          <p style="font-size:0.875rem;color:var(--lx-grey);margin-bottom:1.75rem;">
+            Fill in the details below and we'll reach out to discuss your project.
+          </p>
+
+          {% if form.non_field_errors %}
+          <div class="alert alert-danger mb-3" role="alert">
+            {% for error in form.non_field_errors %}{{ error }}{% endfor %}
+          </div>
+          {% endif %}
+
+          <form method="post" action="{% url 'contact:contact' %}" id="contact-form" novalidate>
+            {% csrf_token %}
+
+            <!-- Honeypot (hidden from real users) -->
+            <div style="display:none;" aria-hidden="true">
+              {{ form.website }}
+            </div>
+
+            <div class="row g-3">
+              <!-- Name -->
+              <div class="col-sm-6">
+                <label for="id_name" class="form-label">{{ form.name.label }} <span class="text-accent">*</span></label>
+                {{ form.name }}
+                {% if form.name.errors %}
+                <div class="invalid-feedback d-block">{{ form.name.errors|join:", " }}</div>
+                {% endif %}
+              </div>
+
+              <!-- Email -->
+              <div class="col-sm-6">
+                <label for="id_email" class="form-label">{{ form.email.label }} <span class="text-accent">*</span></label>
+                {{ form.email }}
+                {% if form.email.errors %}
+                <div class="invalid-feedback d-block">{{ form.email.errors|join:", " }}</div>
+                {% endif %}
+              </div>
+
+              <!-- Service -->
+              <div class="col-12">
+                <label for="id_service_interest" class="form-label">{{ form.service_interest.label }} <span class="text-accent">*</span></label>
+                {{ form.service_interest }}
+                {% if form.service_interest.errors %}
+                <div class="invalid-feedback d-block">{{ form.service_interest.errors|join:", " }}</div>
+                {% endif %}
+              </div>
+
+              <!-- Message -->
+              <div class="col-12">
+                <label for="id_message" class="form-label">{{ form.message.label }} <span class="text-accent">*</span></label>
+                {{ form.message }}
+                {% if form.message.errors %}
+                <div class="invalid-feedback d-block">{{ form.message.errors|join:", " }}</div>
+                {% endif %}
+              </div>
+
+              <!-- Submit -->
+              <div class="col-12 mt-2">
+                <button type="submit" class="btn btn-primary btn-lg w-100" id="contact-submit-btn">
+                  <i class="bi bi-send me-2" aria-hidden="true"></i>Send Enquiry
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Contact info sidebar -->
+      <div class="col-lg-4 offset-lg-1 reveal reveal-delay-2">
+        <div class="contact-info-card mb-4">
+          <h2 class="h5 mb-1">Get in Touch Directly</h2>
+          <p style="font-size:0.82rem;color:var(--lx-grey);margin-bottom:1.5rem;">
+            Prefer to reach out directly? Here's how.
+          </p>
+
+          <div class="contact-method">
+            <div class="contact-method-icon"><i class="bi bi-envelope" aria-hidden="true"></i></div>
+            <div>
+              <div class="contact-method-label">Email</div>
+              <a href="mailto:lunex.presents@gmail.com" class="contact-method-value" style="color:var(--lx-text);">
+                lunex.presents@gmail.com
+              </a>
+            </div>
+          </div>
+
+          <div class="contact-method">
+            <div class="contact-method-icon"><i class="bi bi-instagram" aria-hidden="true"></i></div>
+            <div>
+              <div class="contact-method-label">Instagram</div>
+              <a href="https://instagram.com/lunex.presents" target="_blank" rel="noopener noreferrer" class="contact-method-value" style="color:var(--lx-text);">
+                @lunex.presents
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- WhatsApp CTA (shown when number is configured) -->
+        <div class="lx-card text-center" style="background:rgba(37,211,102,0.05);border-color:rgba(37,211,102,0.15);">
+          <i class="bi bi-whatsapp" style="font-size:2rem;color:#25D366;margin-bottom:0.75rem;display:block;" aria-hidden="true"></i>
+          <h3 class="h6 mb-1">Quick Chat on WhatsApp</h3>
+          <p style="font-size:0.8rem;color:var(--lx-grey);margin-bottom:1rem;">
+            For fast replies and project discussions.
+          </p>
+          <a
+            href="https://wa.me/?text=Hi%2C%20I%27d%20like%20to%20discuss%20a%20project%20with%20Lunex%20Presents."
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn whatsapp-btn w-100"
+            id="whatsapp-cta-btn"
+          >
+            <i class="bi bi-whatsapp me-2" aria-hidden="true"></i>Chat on WhatsApp
+          </a>
+          <p style="font-size:0.72rem;color:var(--lx-grey);margin-top:0.75rem;margin-bottom:0;">
+            WhatsApp number will be updated shortly.
+          </p>
+        </div>
+
+        <!-- Response time note -->
+        <div class="text-center mt-4">
+          <div class="hero-eyebrow" style="display:inline-flex;">
+            <i class="bi bi-clock" aria-hidden="true"></i>&nbsp;
+            We typically respond within 24 hours
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}

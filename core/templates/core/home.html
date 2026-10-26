@@ -1,0 +1,343 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- ═══════════════════════════════════════════
+     HERO SECTION
+═══════════════════════════════════════════ -->
+<section class="hero-section" aria-label="Hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-grid-overlay" aria-hidden="true"></div>
+
+  <div class="container">
+    <div class="row align-items-center g-5">
+
+      <!-- Hero copy -->
+      <div class="col-lg-6">
+        <div class="hero-eyebrow" aria-label="Status">
+          <span class="dot" aria-hidden="true"></span>
+          Available for new projects
+        </div>
+
+        <h1 class="hero-headline">
+          We Build Digital <span class="accent-word">Experiences</span> That Make Brands Stand Out
+        </h1>
+
+        <p class="hero-subtext">
+          Lunex Presents is a digital creative agency crafting premium websites, logos, and social media visuals — built to convert, designed to impress.
+        </p>
+
+        <div class="hero-actions">
+          <a href="{% url 'contact:contact' %}" class="btn btn-primary btn-lg" id="hero-cta-primary">
+            <i class="bi bi-arrow-right-circle me-2" aria-hidden="true"></i>
+            Start a Project
+          </a>
+          <a href="{% url 'portfolio:work' %}" class="btn btn-outline-light btn-lg" id="hero-cta-secondary">
+            Explore Our Work
+          </a>
+        </div>
+
+        <div class="hero-stats" aria-label="Agency stats">
+          <div>
+            <div class="hero-stat-num">100%</div>
+            <div class="hero-stat-label">Custom Work</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">3</div>
+            <div class="hero-stat-label">Core Services</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">∞</div>
+            <div class="hero-stat-label">Possibilities</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero visual -->
+      <div class="col-lg-6 hero-visual">
+        <div class="position-relative">
+          <div class="hero-mockup-card">
+            <div class="mockup-bar">
+              <span class="mockup-dot red" aria-hidden="true"></span>
+              <span class="mockup-dot yellow" aria-hidden="true"></span>
+              <span class="mockup-dot green" aria-hidden="true"></span>
+              <div class="mockup-nav ms-2"></div>
+            </div>
+            <div class="mockup-content-block mockup-accent-line mb-3" style="height:6px;width:60%"></div>
+            <div class="mockup-content-block" style="height:10px;width:90%;margin-bottom:0.5rem"></div>
+            <div class="mockup-content-block" style="height:10px;width:75%;margin-bottom:0.5rem"></div>
+            <div class="mockup-content-block" style="height:10px;width:83%;margin-bottom:1.5rem"></div>
+            <div class="row g-2">
+              <div class="col-4"><div class="mockup-content-block" style="height:60px;border-radius:8px"></div></div>
+              <div class="col-4"><div class="mockup-content-block" style="height:60px;border-radius:8px"></div></div>
+              <div class="col-4"><div class="mockup-content-block" style="height:60px;border-radius:8px"></div></div>
+            </div>
+            <div class="mockup-content-block mockup-accent-line mt-3" style="height:36px;border-radius:6px;width:40%"></div>
+          </div>
+
+          <!-- Floating badges -->
+          <div class="hero-float-badge badge-1" aria-hidden="true">
+            <div class="badge-icon"><i class="bi bi-check2-circle"></i></div>
+            Project Delivered ✓
+          </div>
+          <div class="hero-float-badge badge-2" aria-hidden="true">
+            <div class="badge-icon"><i class="bi bi-stars"></i></div>
+            Premium Quality
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SERVICES OVERVIEW
+═══════════════════════════════════════════ -->
+<section class="section-py" aria-labelledby="services-heading">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <span class="section-eyebrow">What We Do</span>
+      <h2 class="section-title" id="services-heading">Services Built for Growth</h2>
+      <div class="section-divider"></div>
+      <p class="section-subtitle mx-auto">
+        From first impression to final pixel — every service is crafted to give your brand the edge it deserves.
+      </p>
+    </div>
+
+    <div class="row g-4">
+      {% if services %}
+        {% for service in services %}
+        <div class="col-md-6 col-lg-4 reveal reveal-delay-{{ forloop.counter }}">
+          <div class="lx-card h-100">
+            <div class="service-icon-wrap" aria-hidden="true">
+              <i class="{{ service.icon_class }}"></i>
+            </div>
+            <h3 class="h5 mb-2">{{ service.title }}</h3>
+            <p class="text-grey mb-3" style="font-size:0.9rem;">{{ service.short_description }}</p>
+            <a href="{% url 'services:services' %}" class="btn btn-outline-primary btn-sm">
+              Learn More <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+        {% endfor %}
+      {% else %}
+        <!-- Default service cards when no DB entries yet -->
+        <div class="col-md-6 col-lg-4 reveal reveal-delay-1">
+          <div class="lx-card h-100">
+            <div class="service-icon-wrap"><i class="bi bi-code-slash"></i></div>
+            <h3 class="h5 mb-2">Website Design &amp; Development</h3>
+            <p class="text-grey mb-3" style="font-size:0.9rem;">Custom-built websites that look stunning, load fast, and convert visitors into customers.</p>
+            <a href="{% url 'services:services' %}" class="btn btn-outline-primary btn-sm">Learn More <i class="bi bi-arrow-right ms-1"></i></a>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 reveal reveal-delay-2">
+          <div class="lx-card h-100">
+            <div class="service-icon-wrap"><i class="bi bi-pen"></i></div>
+            <h3 class="h5 mb-2">Logo &amp; Brand Identity</h3>
+            <p class="text-grey mb-3" style="font-size:0.9rem;">Distinctive logos and complete brand systems that tell your story and build recognition.</p>
+            <a href="{% url 'services:services' %}" class="btn btn-outline-primary btn-sm">Learn More <i class="bi bi-arrow-right ms-1"></i></a>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 reveal reveal-delay-3">
+          <div class="lx-card h-100">
+            <div class="service-icon-wrap"><i class="bi bi-images"></i></div>
+            <h3 class="h5 mb-2">Posters &amp; Social Media Creatives</h3>
+            <p class="text-grey mb-3" style="font-size:0.9rem;">Eye-catching social media graphics and posters that stop the scroll and drive engagement.</p>
+            <a href="{% url 'services:services' %}" class="btn btn-outline-primary btn-sm">Learn More <i class="bi bi-arrow-right ms-1"></i></a>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="text-center mt-5 reveal">
+      <a href="{% url 'services:services' %}" class="btn btn-outline-primary">
+        View All Services <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FEATURED PORTFOLIO
+═══════════════════════════════════════════ -->
+{% if featured_projects %}
+<section class="section-py" style="background:var(--lx-bg-alt)" aria-labelledby="portfolio-heading">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <span class="section-eyebrow">Our Work</span>
+      <h2 class="section-title" id="portfolio-heading">Featured Projects</h2>
+      <div class="section-divider"></div>
+      <p class="section-subtitle mx-auto">A selection of work we're proud of. Every project is built with intention.</p>
+    </div>
+
+    <div class="row g-4">
+      {% for project in featured_projects %}
+      <div class="col-md-6 col-lg-4 reveal reveal-delay-{{ forloop.counter }}">
+        <article class="project-card">
+          <div class="project-thumbnail">
+            {% if project.thumbnail %}
+              <img src="{{ project.thumbnail.url }}" alt="{{ project.title }}" loading="lazy">
+            {% else %}
+              <div class="project-thumbnail-placeholder">
+                <i class="bi bi-image" aria-hidden="true"></i>
+              </div>
+            {% endif %}
+            <div class="project-overlay" aria-hidden="true">
+              <a href="{{ project.get_absolute_url }}" class="btn btn-primary btn-sm">
+                View Project
+              </a>
+            </div>
+          </div>
+          <div class="project-body">
+            {% if project.category %}
+            <div class="project-category">{{ project.category.name }}</div>
+            {% endif %}
+            <h3 class="project-title">{{ project.title }}</h3>
+            <p class="project-desc">{{ project.short_description }}</p>
+            <div class="project-meta">
+              {% if project.is_concept %}
+              <span class="badge-concept">Concept</span>
+              {% endif %}
+              <a href="{{ project.get_absolute_url }}" class="btn btn-outline-primary btn-sm ms-auto">
+                View <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="text-center mt-5 reveal">
+      <a href="{% url 'portfolio:work' %}" class="btn btn-primary">
+        View All Work <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- ═══════════════════════════════════════════
+     WHY CHOOSE LUNEX
+═══════════════════════════════════════════ -->
+<section class="section-py" aria-labelledby="why-heading">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-5 reveal">
+        <span class="section-eyebrow">Why Us</span>
+        <h2 class="section-title" id="why-heading">Why Choose Lunex Presents?</h2>
+        <p class="section-subtitle" style="margin:0; text-align:left;">
+          We're not a template shop. Every project is a collaboration — rooted in your goals, built with craft, and delivered with care.
+        </p>
+        <div class="mt-4">
+          <a href="{% url 'contact:contact' %}" class="btn btn-primary">
+            Let's Work Together <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-lg-6 offset-lg-1 reveal reveal-delay-2">
+        <div class="why-item">
+          <div class="why-icon"><i class="bi bi-person-check" aria-hidden="true"></i></div>
+          <div>
+            <div class="why-title">Built for Your Business</div>
+            <div class="why-desc">No generic templates. Every design is tailored to your brand, audience, and goals.</div>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon"><i class="bi bi-phone" aria-hidden="true"></i></div>
+          <div>
+            <div class="why-title">Mobile-First &amp; Fast</div>
+            <div class="why-desc">All work is optimized for every screen size and built for real-world performance.</div>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon"><i class="bi bi-chat-dots" aria-hidden="true"></i></div>
+          <div>
+            <div class="why-title">Clear Communication</div>
+            <div class="why-desc">Regular updates, honest timelines, and zero confusing jargon throughout the process.</div>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon"><i class="bi bi-shield-check" aria-hidden="true"></i></div>
+          <div>
+            <div class="why-title">Quality Guaranteed</div>
+            <div class="why-desc">We don't ship work we're not proud of. Every deliverable is polished and production-ready.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     WORKFLOW
+═══════════════════════════════════════════ -->
+<section class="section-py" style="background:var(--lx-bg-alt)" aria-labelledby="workflow-heading">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <span class="section-eyebrow">Our Process</span>
+      <h2 class="section-title" id="workflow-heading">How We Work</h2>
+      <div class="section-divider"></div>
+      <p class="section-subtitle mx-auto">A clear, structured process so you always know what's happening and what's next.</p>
+    </div>
+
+    <div class="lx-card p-0 reveal">
+      <div class="workflow-steps">
+        <div class="workflow-step">
+          <div class="step-number">01</div>
+          <div class="step-icon"><i class="bi bi-search" aria-hidden="true"></i></div>
+          <div class="step-title">Discover</div>
+          <div class="step-desc">We learn about your brand, goals, audience, and what success looks like.</div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-number">02</div>
+          <div class="step-icon"><i class="bi bi-palette" aria-hidden="true"></i></div>
+          <div class="step-title">Design</div>
+          <div class="step-desc">We craft concepts, gather feedback, and refine until you love it.</div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-number">03</div>
+          <div class="step-icon"><i class="bi bi-code-slash" aria-hidden="true"></i></div>
+          <div class="step-title">Develop</div>
+          <div class="step-desc">We build the final product — clean, fast, and exactly as designed.</div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-number">04</div>
+          <div class="step-icon"><i class="bi bi-rocket-takeoff" aria-hidden="true"></i></div>
+          <div class="step-title">Deliver</div>
+          <div class="step-desc">We launch, hand over files, and make sure you're set up for success.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     CTA BAND
+═══════════════════════════════════════════ -->
+<section class="section-py" aria-labelledby="cta-heading">
+  <div class="container">
+    <div class="cta-band reveal">
+      <span class="section-eyebrow">Ready?</span>
+      <h2 class="section-title mt-2" id="cta-heading">Let's Build Something Great Together</h2>
+      <p class="section-subtitle mx-auto mb-4">
+        Tell us about your project and we'll get back to you within 24 hours.
+      </p>
+      <div class="d-flex gap-3 justify-content-center flex-wrap">
+        <a href="{% url 'contact:contact' %}" class="btn btn-primary btn-lg" id="cta-start-project">
+          <i class="bi bi-arrow-right-circle me-2" aria-hidden="true"></i>
+          Start a Project
+        </a>
+        <a href="https://instagram.com/lunex.presents" target="_blank" rel="noopener noreferrer" class="btn btn-outline-light btn-lg">
+          <i class="bi bi-instagram me-2" aria-hidden="true"></i>
+          Follow on Instagram
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
