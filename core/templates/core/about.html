@@ -42,14 +42,14 @@
         <div class="row g-4 text-center">
           <div class="col-6">
             <div class="lx-card p-3">
-              <div class="about-highlight-number">3</div>
+              <div class="about-highlight-number">{{ total_services|default:"3" }}</div>
               <div class="step-desc mt-1">Core Services</div>
             </div>
           </div>
           <div class="col-6">
             <div class="lx-card p-3">
-              <div class="about-highlight-number">100%</div>
-              <div class="step-desc mt-1">Custom Work</div>
+              <div class="about-highlight-number">{{ total_projects|default:"5" }}+</div>
+              <div class="step-desc mt-1">Projects Built</div>
             </div>
           </div>
           <div class="col-6">

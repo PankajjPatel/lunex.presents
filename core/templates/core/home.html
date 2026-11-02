@@ -29,7 +29,7 @@
         </p>
 
         <div class="hero-actions">
-          <a href="{% url 'contact:contact' %}" class="btn btn-primary btn-lg" id="hero-cta-primary">
+          <a href="{% url 'contact:start_project' %}" class="btn btn-primary btn-lg" id="hero-cta-primary">
             <i class="bi bi-arrow-right-circle me-2" aria-hidden="true"></i>
             Start a Project
           </a>
@@ -40,16 +40,16 @@
 
         <div class="hero-stats" aria-label="Agency stats">
           <div>
-            <div class="hero-stat-num">100%</div>
-            <div class="hero-stat-label">Custom Work</div>
+            <div class="hero-stat-num">{{ total_projects|default:"5" }}+</div>
+            <div class="hero-stat-label">Projects Built</div>
           </div>
           <div>
-            <div class="hero-stat-num">3</div>
+            <div class="hero-stat-num">{{ total_services|default:"3" }}</div>
             <div class="hero-stat-label">Core Services</div>
           </div>
           <div>
-            <div class="hero-stat-num">∞</div>
-            <div class="hero-stat-label">Possibilities</div>
+            <div class="hero-stat-num">100%</div>
+            <div class="hero-stat-label">Custom Craft</div>
           </div>
         </div>
       </div>
@@ -177,8 +177,8 @@
       <div class="col-md-6 col-lg-4 reveal reveal-delay-{{ forloop.counter }}">
         <article class="project-card">
           <div class="project-thumbnail">
-            {% if project.thumbnail %}
-              <img src="{{ project.thumbnail.url }}" alt="{{ project.title }}" loading="lazy">
+            {% if project.get_thumbnail_url %}
+              <img src="{{ project.get_thumbnail_url }}" alt="{{ project.title }}" loading="lazy">
             {% else %}
               <div class="project-thumbnail-placeholder">
                 <i class="bi bi-image" aria-hidden="true"></i>
@@ -192,16 +192,13 @@
           </div>
           <div class="project-body">
             {% if project.category %}
-            <div class="project-category">{{ project.category.name }}</div>
+            <div class="project-category mb-1">{{ project.category.name }}</div>
             {% endif %}
             <h3 class="project-title">{{ project.title }}</h3>
             <p class="project-desc">{{ project.short_description }}</p>
             <div class="project-meta">
-              {% if project.is_concept %}
-              <span class="badge-concept">Concept</span>
-              {% endif %}
               <a href="{{ project.get_absolute_url }}" class="btn btn-outline-primary btn-sm ms-auto">
-                View <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
+                View Project <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
               </a>
             </div>
           </div>

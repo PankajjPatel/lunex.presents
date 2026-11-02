@@ -6,11 +6,19 @@ from services.models import Service
 
 def home(request):
     """Homepage view."""
-    featured_projects = Project.objects.filter(is_featured=True).select_related('category')[:6]
-    services = Service.objects.filter(is_active=True)[:3]
+    featured_projects = (
+        Project.objects.filter(is_featured=True)
+        .select_related('category')
+        .prefetch_related('images')[:6]
+    )
+    services = Service.objects.filter(is_active=True)[:6]
+    total_projects = Project.objects.count()
+    total_services = Service.objects.filter(is_active=True).count()
     context = {
         'featured_projects': featured_projects,
         'services': services,
+        'total_projects': total_projects,
+        'total_services': total_services,
         'page_title': 'Lunex Presents — Digital Creative Agency',
         'meta_description': (
             'Lunex Presents is a digital creative agency crafting premium websites, '
@@ -20,9 +28,14 @@ def home(request):
     return render(request, 'core/home.html', context)
 
 
+
 def about(request):
     """About page view."""
+    total_projects = Project.objects.count()
+    total_services = Service.objects.filter(is_active=True).count()
     context = {
+        'total_projects': total_projects,
+        'total_services': total_services,
         'page_title': 'About Us — Lunex Presents',
         'meta_description': (
             'Learn about Lunex Presents — our story, mission, and the process '
@@ -30,6 +43,7 @@ def about(request):
         ),
     }
     return render(request, 'core/about.html', context)
+
 
 
 def handler_404(request, exception):

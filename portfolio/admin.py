@@ -1,5 +1,11 @@
 from django.contrib import admin
-from .models import Category, Project
+from .models import Category, Project, ProjectImage
+
+
+class ProjectImageInline(admin.TabularInline):
+    model = ProjectImage
+    extra = 1
+    fields = ('image', 'caption', 'display_order')
 
 
 @admin.register(Category)
@@ -19,6 +25,7 @@ class ProjectAdmin(admin.ModelAdmin):
     search_fields = ('title', 'short_description', 'client_name')
     prepopulated_fields = {'slug': ('title',)}
     readonly_fields = ('get_deliverables_list',)
+    inlines = [ProjectImageInline]
     fieldsets = (
         ('Project Info', {
             'fields': (
@@ -34,3 +41,11 @@ class ProjectAdmin(admin.ModelAdmin):
             'fields': ('is_featured', 'is_concept', 'display_order', 'created_date'),
         }),
     )
+
+
+@admin.register(ProjectImage)
+class ProjectImageAdmin(admin.ModelAdmin):
+    list_display = ('project', 'caption', 'display_order', 'created_at')
+    list_filter = ('project',)
+    search_fields = ('caption', 'project__title')
+

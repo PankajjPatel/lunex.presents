@@ -33,3 +33,24 @@ class PortfolioTests(TestCase):
     def test_nonexistent_project_returns_404(self):
         response = self.client.get(reverse('portfolio:project_detail', args=['nonexistent-project']))
         self.assertEqual(response.status_code, 404)
+
+    def test_project_gallery_images(self):
+        from .models import ProjectImage
+        img1 = ProjectImage.objects.create(
+            project=self.project,
+            image='portfolio/gallery/test1.jpg',
+            caption='Platform Dashboard',
+            display_order=1
+        )
+        img2 = ProjectImage.objects.create(
+            project=self.project,
+            image='portfolio/gallery/test2.jpg',
+            caption='Mobile App',
+            display_order=2
+        )
+        self.assertEqual(self.project.images.count(), 2)
+        response = self.client.get(reverse('portfolio:project_detail', args=[self.project.slug]))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Platform Dashboard')
+        self.assertContains(response, 'Mobile App')
+

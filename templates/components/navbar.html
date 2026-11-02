@@ -3,27 +3,34 @@
   <div class="container">
     <!-- Brand -->
     <a class="navbar-brand" href="{% url 'core:home' %}">
-      <img
-        src="{% static 'images/logo/lunex-logo.png' %}"
-        alt="Lunex Presents logo"
-        class="brand-logo"
-        onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"
-      >
-      <span style="display:none;">Lunex <span class="brand-accent">Presents</span></span>
+      Lunex <span class="brand-accent">Presents</span>
     </a>
 
-    <!-- Mobile toggle -->
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarMenu"
-      aria-controls="navbarMenu"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <!-- Mobile controls (Theme toggle + Navbar hamburger) -->
+    <div class="d-flex align-items-center gap-2 d-lg-none">
+      <button
+        class="theme-toggle-btn theme-toggle-sm"
+        type="button"
+        onclick="event.stopPropagation(); window.toggleLunexTheme();"
+        aria-label="Switch to light theme"
+        title="Toggle Theme"
+      >
+        <i class="bi bi-sun-fill theme-icon theme-icon-sun"></i>
+        <i class="bi bi-moon-stars-fill theme-icon theme-icon-moon"></i>
+      </button>
+
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarMenu"
+        aria-controls="navbarMenu"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
 
     <!-- Nav links -->
     <div class="collapse navbar-collapse" id="navbarMenu">
@@ -40,10 +47,22 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url 'core:about' %}">About</a>
         </li>
-        <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
-          <a class="btn btn-primary btn-sm px-3" href="{% url 'contact:contact' %}">
-            Start a Project
-          </a>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'contact:contact' %}">Contact</a>
+        </li>
+        <!-- Desktop Theme Toggle Button -->
+        <li class="nav-item ms-lg-2 mt-2 mt-lg-0 d-none d-lg-flex align-items-center">
+          <button
+            class="theme-toggle-btn theme-toggle-sm"
+            id="theme-toggle"
+            type="button"
+            onclick="event.stopPropagation(); window.toggleLunexTheme();"
+            aria-label="Switch to light theme"
+            title="Toggle Light / Dark Theme"
+          >
+            <i class="bi bi-sun-fill theme-icon theme-icon-sun"></i>
+            <i class="bi bi-moon-stars-fill theme-icon theme-icon-moon"></i>
+          </button>
         </li>
       </ul>
     </div>

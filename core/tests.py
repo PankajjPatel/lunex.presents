@@ -25,3 +25,12 @@ class CorePagesTests(TestCase):
         response = self.client.get('/sitemap.xml')
         self.assertEqual(response.status_code, 200)
         self.assertIn('urlset', response.content.decode())
+
+    def test_theme_toggle_rendered(self):
+        response = self.client.get(reverse('core:home'))
+        self.assertEqual(response.status_code, 200)
+        content = response.content.decode()
+        self.assertIn('theme-toggle-btn', content)
+        self.assertIn('theme-toggle-icon', content)
+        self.assertIn('bi-sun-fill', content)
+        self.assertIn('window.toggleLunexTheme', content)

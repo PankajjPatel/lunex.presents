@@ -8,7 +8,7 @@ def work(request):
     categories = Category.objects.all()
     selected_category = request.GET.get('category', '')
 
-    projects = Project.objects.select_related('category')
+    projects = Project.objects.select_related('category').prefetch_related('images')
     if selected_category:
         projects = projects.filter(category__slug=selected_category)
 
@@ -26,16 +26,23 @@ def work(request):
 
 
 def project_detail(request, slug):
-    """Individual project detail page."""
-    project = get_object_or_404(Project, slug=slug)
+    """Individual project detail page with full gallery images."""
+    project = get_object_or_404(
+        Project.objects.select_related('category').prefetch_related('images'),
+        slug=slug
+    )
     related = Project.objects.filter(
         category=project.category
-    ).exclude(pk=project.pk)[:3]
+    ).exclude(pk=project.pk).select_related('category').prefetch_related('images')[:3]
+
+    images = list(project.images.all())
 
     context = {
         'project': project,
         'related_projects': related,
+        'images': images,
         'page_title': f'{project.title} — Lunex Presents',
         'meta_description': project.short_description,
     }
     return render(request, 'portfolio/project_detail.html', context)
+

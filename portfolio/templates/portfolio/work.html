@@ -48,9 +48,9 @@
         >
           <article class="project-card">
             <div class="project-thumbnail">
-              {% if project.thumbnail %}
+              {% if project.get_thumbnail_url %}
                 <img
-                  src="{{ project.thumbnail.url }}"
+                  src="{{ project.get_thumbnail_url }}"
                   alt="{{ project.title }}"
                   loading="lazy"
                 >
@@ -65,16 +65,13 @@
             </div>
             <div class="project-body">
               {% if project.category %}
-              <div class="project-category">{{ project.category.name }}</div>
+              <div class="project-category mb-1">{{ project.category.name }}</div>
               {% endif %}
               <h2 class="project-title">{{ project.title }}</h2>
               <p class="project-desc">{{ project.short_description }}</p>
               <div class="project-meta">
-                {% if project.is_concept %}
-                <span class="badge-concept" title="This is a concept project">Concept</span>
-                {% endif %}
                 <a href="{{ project.get_absolute_url }}" class="btn btn-outline-primary btn-sm ms-auto">
-                  View <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
+                  View Project <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
                 </a>
               </div>
             </div>

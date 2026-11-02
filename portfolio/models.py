@@ -82,3 +82,56 @@ class Project(models.Model):
         if not self.deliverables:
             return []
         return [d.strip() for d in self.deliverables.split(',') if d.strip()]
+
+    def get_thumbnail_url(self):
+        """Return project thumbnail url or first gallery image url."""
+        if self.thumbnail:
+            try:
+                return self.thumbnail.url
+            except ValueError:
+                pass
+        first_img = self.images.first()
+        if first_img and first_img.image:
+            try:
+                return first_img.image.url
+            except ValueError:
+                pass
+        return ""
+
+    def get_gallery_images(self):
+        """Return all gallery images in display order."""
+        return self.images.all()
+
+
+
+class ProjectImage(models.Model):
+    """Gallery image for a project (multi-image showcase)."""
+
+    project = models.ForeignKey(
+        Project,
+        on_delete=models.CASCADE,
+        related_name='images',
+    )
+    image = models.ImageField(
+        upload_to='portfolio/gallery/',
+        help_text="Gallery image (recommended: 1200×800px).",
+    )
+    caption = models.CharField(
+        max_length=150,
+        blank=True,
+        help_text="Caption or view label, e.g. 'Platform Dashboard', 'Mobile App', 'Brand Stationery'.",
+    )
+    display_order = models.PositiveSmallIntegerField(
+        default=0,
+        help_text="Display order in the project gallery.",
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['display_order', 'id']
+        verbose_name = 'Project Image'
+        verbose_name_plural = 'Project Images'
+
+    def __str__(self):
+        return f"{self.project.title} — {self.caption or f'Image #{self.display_order}'}"
+

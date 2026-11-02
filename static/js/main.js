@@ -5,10 +5,15 @@
 
 'use strict';
 
+/* ─── 0. THEME CONTROLLER ─────────────────────────────── */
+// Theme switching is handled cleanly by window.toggleLunexTheme in base.html
+
+
 /* ─── 1. NAVBAR SCROLL EFFECT ─────────────────────────── */
 (function () {
   const navbar = document.querySelector('.lx-navbar');
   if (!navbar) return;
+
 
   const onScroll = () => {
     if (window.scrollY > 40) {
@@ -21,6 +26,86 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll(); // Run on load
 })();
+
+/* ─── 8. INTERACTIVE PROJECT GALLERY ──────────────────── */
+(function () {
+  const mainImg = document.querySelector('#gallery-main-img');
+  const mainCaption = document.querySelector('#gallery-main-caption');
+  const thumbs = document.querySelectorAll('.gallery-thumb-item');
+  if (!mainImg || !thumbs.length) return;
+
+  let currentIndex = 0;
+  const items = Array.from(thumbs).map(t => ({
+    src: t.getAttribute('data-full-src'),
+    caption: t.getAttribute('data-caption') || '',
+    index: parseInt(t.getAttribute('data-index') || '0', 10),
+  }));
+
+  const activateImage = (idx) => {
+    if (idx < 0 || idx >= items.length) return;
+    currentIndex = idx;
+    const item = items[idx];
+
+    // Smooth transition
+    mainImg.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
+    mainImg.style.opacity = '0.3';
+    mainImg.style.transform = 'scale(0.99)';
+
+    setTimeout(() => {
+      mainImg.src = item.src;
+      if (mainCaption) mainCaption.textContent = item.caption;
+      mainImg.style.opacity = '1';
+      mainImg.style.transform = 'scale(1)';
+    }, 180);
+
+    thumbs.forEach((th, i) => {
+      if (i === idx) {
+        th.classList.add('active');
+        th.setAttribute('aria-selected', 'true');
+      } else {
+        th.classList.remove('active');
+        th.setAttribute('aria-selected', 'false');
+      }
+    });
+  };
+
+  thumbs.forEach((thumb, i) => {
+    thumb.addEventListener('click', () => activateImage(i));
+  });
+
+  const prevBtn = document.querySelector('#gallery-prev');
+  const nextBtn = document.querySelector('#gallery-next');
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const prevIdx = (currentIndex - 1 + items.length) % items.length;
+      activateImage(prevIdx);
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const nextIdx = (currentIndex + 1) % items.length;
+      activateImage(nextIdx);
+    });
+  }
+
+  // Lightbox modal preview
+  const modalImg = document.querySelector('#lightbox-modal-img');
+  const modalCaption = document.querySelector('#lightbox-modal-caption');
+  const expandBtns = document.querySelectorAll('[data-gallery-lightbox]');
+  expandBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const src = btn.getAttribute('data-img-src') || mainImg.src;
+      const cap = btn.getAttribute('data-img-caption') || (mainCaption ? mainCaption.textContent : '');
+      if (modalImg) modalImg.src = src;
+      if (modalCaption) modalCaption.textContent = cap;
+    });
+  });
+})();
+
 
 /* ─── 2. ACTIVE NAV LINK ──────────────────────────────── */
 (function () {

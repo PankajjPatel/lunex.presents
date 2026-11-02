@@ -119,4 +119,6 @@ BRAND_NAME = 'Lunex Presents'
 BRAND_EMAIL = 'lunex.presents@gmail.com'
 BRAND_INSTAGRAM = 'https://instagram.com/lunex.presents'
 BRAND_INSTAGRAM_HANDLE = '@lunex.presents'
+BRAND_TWITTER = 'https://x.com/lunex_presents'
+BRAND_TWITTER_HANDLE = '@lunex_presents'
 BRAND_WHATSAPP = ''  # Set when provided by owner

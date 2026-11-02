@@ -13,9 +13,10 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 django.setup()
 
 from services.models import Service
-from portfolio.models import Category, Project
+from portfolio.models import Category, Project, ProjectImage
 
 print("Seeding Services...")
+
 
 services_data = [
     {
@@ -174,9 +175,55 @@ projects_data = [
     },
 ]
 
+gallery_images_map = {
+    'novatech-solutions': [
+        ('portfolio/gallery/novatech-solutions-1.jpg', 'Corporate Brand Identity & Executive Stationery Suite', 1),
+        ('portfolio/gallery/novatech-solutions-2.jpg', 'Enterprise Cloud Platform & Live Telemetry Dashboard', 2),
+        ('portfolio/gallery/novatech-solutions-3.jpg', 'Executive Mobile App & Infrastructure Alert Cockpit', 3),
+        ('portfolio/gallery/novatech-solutions-4.jpg', 'Design System, Brand Guidelines & Typography Tokens', 4),
+    ],
+    'bloom-bakery': [
+        ('portfolio/gallery/bloom-bakery-1.jpg', 'Artisanal Bakery Web Storefront & Daily Ovens Hero', 1),
+        ('portfolio/gallery/bloom-bakery-2.jpg', 'Daily Fresh Sourdough & Pastry Menu Catalog', 2),
+        ('portfolio/gallery/bloom-bakery-3.jpg', 'Eco-Friendly Kraft Bread Bag & Cafe Collateral', 3),
+        ('portfolio/gallery/bloom-bakery-4.jpg', 'Mobile Ordering, Table Reservation & Rapid Checkout', 4),
+    ],
+    'velocity-gym': [
+        ('portfolio/gallery/velocity-gym-1.jpg', 'High-Performance Fitness Web Portal & Membership Hero', 1),
+        ('portfolio/gallery/velocity-gym-2.jpg', '20+ Social Media Carousel & Story Kit in Figma', 2),
+        ('portfolio/gallery/velocity-gym-3.jpg', 'Interactive Weekly Class Timetable & Session Booking', 3),
+        ('portfolio/gallery/velocity-gym-4.jpg', 'Companion Workout Tracker & Member QR Entry App', 4),
+    ],
+    'grind-coffee-co': [
+        ('portfolio/gallery/grind-coffee-co-1.jpg', 'Specialty Coffee Roasters Story & Single-Origin Hero', 1),
+        ('portfolio/gallery/grind-coffee-co-2.jpg', 'Matte Charcoal & Copper Foil Bag Packaging Suite', 2),
+        ('portfolio/gallery/grind-coffee-co-3.jpg', 'E-Commerce Fresh Bean Roaster Subscription System', 3),
+        ('portfolio/gallery/grind-coffee-co-4.jpg', 'Hand-Drawn Brand Emblem & Cafe Menu Board Signage', 4),
+    ],
+    'apex-real-estate': [
+        ('portfolio/gallery/apex-real-estate-1.jpg', 'Full-Screen Luxury Penthouse Architectural Showcase', 1),
+        ('portfolio/gallery/apex-real-estate-2.jpg', 'Level 42 Architectural Blueprint & Residence Specs', 2),
+        ('portfolio/gallery/apex-real-estate-3.jpg', 'Mobile Luxury Property Portfolio & VIP Tour Booking', 3),
+        ('portfolio/gallery/apex-real-estate-4.jpg', 'Bespoke Property Lookbook & Foil Stationery Monogram', 4),
+    ],
+}
+
 for p in projects_data:
+    p['thumbnail'] = f"portfolio/{p['slug']}-thumb.jpg"
     obj, created = Project.objects.update_or_create(slug=p['slug'], defaults=p)
     print(f"  {'Created' if created else 'Updated'} project: {obj.title}")
+    
+    # Seed 4 gallery images
+    if p['slug'] in gallery_images_map:
+        ProjectImage.objects.filter(project=obj).delete()
+        for img_path, caption, order in gallery_images_map[p['slug']]:
+            ProjectImage.objects.create(
+                project=obj,
+                image=img_path,
+                caption=caption,
+                display_order=order,
+            )
+        print(f"    Added 4 gallery images for {obj.title}")
 
-print("\nSeed complete. Database populated with initial content.")
-print("   To manage content, create a superuser: python manage.py createsuperuser")
+print("\nSeed complete. Database populated with dynamic projects and gallery images.")
+

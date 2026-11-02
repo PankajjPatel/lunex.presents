@@ -31,19 +31,83 @@
           <h1 class="page-hero-title" id="project-title" style="font-size:clamp(1.8rem,3.5vw,2.5rem);">
             {{ project.title }}
           </h1>
-          {% if project.is_concept %}
-          <span class="badge-concept ms-0 mt-2 d-inline-block">Concept Project</span>
-          {% endif %}
         </div>
 
-        <!-- Hero image -->
-        <div class="project-detail-hero reveal">
-          {% if project.thumbnail %}
-            <img src="{{ project.thumbnail.url }}" alt="{{ project.title }}">
-          {% else %}
-            <div class="project-detail-placeholder">
-              <i class="bi bi-image" aria-hidden="true"></i>
-            </div>
+        <!-- Interactive Multi-Image Gallery Showcase -->
+        <div class="project-gallery-container reveal">
+          <div class="gallery-main-view">
+            {% if images %}
+              <img
+                id="gallery-main-img"
+                src="{{ images.0.image.url }}"
+                alt="{{ images.0.caption|default:project.title }}"
+                data-img-src="{{ images.0.image.url }}"
+                data-img-caption="{{ images.0.caption|default:project.title }}"
+              >
+
+              <!-- Previous & Next controls -->
+              {% if images|length > 1 %}
+              <button id="gallery-prev" class="gallery-nav-btn prev" type="button" aria-label="Previous view">
+                <i class="bi bi-chevron-left" aria-hidden="true"></i>
+              </button>
+              <button id="gallery-next" class="gallery-nav-btn next" type="button" aria-label="Next view">
+                <i class="bi bi-chevron-right" aria-hidden="true"></i>
+              </button>
+              {% endif %}
+
+              <!-- Bottom caption & zoom action -->
+              <div class="gallery-caption-bar">
+                <div class="gallery-caption-text" id="gallery-main-caption">
+                  {{ images.0.caption|default:project.title }}
+                </div>
+                <div class="gallery-actions">
+                  <button
+                    class="btn btn-sm btn-outline-light rounded-pill px-3 py-1"
+                    type="button"
+                    data-gallery-lightbox
+                    data-bs-toggle="modal"
+                    data-bs-target="#lightboxModal"
+                    aria-label="Enlarge image"
+                  >
+                    <i class="bi bi-arrows-fullscreen me-1" aria-hidden="true"></i>
+                    Expand
+                  </button>
+                </div>
+              </div>
+
+            {% elif project.thumbnail %}
+              <img src="{{ project.thumbnail.url }}" alt="{{ project.title }}">
+            {% else %}
+              <div class="project-detail-placeholder">
+                <i class="bi bi-image" aria-hidden="true"></i>
+              </div>
+            {% endif %}
+          </div>
+
+          <!-- Thumbnail Navigation Strip -->
+          {% if images|length > 1 %}
+          <div class="gallery-thumbs-strip" role="tablist" aria-label="Project images thumbnails">
+            {% for img in images %}
+            <button
+              class="gallery-thumb-item {% if forloop.first %}active{% endif %}"
+              type="button"
+              role="tab"
+              aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+              data-index="{{ forloop.counter0 }}"
+              data-full-src="{{ img.image.url }}"
+              data-caption="{{ img.caption|default:project.title }}"
+              aria-label="View {{ img.caption|default:forloop.counter }}"
+            >
+              <div class="gallery-thumb-preview">
+                <img src="{{ img.image.url }}" alt="{{ img.caption|default:project.title }}" loading="lazy">
+              </div>
+              <div class="gallery-thumb-meta">
+                <span class="gallery-thumb-num">0{{ forloop.counter }}</span>
+                <span class="gallery-thumb-label">{{ img.caption|default:"View" }}</span>
+              </div>
+            </button>
+            {% endfor %}
+          </div>
           {% endif %}
         </div>
 
@@ -53,8 +117,48 @@
           <div style="color:var(--lx-grey-light);line-height:1.9;white-space:pre-line;">{{ project.description }}</div>
         </div>
 
+        <!-- Project Gallery Breakdown -->
+        {% if images|length > 1 %}
+        <div class="mt-5 reveal">
+          <h2 class="h4 mb-3">Project Asset Breakdown</h2>
+          <p class="text-grey mb-4" style="font-size:0.9rem;">
+            Explore each high-fidelity asset crafted for {{ project.client_name|default:project.title }}.
+          </p>
+
+          <div class="row g-4">
+            {% for img in images %}
+            <div class="col-md-6">
+              <div class="lx-card p-0 h-100 overflow-hidden">
+                <div class="position-relative" style="aspect-ratio:16/10; overflow:hidden;">
+                  <img src="{{ img.image.url }}" alt="{{ img.caption }}" style="width:100%; height:100%; object-fit:cover;" loading="lazy">
+                  <button
+                    class="btn btn-sm btn-dark position-absolute bottom-0 end-0 m-2 rounded-pill px-2 py-1"
+                    style="font-size:0.75rem; background:rgba(0,0,0,0.7); backdrop-filter:blur(6px);"
+                    type="button"
+                    data-gallery-lightbox
+                    data-img-src="{{ img.image.url }}"
+                    data-img-caption="{{ img.caption }}"
+                    data-bs-toggle="modal"
+                    data-bs-target="#lightboxModal"
+                  >
+                    <i class="bi bi-zoom-in me-1"></i>Zoom
+                  </button>
+                </div>
+                <div class="p-3">
+                  <div class="d-flex align-items-center gap-2 mb-1">
+                    <span class="badge-gallery-count">Asset 0{{ forloop.counter }}</span>
+                  </div>
+                  <h3 class="h6 mb-0">{{ img.caption }}</h3>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+
         {% if project.get_deliverables_list %}
-        <div class="mt-4 reveal">
+        <div class="mt-5 reveal">
           <h2 class="h5 mb-3">Deliverables</h2>
           <div>
             {% for item in project.get_deliverables_list %}
@@ -71,6 +175,7 @@
           </a>
         </div>
       </div>
+
 
       <!-- Sidebar -->
       <div class="col-lg-4">
@@ -129,21 +234,26 @@
         <div class="col-md-4">
           <article class="project-card">
             <div class="project-thumbnail">
-              {% if rp.thumbnail %}
-                <img src="{{ rp.thumbnail.url }}" alt="{{ rp.title }}" loading="lazy">
+              {% if rp.get_thumbnail_url %}
+                <img src="{{ rp.get_thumbnail_url }}" alt="{{ rp.title }}" loading="lazy">
               {% else %}
                 <div class="project-thumbnail-placeholder"><i class="bi bi-image" aria-hidden="true"></i></div>
               {% endif %}
               <div class="project-overlay" aria-hidden="true">
-                <a href="{{ rp.get_absolute_url }}" class="btn btn-primary btn-sm">View</a>
+                <a href="{{ rp.get_absolute_url }}" class="btn btn-primary btn-sm">View Project</a>
               </div>
             </div>
             <div class="project-body">
+              {% if rp.category %}
+              <div class="project-category mb-1">{{ rp.category.name }}</div>
+              {% endif %}
               <h3 class="project-title">{{ rp.title }}</h3>
               <p class="project-desc">{{ rp.short_description }}</p>
-              <a href="{{ rp.get_absolute_url }}" class="btn btn-outline-primary btn-sm">
-                View <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
-              </a>
+              <div class="project-meta">
+                <a href="{{ rp.get_absolute_url }}" class="btn btn-outline-primary btn-sm ms-auto">
+                  View Project <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
+                </a>
+              </div>
             </div>
           </article>
         </div>
@@ -154,4 +264,24 @@
   </div>
 </section>
 
+<!-- Lightbox Modal -->
+<div class="modal fade gallery-lightbox-modal" id="lightboxModal" tabindex="-1" aria-labelledby="lightboxModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+      <div class="modal-header border-bottom border-subtle">
+        <h5 class="modal-title h6 mb-0" id="lightboxModalLabel">{{ project.title }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center p-2">
+        <img id="lightbox-modal-img" src="" alt="Project view" class="img-fluid rounded">
+      </div>
+      <div class="modal-footer justify-content-between">
+        <div id="lightbox-modal-caption" class="fw-semibold small"></div>
+        <button type="button" class="btn btn-secondary btn-sm px-3" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 {% endblock %}
+
