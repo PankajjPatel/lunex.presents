@@ -27,14 +27,11 @@ CSRF_TRUSTED_ORIGINS = env.list(
 )
 
 # --------------------------------------------------
-# Database
+# PostgreSQL Database (Neon)
 # --------------------------------------------------
 
 DATABASES = {
-    'default': env.db(
-        'DATABASE_URL',
-        default=f'sqlite:///{BASE_DIR / "db.sqlite3"}',
-    ),
+    'default': env.db('DATABASE_URL'),
 }
 
 # --------------------------------------------------
@@ -71,3 +68,6 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 # --------------------------------------------------
 # Email
 # --------------------------------------------------
+
+# MAILERS is already configured in base.py.
+# Do not redefine EMAIL_BACKEND here.
