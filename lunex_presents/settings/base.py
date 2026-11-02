@@ -8,11 +8,9 @@ import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
-
 # Environment variables
 env = environ.Env(
     DEBUG=(bool, False),
-    SECRET_KEY=(str, 'django-insecure-change-me-in-production'),
     ALLOWED_HOSTS=(list, []),
 )
 
@@ -24,6 +22,7 @@ if env_file.exists():
 SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DEBUG')
 ALLOWED_HOSTS = env('ALLOWED_HOSTS')
+
 
 # Application definition
 INSTALLED_APPS = [
