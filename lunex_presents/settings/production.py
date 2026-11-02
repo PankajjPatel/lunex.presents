@@ -71,5 +71,3 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 # --------------------------------------------------
 # Email
 # --------------------------------------------------
-
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
