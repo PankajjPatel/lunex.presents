@@ -42,3 +42,4 @@ class AuditFindingAdmin(admin.ModelAdmin):
     list_filter = ('module', 'severity', 'is_resolved', 'created_at')
     search_fields = ('title', 'description', 'evidence', 'recommended_fix', 'regulatory_reference')
     ordering = ('-created_at',)
+

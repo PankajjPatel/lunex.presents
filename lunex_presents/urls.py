@@ -7,6 +7,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path, include
 from django.views.generic import TemplateView
+from django.views.generic.base import RedirectView
 
 from core.sitemaps import StaticViewSitemap
 from portfolio.sitemaps import ProjectSitemap
@@ -18,6 +19,7 @@ sitemaps = {
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('favicon.ico', RedirectView.as_view(url='/static/images/favicon.ico', permanent=True)),
     path('', include('core.urls')),
     path('services/', include('services.urls')),
     path('work/', include('portfolio.urls')),

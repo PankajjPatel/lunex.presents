@@ -1,0 +1,221 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="section-padding bg-ivory border-bottom border-warm">
+  <div class="container text-center">
+    <div class="max-w-700 mx-auto">
+      <div class="d-inline-flex align-items-center gap-2 mb-3">
+        <span class="badge bg-secondary text-uppercase" style="letter-spacing: 0.1em; font-size: 0.72rem;">Support &amp; Guidance</span>
+      </div>
+      <h1 class="font-serif display-4 text-charcoal mb-3">How Can We Help You?</h1>
+      <p class="lead text-muted mb-4">
+        Everything you need to know about starting a project, requesting a free demo, pricing milestones, delivery timelines, and post-launch support at Lunex Presents.
+      </p>
+      <div class="d-flex flex-wrap justify-content-center gap-3">
+        <a href="#faq-section" class="btn-lunex-gold btn-sm">Browse FAQs</a>
+        <a href="#contact-support" class="btn-lunex-outline btn-sm">Contact Support Directly</a>
+        <a href="mailto:lunex.presents@gmail.com" class="btn-lunex-outline btn-sm">Email Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Quick Help Category Cards -->
+<section class="section-padding-sm bg-cream border-bottom border-warm">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="bg-white-card p-4 border-warm h-100">
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <div class="p-2 bg-cream text-gold border-warm rounded" style="width: 44px; height: 44px; display: grid; place-items: center;">
+              <i class="bi bi-rocket-takeoff fs-5"></i>
+            </div>
+            <h2 class="h5 text-charcoal mb-0">Starting a Project</h2>
+          </div>
+          <p class="text-muted small mb-3">
+            Learn how our initial discovery, proposal drafting, and free initial design demo preview work before committing.
+          </p>
+          <a href="#cat-0" class="small fw-semibold text-charcoal text-decoration-none">View 3 Questions &rarr;</a>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="bg-white-card p-4 border-warm h-100">
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <div class="p-2 bg-cream text-gold border-warm rounded" style="width: 44px; height: 44px; display: grid; place-items: center;">
+              <i class="bi bi-cash-coin fs-5"></i>
+            </div>
+            <h2 class="h5 text-charcoal mb-0">Pricing &amp; Payments</h2>
+          </div>
+          <p class="text-muted small mb-3">
+            Transparent starting rates, our 40% / 40% / 20% milestone model, hosting costs, and scope changes.
+          </p>
+          <a href="#cat-1" class="small fw-semibold text-charcoal text-decoration-none">View 3 Questions &rarr;</a>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="bg-white-card p-4 border-warm h-100">
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <div class="p-2 bg-cream text-gold border-warm rounded" style="width: 44px; height: 44px; display: grid; place-items: center;">
+              <i class="bi bi-shield-check fs-5"></i>
+            </div>
+            <h2 class="h5 text-charcoal mb-0">Handover &amp; Security</h2>
+          </div>
+          <p class="text-muted small mb-3">
+            Full source code ownership, 30 days of warranty support, and DPDP Act 2023 compliance standards.
+          </p>
+          <a href="#cat-2" class="small fw-semibold text-charcoal text-decoration-none">View 3 Questions &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ Accordion Section -->
+<section id="faq-section" class="section-padding bg-ivory">
+  <div class="container">
+    <div class="max-w-900 mx-auto">
+      <div class="text-center mb-5">
+        <span class="badge bg-secondary text-uppercase mb-2" style="letter-spacing: 0.1em; font-size: 0.72rem;">Answers &amp; Clarity</span>
+        <h2 class="font-serif display-5 text-charcoal">Frequently Asked Questions</h2>
+        <p class="text-muted small">Real answers to real questions — no generic corporate filler.</p>
+      </div>
+
+      {% for cat in faq_categories %}
+      <div id="cat-{{ forloop.counter0 }}" class="mb-5">
+        <div class="d-flex align-items-center gap-2 mb-3 pb-2 border-bottom border-warm">
+          <i class="bi {{ cat.icon }} text-gold fs-5"></i>
+          <h3 class="font-serif h4 text-charcoal mb-0">{{ cat.title }}</h3>
+        </div>
+        <p class="text-muted small mb-4">{{ cat.desc }}</p>
+
+        <div class="accordion" id="accordionCat{{ forloop.counter0 }}">
+          {% for item in cat.items %}
+          <div class="accordion-item mb-3 border-warm bg-white-card rounded-0">
+            <h4 class="accordion-header" id="heading-{{ forloop.parentloop.counter0 }}-{{ forloop.counter0 }}">
+              <button class="accordion-button collapsed font-serif fs-6 text-charcoal bg-white-card" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ forloop.parentloop.counter0 }}-{{ forloop.counter0 }}" aria-expanded="false" aria-controls="collapse-{{ forloop.parentloop.counter0 }}-{{ forloop.counter0 }}">
+                {{ item.q }}
+              </button>
+            </h4>
+            <div id="collapse-{{ forloop.parentloop.counter0 }}-{{ forloop.counter0 }}" class="accordion-collapse collapse" aria-labelledby="heading-{{ forloop.parentloop.counter0 }}-{{ forloop.counter0 }}" data-bs-parent="#accordionCat{{ forloop.parentloop.counter0 }}">
+              <div class="accordion-body text-charcoal small" style="line-height: 1.75; background-color: var(--lx-cream);">
+                {{ item.a }}
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+</section>
+
+<!-- Direct Support / Contact Section -->
+<section id="contact-support" class="section-padding bg-cream border-top border-warm">
+  <div class="container">
+    <div class="max-w-900 mx-auto">
+      <div class="row g-5 align-items-start">
+        
+        <!-- Left Column: Direct Channels -->
+        <div class="col-lg-5">
+          <span class="badge bg-secondary text-uppercase mb-2" style="letter-spacing: 0.1em; font-size: 0.72rem;">Direct Channels</span>
+          <h2 class="font-serif display-6 text-charcoal mb-3">Still need assistance?</h2>
+          <p class="text-muted small mb-4">
+            We are always here to help. Reach out directly and an experienced team member will get back to you within 24 business hours.
+          </p>
+
+          <div class="bg-white-card p-4 border-warm mb-3">
+            <div class="d-flex align-items-start gap-3">
+              <i class="bi bi-envelope-fill text-gold fs-4 mt-1"></i>
+              <div>
+                <div class="small fw-semibold text-muted text-uppercase" style="letter-spacing: 0.05em; font-size: 0.7rem;">Official Email</div>
+                <a href="mailto:lunex.presents@gmail.com" class="text-charcoal fw-bold text-decoration-none">lunex.presents@gmail.com</a>
+                <div class="small text-muted mt-1">Average response time: 4–12 hours</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white-card p-4 border-warm mb-3">
+            <div class="d-flex align-items-start gap-3">
+              <i class="bi bi-chat-square-text-fill text-gold fs-4 mt-1"></i>
+              <div>
+                <div class="small fw-semibold text-muted text-uppercase" style="letter-spacing: 0.05em; font-size: 0.7rem;">Free Initial Demo</div>
+                <a href="{% url 'core:free_demo' %}" class="text-charcoal fw-bold text-decoration-none">Request a Free Design Demo</a>
+                <div class="small text-muted mt-1">See how your website could look before paying anything</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white-card p-4 border-warm">
+            <div class="d-flex align-items-start gap-3">
+              <i class="bi bi-shield-check text-gold fs-4 mt-1"></i>
+              <div>
+                <div class="small fw-semibold text-muted text-uppercase" style="letter-spacing: 0.05em; font-size: 0.7rem;">Compliance Audit</div>
+                <a href="{% url 'audit:home' %}" class="text-charcoal fw-bold text-decoration-none">AuditFlow Compliance Tool</a>
+                <div class="small text-muted mt-1">Scan your website for DPDP Act 2023 &amp; security gaps</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Quick Support Form -->
+        <div class="col-lg-7">
+          <div class="bg-white-card p-4 p-lg-5 border-warm">
+            <h3 class="font-serif h4 text-charcoal mb-2">Send Us a Message</h3>
+            <p class="text-muted small mb-4">Have a specific question, enquiry, or technical concern? Leave your details below.</p>
+
+            <form method="POST" action="{% url 'contact:contact' %}">
+              {% csrf_token %}
+              <input type="hidden" name="enquiry_type" value="general">
+              
+              <div class="mb-3">
+                <label for="id_name" class="form-label small fw-semibold text-charcoal">Your Full Name *</label>
+                <input type="text" name="name" id="id_name" required class="form-control bg-cream border-warm" placeholder="Pankaj Sharma">
+              </div>
+
+              <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                  <label for="id_email" class="form-label small fw-semibold text-charcoal">Email Address *</label>
+                  <input type="email" name="email" id="id_email" required class="form-control bg-cream border-warm" placeholder="name@company.com">
+                </div>
+                <div class="col-md-6">
+                  <label for="id_phone" class="form-label small fw-semibold text-charcoal">Phone Number</label>
+                  <input type="tel" name="phone" id="id_phone" class="form-control bg-cream border-warm" placeholder="+91 98765 43210">
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="id_service" class="form-label small fw-semibold text-charcoal">Subject / Service of Interest</label>
+                <select name="service" id="id_service" class="form-select bg-cream border-warm">
+                  <option value="web-dev">Website Development</option>
+                  <option value="branding">Branding &amp; Graphic Design</option>
+                  <option value="social">Social Media Creatives</option>
+                  <option value="automation">Business Automation</option>
+                  <option value="ordering">Online Ordering &amp; Booking Solutions</option>
+                  <option value="custom">Custom Digital Solutions</option>
+                  <option value="other" selected>General Question / Support</option>
+                </select>
+              </div>
+
+              <div class="mb-4">
+                <label for="id_message" class="form-label small fw-semibold text-charcoal">How can we help? *</label>
+                <textarea name="message" id="id_message" rows="4" required class="form-control bg-cream border-warm" placeholder="Please describe your project, question, or issue in detail..."></textarea>
+              </div>
+
+              <button type="submit" class="btn-lunex-gold w-100 py-2">
+                Submit Message &rarr;
+              </button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

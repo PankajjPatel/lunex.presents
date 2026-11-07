@@ -167,3 +167,4 @@ class AuditFinding(models.Model):
 
     def __str__(self):
         return f"[{self.severity.upper()}] {self.title} ({self.get_module_display()})"
+

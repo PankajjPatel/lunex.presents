@@ -228,3 +228,4 @@ def run_compliance_audit(url, company_name="My Business", email=""):
     scan.status = 'completed'
     scan.recalculate_score()
     return scan
+

@@ -106,3 +106,4 @@ def toggle_resolution(request, finding_id):
         'critical_count': finding.audit.critical_count,
         'high_count': finding.audit.high_count,
     })
+

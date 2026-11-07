@@ -2,13 +2,14 @@
 <header class="lx-header">
   <div class="container">
     <nav class="navbar navbar-expand-lg p-0" aria-label="Lunex Presents Navigation">
-      <!-- Brand Logo -->
-      <a class="navbar-brand lx-brand-logo-link py-2" href="{% url 'core:home' %}">
+      <!-- Brand Logo: Exact Original Logo -->
+      <a class="navbar-brand d-inline-flex align-items-center gap-2 py-2" href="{% url 'core:home' %}" aria-label="Lunex Presents Homepage">
         <img
-          src="{% static 'images/logo/lunex-logo.svg' %}"
+          src="{% static 'images/logo/lunex-logo.png' %}?v=20261107"
           alt="Lunex Presents"
           class="lx-nav-logo-img"
-          onerror="this.onerror=null; this.src='{% static 'images/logo/lunex-icon.png' %}';"
+          style="height: 48px; width: auto; object-fit: contain; border-radius: 4px;"
+          onerror="this.onerror=null; this.src='{% static 'images/logo/lunex-brand-original.png' %}';"
         >
       </a>
 
@@ -63,14 +64,21 @@
               Compliance SaaS <span class="lx-nav-badge">Tool</span>
             </a>
           </li>
+          <!-- Help Option -->
           <li class="nav-item">
-            <a class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}" href="{% url 'contact:contact' %}">
+            <a class="nav-link {% if request.resolver_match.url_name == 'help' and request.resolver_match.app_name == 'core' %}active{% endif %}" href="{% url 'core:help' %}">
+              <i class="bi bi-question-circle me-1 text-gold"></i>Help
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.url_name == 'contact' and request.resolver_match.app_name == 'contact' %}active{% endif %}" href="{% url 'contact:contact' %}">
               Contact
             </a>
           </li>
           <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
-            <a class="btn-lunex-gold" href="{% url 'contact:start_project' %}">
-              Start a Project
+            <a href="{% url 'contact:start_project' %}" class="btn-lunex-gold btn-sm d-inline-flex align-items-center gap-2">
+              <span>Start a Project</span>
+              <i class="bi bi-arrow-right"></i>
             </a>
           </li>
         </ul>

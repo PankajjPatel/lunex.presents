@@ -1135,3 +1135,47 @@ a:hover {
     padding: 3.5rem 0 3rem;
   }
 }
+
+/* Floating Help Trigger */
+.lx-floating-help {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1050;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--lx-text-primary);
+  color: var(--lx-bg);
+  border: 1px solid var(--lx-border);
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(16, 17, 22, 0.18);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.lx-floating-help:hover {
+  background-color: var(--lx-accent);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(183, 131, 0, 0.28);
+}
+.lx-floating-help-icon {
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  color: var(--lx-accent);
+}
+.lx-floating-help:hover .lx-floating-help-icon {
+  color: #FFFFFF;
+}
+@media (max-width: 576px) {
+  .lx-floating-help {
+    bottom: 16px;
+    right: 16px;
+    padding: 8px 14px;
+    font-size: 0.8rem;
+  }
+}

@@ -181,6 +181,84 @@ def payment_policy(request):
     return render(request, 'core/legal/payment_policy.html', context)
 
 
+
+
+def help_page(request):
+    """
+    Help Center & Client Support.
+    Provides answers to common questions about starting a project, free demo,
+    pricing, revisions, technology stack, DPDP compliance, and direct support.
+    """
+    contact_form = ContactForm(initial={'enquiry_type': 'general'})
+    faq_categories = [
+        {
+            'title': 'Getting Started & Free Demo',
+            'icon': 'bi-rocket-takeoff',
+            'desc': 'How we initiate projects, initial concept demos, and timelines.',
+            'items': [
+                {
+                    'q': 'What exactly is the Free Demo offer?',
+                    'a': 'Our free demo is an initial design preview or concept tailored to your brand ideas. It helps you visualize layout, typography, and aesthetic direction before committing financially. It is an initial design concept, not a full production-ready code delivery. Full development begins after the project scope, quotation, and payment terms are formally approved.'
+                },
+                {
+                    'q': 'How long does a website project take from start to launch?',
+                    'a': 'Standard project turnaround times: Basic Landing Pages take 3 to 5 business days; Business & Portfolio websites take 7 to 14 days; E-commerce & Custom Web Applications take 3 to 5 weeks depending on custom features, third-party integrations, and content readiness.'
+                },
+                {
+                    'q': 'What information do I need to get started?',
+                    'a': 'Just your business or brand name, core products or services, preferred design references, and any initial copy or logo assets you have. If you do not have a logo or copy yet, Lunex Presents can develop both under our Branding and Creative services.'
+                }
+            ]
+        },
+        {
+            'title': 'Pricing, Milestones & Billing',
+            'icon': 'bi-cash-coin',
+            'desc': 'Transparent pricing ranges, payment terms, and scope management.',
+            'items': [
+                {
+                    'q': 'How does the 40% / 40% / 20% payment milestone work?',
+                    'a': 'We never ask for 100% upfront. Our milestone payment schedule is: 40% Advance Payment before development begins; 40% Milestone Payment after the interactive working preview is approved; and 20% Final Payment before final domain deployment and code handover.'
+                },
+                {
+                    'q': 'Are domain, hosting, or third-party fees included?',
+                    'a': 'Unless specified in a custom package, domain name registration and cloud hosting fees (e.g. Vercel, Railway, AWS, Hostinger) are paid directly to providers or billed at actual cost. We provide complete end-to-end setup, SSL installation, and DNS configuration without extra service fees.'
+                },
+                {
+                    'q': 'What if my requirements change mid-project?',
+                    'a': 'Minor refinements within the agreed scope are included. If you need substantial new pages, features, or integrations, we document an addendum with an honest scope and quotation before writing additional code. No surprise bills.'
+                }
+            ]
+        },
+        {
+            'title': 'Handover, Ownership & Security',
+            'icon': 'bi-shield-check',
+            'desc': 'Code ownership, security standards, and post-launch support.',
+            'items': [
+                {
+                    'q': 'Do I own 100% of my website code after launch?',
+                    'a': 'Yes, completely. Upon final payment, 100% intellectual property of your custom website code, design files, and database schemas are handed over to you with full repository access.'
+                },
+                {
+                    'q': 'Do you offer support after my website goes live?',
+                    'a': 'Every Lunex project includes 30 days of complimentary post-launch support covering bug fixes, browser checks, and minor adjustments. We also offer monthly retainer packages for continuous updates, security audits, and backups.'
+                },
+                {
+                    'q': 'How does Lunex Presents ensure data privacy & DPDP Act compliance?',
+                    'a': 'All our websites are built with HTTPS encryption, CSRF protection, SQL injection prevention, strict input sanitization, and compliance with the Digital Personal Data Protection (DPDP) Act 2023. You can also run automated compliance scans on any domain using our built-in AuditFlow platform.'
+                }
+            ]
+        }
+    ]
+
+    context = {
+        'page_title': 'Help Center & Client Support — Lunex Presents',
+        'meta_description': 'Get quick answers to common questions about our web development, pricing, free demos, revisions, payment milestones, and direct support.',
+        'faq_categories': faq_categories,
+        'contact_form': contact_form,
+    }
+    return render(request, 'core/help.html', context)
+
+
 def handler_404(request, exception):
     return render(request, '404.html', status=404)
 

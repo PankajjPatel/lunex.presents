@@ -10,3 +10,4 @@ urlpatterns = [
     path('dashboard/', views.audit_dashboard, name='dashboard'),
     path('toggle-resolution/<int:finding_id>/', views.toggle_resolution, name='toggle_resolution'),
 ]
+

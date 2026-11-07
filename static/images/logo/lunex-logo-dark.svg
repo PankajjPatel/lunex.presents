@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 50" width="240" height="50" fill="none">
+  <!-- Geometric L Mark -->
+  <g transform="translate(4, 4)">
+    <path d="M 6 6 L 22 6 L 22 26 L 40 26 L 40 38 L 6 38 Z" fill="#F5F1E9" />
+    <rect x="25" y="6" width="12" height="12" rx="1" transform="rotate(45 31 12)" fill="#B78300" />
+  </g>
+  <!-- Typography -->
+  <g transform="translate(56, 32)">
+    <text font-family="'Inter', -apple-system, BlinkMacSystemFont, sans-serif" font-weight="800" font-size="20" letter-spacing="0.08em" fill="#F5F1E9">LUNEX</text>
+    <text x="82" y="-1" font-family="'Inter', -apple-system, BlinkMacSystemFont, sans-serif" font-weight="600" font-size="12" letter-spacing="0.18em" fill="#B78300">.PRESENTS</text>
+  </g>
+</svg>
