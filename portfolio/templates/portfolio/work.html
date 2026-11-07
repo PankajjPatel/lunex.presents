@@ -1,107 +1,98 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block content %}
+{% block title %}Our Work &amp; Case Studies — Lunex Presents{% endblock %}
 
-<!-- Page Hero -->
-<section class="page-hero" aria-labelledby="work-title">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-7">
-        <span class="section-eyebrow">Portfolio</span>
-        <h1 class="page-hero-title" id="work-title">Our Work</h1>
-        <p class="page-hero-subtitle mt-3">
-          A selection of projects we've delivered — websites, identities, and visual content built with intention.
-        </p>
-      </div>
+{% block content %}
+<section class="py-5" style="background-color: var(--lx-bg); border-bottom: 1px solid var(--lx-border);">
+  <div class="container py-4">
+    <div class="lx-eyebrow">
+      <span class="lx-diamond"></span> Studio Portfolio
     </div>
+    <h1 class="mb-3">
+      Selected Work &amp; Concept Architecture
+    </h1>
+    <p class="lead" style="color: var(--lx-text-secondary); max-width: 760px;">
+      A curated collection of digital systems, brand identities, and exploratory concept architectures. We maintain rigorous honesty: demo projects are transparently labeled.
+    </p>
   </div>
 </section>
 
-<hr style="margin:0; border-color:var(--lx-border);">
-
-<!-- Portfolio Grid -->
-<section class="section-py" aria-label="Portfolio grid">
-  <div class="container">
-
-    <!-- Category Filters -->
-    {% if categories %}
-    <nav class="portfolio-filters" aria-label="Portfolio category filters">
-      <button class="filter-btn active" data-filter="all" id="filter-all">All Work</button>
+<section class="py-5" style="background-color: var(--lx-surface);">
+  <div class="container py-3">
+    <!-- Category Filter Tabs -->
+    <div class="d-flex flex-wrap gap-2 mb-5">
+      <a href="{% url 'portfolio:work' %}" class="lx-tab-btn {% if not selected_category %}active{% endif %}">
+        All Projects
+      </a>
       {% for cat in categories %}
-      <button
-        class="filter-btn {% if selected_category == cat.slug %}active{% endif %}"
-        data-filter="{{ cat.slug }}"
-        id="filter-{{ cat.slug }}"
-      >{{ cat.name }}</button>
+        <a href="{% url 'portfolio:work' %}?category={{ cat.slug }}" class="lx-tab-btn {% if selected_category == cat.slug %}active{% endif %}">
+          {{ cat.name }}
+        </a>
       {% endfor %}
-    </nav>
-    {% endif %}
+    </div>
 
-    <!-- Projects -->
-    <div class="row g-4 position-relative" id="portfolio-grid">
-      {% if projects %}
-        {% for project in projects %}
-        <div
-          class="col-md-6 col-lg-4 portfolio-item reveal"
-          data-category="{{ project.category.slug|default:'uncategorized' }}"
-        >
-          <article class="project-card">
-            <div class="project-thumbnail">
-              {% if project.get_thumbnail_url %}
-                <img
-                  src="{{ project.get_thumbnail_url }}"
-                  alt="{{ project.title }}"
-                  loading="lazy"
-                >
-              {% else %}
-                <div class="project-thumbnail-placeholder">
-                  <i class="bi bi-image" aria-hidden="true"></i>
+    <!-- Portfolio Grid -->
+    <div class="lx-portfolio-grid">
+      {% for project in projects %}
+        <div class="lx-project-card">
+          <div class="lx-project-visual">
+            {% if project.thumbnail %}
+              <img src="{{ project.thumbnail.url }}" alt="{{ project.title }}">
+            {% else %}
+              <div class="d-flex flex-column align-items-center justify-content-center p-4 text-center">
+                <span class="lx-diamond-lg mb-2"></span>
+                <span class="font-mono text-charcoal font-weight-bold" style="font-size: 0.95rem;">{{ project.title }}</span>
+                <span style="font-size: 0.78rem; color: var(--lx-text-muted);">{{ project.category.name|default:"Digital Product" }}</span>
+              </div>
+            {% endif %}
+
+            {% if project.is_concept %}
+              <span class="lx-project-badge-concept">Concept / Demo Project</span>
+            {% else %}
+              <span class="lx-project-badge-active">Active Product</span>
+            {% endif %}
+          </div>
+
+          <div class="lx-project-body">
+            <div>
+              <div class="lx-project-category">{{ project.category.name|default:"Studio Project" }}</div>
+              <h2 class="h4 lx-project-title">
+                <a href="{{ project.get_absolute_url }}">{{ project.title }}</a>
+              </h2>
+              <p class="lx-project-desc">
+                {{ project.short_description }}
+              </p>
+            </div>
+
+            <div>
+              {% if project.tech_stack %}
+                <div class="lx-project-tags">
+                  {% for tech in project.get_tech_stack_list %}
+                    <span class="lx-tag">{{ tech }}</span>
+                  {% endfor %}
                 </div>
               {% endif %}
-              <div class="project-overlay" aria-hidden="true">
-                <a href="{{ project.get_absolute_url }}" class="btn btn-primary btn-sm">View Project</a>
-              </div>
-            </div>
-            <div class="project-body">
-              {% if project.category %}
-              <div class="project-category mb-1">{{ project.category.name }}</div>
-              {% endif %}
-              <h2 class="project-title">{{ project.title }}</h2>
-              <p class="project-desc">{{ project.short_description }}</p>
-              <div class="project-meta">
-                <a href="{{ project.get_absolute_url }}" class="btn btn-outline-primary btn-sm ms-auto">
-                  View Project <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
+
+              <div class="d-flex justify-content-between align-items-center pt-3 border-top" style="border-color: var(--lx-border-subtle) !important;">
+                <a href="{{ project.get_absolute_url }}" class="fw-bold text-charcoal" style="font-size: 0.88rem;">
+                  Case Study <i class="bi bi-arrow-right ms-1"></i>
                 </a>
+                {% if project.project_url %}
+                  <a href="{{ project.project_url }}" class="btn-lunex-gold py-1 px-3" style="font-size: 0.78rem;">
+                    Launch Tool <i class="bi bi-box-arrow-up-right ms-1"></i>
+                  </a>
+                {% endif %}
               </div>
             </div>
-          </article>
+          </div>
         </div>
-        {% endfor %}
-      {% endif %}
-    </div>
-
-    <!-- Empty state -->
-    <div id="portfolio-empty" class="empty-state {% if projects %}d-none{% endif %}">
-      <i class="bi bi-folder2-open d-block" aria-hidden="true"></i>
-      <h3 class="h5 text-grey">No projects here yet</h3>
-      <p class="text-grey" style="font-size:0.9rem;">Projects will appear here once they're added. Check back soon.</p>
-    </div>
-
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="section-py-sm" style="background:var(--lx-bg-alt)" aria-labelledby="work-cta-heading">
-  <div class="container">
-    <div class="cta-band reveal">
-      <h2 class="section-title" id="work-cta-heading">Want Work Like This?</h2>
-      <p class="section-subtitle mx-auto mb-4">Every project starts with a conversation. Let's have one.</p>
-      <a href="{% url 'contact:contact' %}" class="btn btn-primary btn-lg" id="work-cta-btn">
-        <i class="bi bi-arrow-right-circle me-2" aria-hidden="true"></i>Start a Project
-      </a>
+      {% empty %}
+        <div class="col-12 text-center py-5">
+          <p class="text-muted-grey">No projects found in this category.</p>
+        </div>
+      {% endfor %}
     </div>
   </div>
 </section>
-
 {% endblock %}

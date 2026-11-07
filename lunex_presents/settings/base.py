@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'services.apps.ServicesConfig',
     'portfolio.apps.PortfolioConfig',
     'contact.apps.ContactConfig',
+    'audit.apps.AuditConfig',
 ]
 
 MIDDLEWARE = [

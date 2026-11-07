@@ -17,12 +17,12 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
     list_display = (
-        'title', 'category', 'is_featured', 'is_concept',
+        'title', 'category', 'tech_stack', 'is_featured', 'is_concept',
         'display_order', 'created_date',
     )
     list_editable = ('is_featured', 'is_concept', 'display_order')
     list_filter = ('category', 'is_featured', 'is_concept')
-    search_fields = ('title', 'short_description', 'client_name')
+    search_fields = ('title', 'short_description', 'client_name', 'tech_stack')
     prepopulated_fields = {'slug': ('title',)}
     readonly_fields = ('get_deliverables_list',)
     inlines = [ProjectImageInline]
@@ -31,7 +31,7 @@ class ProjectAdmin(admin.ModelAdmin):
             'fields': (
                 'title', 'slug', 'category', 'client_name',
                 'short_description', 'description', 'deliverables',
-                'get_deliverables_list',
+                'tech_stack', 'project_url', 'get_deliverables_list',
             ),
         }),
         ('Media', {
@@ -48,4 +48,3 @@ class ProjectImageAdmin(admin.ModelAdmin):
     list_display = ('project', 'caption', 'display_order', 'created_at')
     list_filter = ('project',)
     search_fields = ('caption', 'project__title')
-

@@ -1,0 +1,188 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="section-padding bg-ivory">
+  <div class="container">
+    <!-- Breadcrumb & Top Bar -->
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 pb-3 border-bottom border-warm">
+      <div>
+        <a href="{% url 'audit:home' %}" class="small text-muted text-decoration-none">&larr; Back to AuditFlow</a>
+        <span class="mx-2 text-muted">/</span>
+        <span class="small text-charcoal fw-semibold">Audit Report</span>
+      </div>
+      <div class="d-flex gap-2 align-items-center mt-2 mt-md-0">
+        <a href="{% url 'audit:dashboard' %}" class="btn-lunex-outline btn-sm">Operations Dashboard</a>
+        <button onclick="window.print()" class="btn-lunex-gold btn-sm">Export Report (Print)</button>
+      </div>
+    </div>
+
+    <!-- Header Summary Card -->
+    <div class="bg-white-card p-4 p-lg-5 mb-5 border-warm">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-8">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <span class="badge bg-secondary text-uppercase" style="letter-spacing: 0.1em; font-size: 0.7rem;">DPDP 2023 & Security Audit</span>
+            <span class="badge bg-light text-muted border border-warm" style="font-size: 0.7rem;">{{ scan.created_at|date:"d M Y, H:i" }} IST</span>
+          </div>
+          <h1 class="font-serif display-6 text-charcoal mb-2">Compliance Findings for {{ scan.domain }}</h1>
+          <p class="text-muted mb-3">Target URL: <a href="{{ scan.target_url }}" target="_blank" rel="noopener noreferrer" class="text-charcoal fw-medium">{{ scan.target_url }}</a></p>
+          <div class="d-flex flex-wrap gap-4 pt-2">
+            <div>
+              <div class="small text-muted">Total Findings</div>
+              <div class="h4 text-charcoal fw-bold mb-0">{{ all_findings_count }}</div>
+            </div>
+            <div>
+              <div class="small text-muted">Critical Risks</div>
+              <div class="h4 text-danger fw-bold mb-0">{{ scan.critical_count }}</div>
+            </div>
+            <div>
+              <div class="small text-muted">High Risks</div>
+              <div class="h4 text-warning fw-bold mb-0">{{ scan.high_count }}</div>
+            </div>
+            <div>
+              <div class="small text-muted">Resolved</div>
+              <div class="h4 text-success fw-bold mb-0" id="resolved-stat">{{ resolved_count }}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 text-center">
+          <div class="p-4 border-warm bg-cream d-inline-block text-center w-100" style="max-width: 240px;">
+            <div class="small text-muted text-uppercase fw-semibold" style="letter-spacing: 0.1em;">Compliance Score</div>
+            <div class="display-3 fw-bold my-2 {% if scan.compliance_score >= 80 %}text-success{% elif scan.compliance_score >= 50 %}text-warning{% else %}text-danger{% endif %}" id="compliance-score">
+              {{ scan.compliance_score }}
+            </div>
+            <div class="small text-muted">out of 100</div>
+            <div class="small fw-semibold mt-2 {% if scan.compliance_score >= 80 %}text-success{% elif scan.compliance_score >= 50 %}text-warning{% else %}text-danger{% endif %}">
+              {% if scan.compliance_score >= 80 %}Low Risk Profile{% elif scan.compliance_score >= 50 %}Moderate Risk Profile{% else %}High Risk Profile{% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Remediation Guidance Banner -->
+    <div class="bg-cream p-4 mb-5 border-warm">
+      <div class="row align-items-center g-3">
+        <div class="col-lg-8">
+          <div class="fw-bold text-charcoal mb-1">Need Lunex Presents to remediate these issues for you?</div>
+          <div class="small text-muted">Our development team can implement consent banners, cookie governance, DPDP notices, and strict security headers directly into your codebase.</div>
+        </div>
+        <div class="col-lg-4 text-lg-end">
+          <a href="{% url 'contact:start_project' %}?service=website-development&ref=audit-{{ scan.id }}" class="btn-lunex-gold btn-sm">Request Remediation Support</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Findings Section -->
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+      <h2 class="font-serif h4 text-charcoal mb-0">Detailed Audit Findings</h2>
+      <!-- Severity Filter Pills -->
+      <div class="d-flex flex-wrap gap-2 mt-2 mt-md-0">
+        <a href="?severity=all" class="btn btn-sm {% if selected_severity == 'all' %}btn-dark{% else %}btn-outline-secondary{% endif %}" style="font-size: 0.75rem;">All ({{ all_findings_count }})</a>
+        <a href="?severity=critical" class="btn btn-sm {% if selected_severity == 'critical' %}btn-danger{% else %}btn-outline-danger{% endif %}" style="font-size: 0.75rem;">Critical ({{ scan.critical_count }})</a>
+        <a href="?severity=high" class="btn btn-sm {% if selected_severity == 'high' %}btn-warning text-dark{% else %}btn-outline-warning text-dark{% endif %}" style="font-size: 0.75rem;">High ({{ scan.high_count }})</a>
+        <a href="?severity=medium" class="btn btn-sm {% if selected_severity == 'medium' %}btn-info text-dark{% else %}btn-outline-info text-dark{% endif %}" style="font-size: 0.75rem;">Medium ({{ scan.medium_count }})</a>
+        <a href="?severity=low" class="btn btn-sm {% if selected_severity == 'low' %}btn-secondary{% else %}btn-outline-secondary{% endif %}" style="font-size: 0.75rem;">Low ({{ scan.low_count }})</a>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      {% for finding in findings %}
+      <div class="col-12" id="finding-card-{{ finding.id }}">
+        <div class="bg-white-card p-4 border-warm {% if finding.is_resolved %}opacity-75{% endif %}">
+          <div class="d-flex flex-wrap justify-content-between align-items-start gap-3 mb-3">
+            <div>
+              <div class="d-flex align-items-center gap-2 mb-2">
+                <span class="badge {% if finding.severity == 'critical' %}bg-danger{% elif finding.severity == 'high' %}bg-warning text-dark{% elif finding.severity == 'medium' %}bg-info text-dark{% else %}bg-secondary{% endif %} text-uppercase" style="font-size: 0.65rem; letter-spacing: 0.05em;">
+                  {{ finding.get_severity_display }}
+                </span>
+                <span class="badge bg-light text-muted border border-warm" style="font-size: 0.65rem;">
+                  {{ finding.get_module_display }}
+                </span>
+                <span class="badge bg-light text-dark border border-warm" style="font-size: 0.65rem;">
+                  {{ finding.penalty_points }} pts deduction
+                </span>
+              </div>
+              <h3 class="h5 text-charcoal mb-1">{{ finding.title }}</h3>
+            </div>
+            <div>
+              <button onclick="toggleResolution('{{ finding.id }}')" id="btn-resolve-{{ finding.id }}" class="btn btn-sm {% if finding.is_resolved %}btn-success{% else %}btn-outline-dark{% endif %}" style="font-size: 0.75rem;">
+                {% if finding.is_resolved %}✓ Resolved{% else %}Mark as Resolved{% endif %}
+              </button>
+            </div>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-lg-6">
+              <div class="small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.7rem; letter-spacing: 0.05em;">Observation</div>
+              <p class="text-charcoal small mb-3">{{ finding.description }}</p>
+              
+              {% if finding.technical_evidence %}
+              <div class="small fw-semibold text-muted text-uppercase mb-1" style="font-size: 0.7rem; letter-spacing: 0.05em;">Technical Evidence</div>
+              <pre class="bg-cream p-2 small border-warm mb-0" style="font-size: 0.75rem; max-height: 120px; overflow-y: auto;"><code>{{ finding.technical_evidence|linebreaksbr }}</code></pre>
+              {% endif %}
+            </div>
+
+            <div class="col-lg-6">
+              <div class="small fw-semibold text-gold text-uppercase mb-1" style="font-size: 0.7rem; letter-spacing: 0.05em;">Remediation Recommendation</div>
+              <div class="bg-cream p-3 border-warm small text-charcoal mb-2">
+                {{ finding.recommendation }}
+              </div>
+              {% if finding.regulatory_reference %}
+              <div class="small text-muted">
+                <span class="fw-semibold">Statutory Reference:</span> {{ finding.regulatory_reference }}
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <div class="col-12">
+        <div class="bg-white-card p-5 text-center border-warm">
+          <div class="font-serif h4 text-charcoal mb-2">No findings match your filter.</div>
+          <p class="text-muted small mb-3">All audited checks under this filter passed without violation.</p>
+          <a href="?severity=all" class="btn-lunex-gold btn-sm">Clear Filter</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+<script>
+function toggleResolution(findingId) {
+  fetch(`/audit/finding/${findingId}/toggle/`, {
+    method: 'POST',
+    headers: {
+      'X-CSRFToken': '{{ csrf_token }}',
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.status === 'success') {
+      const btn = document.getElementById(`btn-resolve-${findingId}`);
+      const card = document.getElementById(`finding-card-${findingId}`);
+      if (data.is_resolved) {
+        btn.className = 'btn btn-sm btn-success';
+        btn.textContent = '✓ Resolved';
+        card.querySelector('.bg-white-card').classList.add('opacity-75');
+      } else {
+        btn.className = 'btn btn-sm btn-outline-dark';
+        btn.textContent = 'Mark as Resolved';
+        card.querySelector('.bg-white-card').classList.remove('opacity-75');
+      }
+      document.getElementById('compliance-score').textContent = data.new_score;
+      if (document.getElementById('resolved-stat')) {
+        document.getElementById('resolved-stat').textContent = data.resolved_count;
+      }
+    }
+  })
+  .catch(err => console.error('Error toggling resolution:', err));
+}
+</script>
+{% endblock %}

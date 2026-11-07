@@ -1,227 +1,78 @@
 {% load static %}<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <!-- Theme Initialization & Controller (Runs immediately in head for zero-flicker & instant theme apply) -->
-  <script>
-    (function () {
-      function applyTheme(theme) {
-        var root = document.documentElement;
-        root.setAttribute('data-theme', theme);
-        root.setAttribute('data-bs-theme', theme);
-        if (document.body) {
-          document.body.setAttribute('data-theme', theme);
-          if (theme === 'light') {
-            document.body.classList.add('light-theme');
-            document.body.classList.remove('dark-theme');
-          } else {
-            document.body.classList.add('dark-theme');
-            document.body.classList.remove('light-theme');
-          }
-        }
-        // Update aria-label on all toggle buttons
-        var btns = document.querySelectorAll('.theme-toggle-btn');
-        btns.forEach(function (btn) {
-          var label = theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme';
-          btn.setAttribute('aria-label', label);
-          btn.setAttribute('title', label);
-        });
-      }
-
-      var savedTheme = 'dark';
-      try {
-        savedTheme = localStorage.getItem('lunex-theme') || 'dark';
-      } catch (e) {}
-
-      applyTheme(savedTheme);
-
-      window.toggleLunexTheme = function () {
-        var current = document.documentElement.getAttribute('data-theme') || 'dark';
-        var next = (current === 'light') ? 'dark' : 'light';
-        applyTheme(next);
-        try {
-          localStorage.setItem('lunex-theme', next);
-        } catch (e) {}
-        return next;
-      };
-
-      document.addEventListener('DOMContentLoaded', function () {
-        var current = document.documentElement.getAttribute('data-theme') || 'dark';
-        applyTheme(current);
-      });
-    })();
-  </script>
-
-  <style id="lunex-theme-core-css">
-    /* ─── GUARANTEED FULL PAGE THEME RULES ─── */
-    /* DARK THEME */
-    html[data-theme="dark"],
-    html:not([data-theme="light"]),
-    body.dark-theme,
-    [data-theme="dark"] body {
-      background-color: #0B0D10 !important;
-      color: #E8EAED !important;
-    }
-    html[data-theme="dark"] .lx-navbar,
-    html:not([data-theme="light"]) .lx-navbar {
-      background: rgba(11, 13, 16, 0.9) !important;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-    }
-    html[data-theme="dark"] .lx-card,
-    html[data-theme="dark"] .project-card,
-    html[data-theme="dark"] .lx-footer,
-    html:not([data-theme="light"]) .lx-card,
-    html:not([data-theme="light"]) .project-card,
-    html:not([data-theme="light"]) .lx-footer {
-      background: #171A20 !important;
-      border-color: rgba(255, 255, 255, 0.08) !important;
-      color: #E8EAED !important;
-    }
-
-    /* LIGHT THEME */
-    html[data-theme="light"],
-    [data-theme="light"] body,
-    body.light-theme {
-      background-color: #F8FAFC !important;
-      color: #1E293B !important;
-    }
-    [data-theme="light"] .lx-navbar,
-    body.light-theme .lx-navbar {
-      background: rgba(255, 255, 255, 0.95) !important;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
-    }
-    [data-theme="light"] .lx-navbar .navbar-brand,
-    body.light-theme .lx-navbar .navbar-brand {
-      color: #0F172A !important;
-    }
-    [data-theme="light"] .lx-navbar .nav-link,
-    body.light-theme .lx-navbar .nav-link {
-      color: #475569 !important;
-    }
-    [data-theme="light"] .lx-navbar .nav-link:hover,
-    body.light-theme .lx-navbar .nav-link:hover {
-      color: #0F172A !important;
-    }
-    [data-theme="light"] .lx-navbar .nav-link.active,
-    body.light-theme .lx-navbar .nav-link.active {
-      color: #1D72FE !important;
-    }
-    [data-theme="light"] h1, [data-theme="light"] h2, [data-theme="light"] h3,
-    [data-theme="light"] h4, [data-theme="light"] h5, [data-theme="light"] h6,
-    [data-theme="light"] .section-title, [data-theme="light"] .hero-headline,
-    [data-theme="light"] .project-title, [data-theme="light"] .footer-brand-name,
-    body.light-theme h1, body.light-theme h2, body.light-theme h3,
-    body.light-theme h4, body.light-theme h5, body.light-theme h6 {
-      color: #0F172A !important;
-    }
-    [data-theme="light"] p, [data-theme="light"] .hero-subtext,
-    [data-theme="light"] .section-subtitle, [data-theme="light"] .project-desc,
-    body.light-theme p {
-      color: #475569 !important;
-    }
-    [data-theme="light"] .lx-card,
-    [data-theme="light"] .project-card,
-    [data-theme="light"] .contact-info-card,
-    [data-theme="light"] .project-info-block,
-    [data-theme="light"] .hero-mockup-card,
-    [data-theme="light"] .hero-float-badge,
-    body.light-theme .lx-card,
-    body.light-theme .project-card {
-      background: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.08) !important;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
-      color: #1E293B !important;
-    }
-    [data-theme="light"] .lx-footer,
-    body.light-theme .lx-footer {
-      background: #FFFFFF !important;
-      border-top: 1px solid rgba(0, 0, 0, 0.08) !important;
-      color: #475569 !important;
-    }
-    [data-theme="light"] section[style*="background:var(--lx-bg-alt)"] {
-      background: #FFFFFF !important;
-    }
-    [data-theme="light"] .cta-band {
-      background: linear-gradient(135deg, rgba(29, 114, 254, 0.06) 0%, #FFFFFF 100%) !important;
-      border: 1px solid rgba(29, 114, 254, 0.18) !important;
-    }
-    [data-theme="light"] .btn-outline-light {
-      border: 1.5px solid rgba(15, 23, 42, 0.25) !important;
-      color: #0F172A !important;
-      background: transparent !important;
-    }
-    [data-theme="light"] .btn-outline-light:hover {
-      background: #0F172A !important;
-      color: #FFFFFF !important;
-    }
-    [data-theme="light"] .filter-btn {
-      background: #FFFFFF !important;
-      border: 1px solid rgba(0, 0, 0, 0.1) !important;
-      color: #475569 !important;
-    }
-    [data-theme="light"] .filter-btn.active {
-      background: #1D72FE !important;
-      border-color: #1D72FE !important;
-      color: #FFFFFF !important;
-    }
-  </style>
-
-
-  <!-- Title & Meta -->
-  <title>{% block title %}{{ page_title|default:"Lunex Presents — Digital Creative Agency" }}{% endblock %}</title>
-  <meta name="description" content="{% block meta_description %}{{ meta_description|default:"Lunex Presents crafts premium websites, logos, and social media visuals for local businesses and brands." }}{% endblock %}">
+  <!-- Title & SEO Meta -->
+  <title>{% block title %}{{ page_title|default:"Lunex Presents — Ideas to Digital Experiences that Grow" }}{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}{{ meta_description|default:"We design, develop and build digital solutions for businesses, brands and creators. Web development, brand identity, social creatives, and privacy compliance." }}{% endblock %}">
   <meta name="author" content="Lunex Presents">
   <meta name="robots" content="index, follow">
 
-  <!-- Open Graph -->
+  <!-- Open Graph / Facebook / LinkedIn -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Lunex Presents">
-  <meta property="og:title" content="{% block og_title %}{{ page_title|default:"Lunex Presents" }}{% endblock %}">
-  <meta property="og:description" content="{% block og_description %}{{ meta_description|default:"Lunex Presents crafts premium websites, logos, and social media visuals." }}{% endblock %}">
-  <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/og-image.png' %}">
+  <meta property="og:title" content="{% block og_title %}{{ page_title|default:"Lunex Presents — Ideas to Digital Experiences that Grow" }}{% endblock %}">
+  <meta property="og:description" content="{% block og_description %}{{ meta_description|default:"We design, develop and build digital solutions for businesses, brands and creators." }}{% endblock %}">
+  <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/logo/lunex-logo.png' %}">
   <meta property="og:url" content="{{ request.build_absolute_uri }}">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{% block twitter_title %}{{ page_title|default:"Lunex Presents" }}{% endblock %}">
-  <meta name="twitter:description" content="{{ meta_description|default:"Lunex Presents crafts premium websites, logos, and social media visuals." }}">
-  <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/og-image.png' %}">
+  <meta name="twitter:description" content="{{ meta_description|default:"We design, develop and build digital solutions for businesses, brands and creators." }}">
+  <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/logo/lunex-logo.png' %}">
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
-  <link rel="apple-touch-icon" href="{% static 'images/favicon.png' %}">
+  <!-- Favicon (Original Geometric L with Mustard Accent) -->
+  <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon-32.png' %}">
+  <link rel="icon" type="image/png" sizes="64x64" href="{% static 'images/favicon-64.png' %}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/apple-touch-icon.png' %}">
 
   <!-- Google Fonts: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <!-- Bootstrap 5 -->
+  <!-- Bootstrap 5.3 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Bootstrap Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
 
-  <!-- Lunex Custom CSS -->
+  <!-- Master Brand Stylesheet -->
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
   {% block extra_css %}{% endblock %}
 </head>
-<body>
+<body class="{% block body_class %}{% endblock %}">
 
-  <!-- Skip to content (accessibility) -->
-  <a href="#main-content" class="visually-hidden-focusable position-absolute top-0 start-0 p-2 m-2 bg-primary text-white rounded">
+  <!-- Accessibility Skip Link -->
+  <a href="#main-content" class="visually-hidden-focusable position-absolute top-0 start-0 p-2 m-2 bg-dark text-white rounded">
     Skip to main content
   </a>
 
-  <!-- Navbar -->
+  <!-- Header & Navbar -->
   {% include "components/navbar.html" %}
 
-  <!-- Main content -->
+  <!-- Flash Messages -->
+  {% if messages %}
+    <div class="container my-3">
+      {% for message in messages %}
+        <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show border-0 shadow-sm" role="alert" style="background-color: var(--lx-surface); border-left: 4px solid var(--lx-accent) !important; color: var(--lx-text-primary);">
+          <div class="d-flex align-items-center gap-2">
+            <span class="lx-diamond"></span>
+            <div>{{ message }}</div>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <!-- Main Content Anchor -->
   <main id="main-content">
     {% block content %}{% endblock %}
   </main>
@@ -229,7 +80,7 @@
   <!-- Footer -->
   {% include "components/footer.html" %}
 
-  <!-- Bootstrap 5 JS -->
+  <!-- Bootstrap 5 JS Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
   <!-- Lunex Main JS -->

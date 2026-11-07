@@ -1,5 +1,4 @@
 from django.shortcuts import render, get_object_or_404
-
 from .models import Project, Category
 
 
@@ -16,10 +15,10 @@ def work(request):
         'projects': projects,
         'categories': categories,
         'selected_category': selected_category,
-        'page_title': 'Our Work — Lunex Presents',
+        'page_title': 'Our Work & Case Studies — Lunex Presents',
         'meta_description': (
             'Browse the Lunex Presents portfolio — websites, logos, brand identities, '
-            'and social media creatives for businesses and brands.'
+            'and custom software platforms for businesses and brands.'
         ),
     }
     return render(request, 'portfolio/work.html', context)
@@ -45,4 +44,3 @@ def project_detail(request, slug):
         'meta_description': project.short_description,
     }
     return render(request, 'portfolio/project_detail.html', context)
-

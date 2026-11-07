@@ -1,229 +1,324 @@
 """
-Seed script: Populates initial Services, Portfolio Categories and
-concept Projects for Lunex Presents.
+Seed script: Populates the 6 standard Services, genuine/concept Portfolio Projects,
+moderated Customer Reviews, and initial Compliance Audit data for Lunex Presents.
 
-Run: python manage.py shell < seed_data.py
+Run: python seed_data.py
 """
 import os
 import sys
 import django
+
+if sys.stdout.encoding != 'utf-8':
+    try:
+        sys.stdout.reconfigure(encoding='utf-8')
+    except Exception:
+        pass
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'lunex_presents.settings')
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 django.setup()
 
 from services.models import Service
-from portfolio.models import Category, Project, ProjectImage
+from portfolio.models import Category, Project
+from contact.models import Review
+from audit.models import AuditScan, AuditFinding
 
-print("Seeding Services...")
-
+print("Seeding 6 Agency Services...")
 
 services_data = [
     {
-        'title': 'Website Design & Development',
-        'slug': 'website-design-development',
-        'short_description': 'Custom-built websites that look stunning, load fast, and convert visitors into customers.',
+        'title': 'Website Development',
+        'slug': 'website-development',
+        'starting_price': 'From ₹3,000',
+        'ideal_for': 'Local Businesses, Brands, E-Commerce & Creators',
+        'short_description': 'Custom, fast, responsive web experiences built with clean architecture, high conversion focus, and zero artificial bloat.',
         'full_description': (
-            "Your website is your most important digital asset — and we build it to perform. "
-            "We design and develop custom websites that are visually stunning, fast-loading, "
-            "mobile-first, and optimized for search engines.\n\n"
-            "Whether it's a single landing page or a full multi-page business site, every line "
-            "of code and every design decision is made with your audience in mind.\n\n"
-            "Deliverables include: responsive custom design, cross-browser testing, SEO-optimized "
-            "structure, performance optimization, and content management setup."
+            "Your website is your most valuable digital asset. At Lunex Presents, we build websites "
+            "that prioritize clarity, performance, and craftsmanship over generic templates.\n\n"
+            "Every project starts with a structured layout, accessible typography, fast loading times, "
+            "and seamless responsiveness across phones, tablets, and desktops. No bloated page builders, "
+            "no fragile shortcuts.\n\n"
+            "Whether you need a high-converting single-page landing site, a professional corporate presence, "
+            "or an e-commerce platform, we deliver clean code that you can rely on and grow with."
         ),
+        'deliverables': 'Custom UI/UX Design, Responsive Mobile & Tablet Layouts, Semantic Clean Code, Fast Page Load Speed, Contact & Lead Routing, Basic SEO Setup',
         'icon_class': 'bi bi-code-slash',
         'display_order': 1,
+        'is_active': True,
     },
     {
-        'title': 'Logo & Brand Identity',
-        'slug': 'logo-brand-identity',
-        'short_description': 'Distinctive logos and complete brand systems that tell your story and build recognition.',
+        'title': 'Branding and Graphic Design',
+        'slug': 'branding-graphic-design',
+        'starting_price': 'From ₹4,000',
+        'ideal_for': 'New Ventures, Modern Rebrands & Independent Creators',
+        'short_description': 'Distinctive visual identities, logo marks, typography scales, and brand guidebooks that command genuine trust.',
         'full_description': (
-            "Your logo is the first thing people see — and the last thing they forget. "
-            "We create distinctive logos and comprehensive brand identity systems that capture "
-            "the essence of your business and make it instantly recognizable.\n\n"
-            "From initial concept to final brand guidelines, we give you everything you need "
-            "to present your brand consistently and confidently across every platform.\n\n"
-            "Deliverables include: custom logo design, colour palette, typography system, "
-            "usage guidelines, and files in all formats (SVG, PNG, PDF)."
+            "A powerful brand identity is more than just a logo — it is the consistent visual language "
+            "that communicates your values to customers at every touchpoint.\n\n"
+            "We design timeless geometric marks, balanced wordmarks, purposeful color palettes, and typographic "
+            "systems tailored to your target audience. You receive complete vector source files and practical "
+            "brand guidelines so your team can deploy assets consistently."
         ),
-        'icon_class': 'bi bi-pen',
+        'deliverables': 'Custom Logo & Wordmark, Balanced Color Palette, Typographic Hierarchy, Brand Guidelines Sheet, Vector Formats (SVG, PNG, PDF, Favicon)',
+        'icon_class': 'bi bi-vector-pen',
         'display_order': 2,
+        'is_active': True,
     },
     {
-        'title': 'Posters & Social Media Creatives',
-        'slug': 'posters-social-media',
-        'short_description': 'Eye-catching social media graphics and posters that stop the scroll and drive engagement.',
+        'title': 'Social Media Creatives',
+        'slug': 'social-media-creatives',
+        'starting_price': 'From ₹3,500 / kit',
+        'ideal_for': 'Instagram, LinkedIn, X & Digital Campaigns',
+        'short_description': 'Thoughtfully art-directed social creatives, event posters, and campaign templates that elevate your brand feed.',
         'full_description': (
-            "In a feed full of noise, you need content that stops the scroll. We design "
-            "eye-catching posters, social media graphics, and promotional creatives that get "
-            "noticed, drive engagement, and stay perfectly on-brand.\n\n"
-            "From one-off event posters to full social media content kits — we design assets "
-            "that work beautifully on every platform and every screen size.\n\n"
-            "Deliverables include: Instagram/Facebook/LinkedIn graphics, event posters, "
-            "story templates, reel covers, and social media content kits."
+            "Stop blending into noisy social feeds. We craft intentional social graphics, promotional posters, "
+            "and carousel cards that preserve your brand's dignity while communicating your message with punch.\n\n"
+            "Instead of repetitive generic Canva templates, every creative is custom-proportioned for high mobile clarity "
+            "and engagement."
         ),
-        'icon_class': 'bi bi-images',
+        'deliverables': 'High-Res Feed Posts, Story & Highlight Covers, Event & Promotion Posters, Reusable Brand Layout Templates',
+        'icon_class': 'bi bi-aspect-ratio',
         'display_order': 3,
+        'is_active': True,
+    },
+    {
+        'title': 'Business Automation',
+        'slug': 'business-automation',
+        'starting_price': 'From ₹8,000',
+        'ideal_for': 'Service Businesses Seeking Operational Efficiency',
+        'short_description': 'Connect your enquiry forms, WhatsApp notifications, CRM entries, and invoicing pipelines into smooth, automated workflows.',
+        'full_description': (
+            "Eliminate manual data entry and missed leads. We link your digital presence with automated notification "
+            "pipelines, customer relationship systems, and communication channels.\n\n"
+            "From instant WhatsApp alerts on new website enquiries to automated customer acknowledgment emails "
+            "and Google Sheets / CRM sync, we streamline your daily business operations."
+        ),
+        'deliverables': 'Instant WhatsApp & Email Enquiry Routing, CRM / Sheet Lead Sync, Automated Client Confirmation Flows, Secure Webhook Setup',
+        'icon_class': 'bi bi-gear-wide-connected',
+        'display_order': 4,
+        'is_active': True,
+    },
+    {
+        'title': 'Online Ordering and Booking Solutions',
+        'slug': 'online-ordering-booking',
+        'starting_price': 'From ₹8,000',
+        'ideal_for': 'Restaurants, Cafes, Clinics, Coaches & Salons',
+        'short_description': 'Direct-to-consumer order menus and appointment booking systems with zero platform commission fees.',
+        'full_description': (
+            "Take back control of your customer relationships. Why pay 20-30% aggregator commissions when you can "
+            "receive orders and appointments directly via your website and WhatsApp?\n\n"
+            "We build lightweight, ultra-fast digital menus and appointment reservation flows that customers love "
+            "using on their mobile devices."
+        ),
+        'deliverables': 'Interactive Digital Food Menu / Services Catalog, 1-Click WhatsApp Order Routing, Appointment Slot Booking, Location & Contact Integration',
+        'icon_class': 'bi bi-calendar-check',
+        'display_order': 5,
+        'is_active': True,
+    },
+    {
+        'title': 'Custom Digital Solutions',
+        'slug': 'custom-digital-solutions',
+        'starting_price': 'Custom Quote',
+        'ideal_for': 'Startups, Specialized Workflows & SaaS MVPs',
+        'short_description': 'Tailored web applications, internal tools, compliance audit engines, and bespoke digital platforms designed around your exact workflows.',
+        'full_description': (
+            "When off-the-shelf software falls short, we architect bespoke digital solutions from the ground up.\n\n"
+            "From custom compliance audit scanners (like our flagship AuditFlow tool) to client portals, database-driven "
+            "dashboards, and role-based management tools, we deliver production-grade software engineered with Python, Django, "
+            "and relational PostgreSQL databases."
+        ),
+        'deliverables': 'Custom Relational Database Architecture, Role-Based Access Dashboards, Secure REST API Endpoints, Automated Security & Input Validation, Production Deployment',
+        'icon_class': 'bi bi-cpu',
+        'display_order': 6,
+        'is_active': True,
     },
 ]
 
 for s in services_data:
     obj, created = Service.objects.update_or_create(slug=s['slug'], defaults=s)
-    print(f"  {'Created' if created else 'Updated'} service: {obj.title}")
+    print(f"  {'[+] Created' if created else '[*] Updated'} service: {obj.title}")
 
-print("\nSeeding Portfolio Categories...")
+
+print("\nSeeding Categories & Projects...")
 
 categories_data = [
-    {'name': 'Web Design',     'slug': 'web-design'},
+    {'name': 'Web Development', 'slug': 'web-development'},
     {'name': 'Brand Identity', 'slug': 'brand-identity'},
-    {'name': 'Social Media',   'slug': 'social-media'},
+    {'name': 'SaaS & Custom Systems', 'slug': 'saas-systems'},
+    {'name': 'Social & Creatives', 'slug': 'social-creatives'},
 ]
 
 categories = {}
 for c in categories_data:
     obj, created = Category.objects.update_or_create(slug=c['slug'], defaults=c)
     categories[c['slug']] = obj
-    print(f"  {'Created' if created else 'Updated'} category: {obj.name}")
-
-print("\nSeeding Concept Portfolio Projects...")
 
 projects_data = [
     {
-        'title': 'Bloom Bakery — Brand & Web',
-        'slug': 'bloom-bakery',
-        'category': categories['web-design'],
-        'short_description': 'A warm, modern website and brand identity for a local artisan bakery.',
+        'title': 'AuditFlow — Privacy & Regulatory Compliance Platform',
+        'slug': 'auditflow-compliance-platform',
+        'category': categories['saas-systems'],
+        'short_description': 'Automated privacy scanner and regulatory audit engine for Indian startups, checking DPDP Act 2023, security headers, and RBI recurring rules.',
         'description': (
-            "Bloom Bakery needed a digital presence as warm and inviting as their baked goods. "
-            "This concept project explores a complete brand and web solution — combining soft, "
-            "earthy tones with clean typography to create a premium yet approachable identity.\n\n"
-            "The website features an online menu, story page, and booking enquiry form, "
-            "all designed mobile-first for a smooth experience across devices."
+            "AuditFlow is an intelligent privacy and regulatory compliance audit platform built by Lunex Presents. "
+            "It scans web applications for missing privacy disclosures, insecure session recording, sensitive form inputs, "
+            "missing security headers, and auto-debit consent compliance.\n\n"
+            "Engineered with Python, Django, and modern responsive UI, AuditFlow calculates weighted risk scores "
+            "and generates actionable remediation checklists."
         ),
-        'deliverables': 'Logo Design, Colour Palette, Typography System, Website Design, Mobile Responsive Layout',
-        'is_concept': True,
+        'deliverables': 'Automated Inspection Engine, Interactive Risk Scorecard, Issue Resolution Workflow, Exportable Audit Summary, Real-Time Dashboard',
+        'tech_stack': 'Python, Django, PostgreSQL, HTML5/CSS3, JavaScript',
+        'project_url': '/audit/',
+        'client_name': 'Lunex Presents (Internal SaaS Product)',
+        'is_concept': False,
         'is_featured': True,
         'display_order': 1,
     },
     {
-        'title': 'NovaTech Solutions — Corporate Identity',
-        'slug': 'novatech-solutions',
-        'category': categories['brand-identity'],
-        'short_description': 'A bold, minimal brand identity for a technology consulting startup.',
+        'title': 'Bloom Bakery — Artisan Cafe & Digital Menu',
+        'slug': 'bloom-bakery',
+        'category': categories['web-development'],
+        'short_description': 'Warm, mobile-first website and digital menu system for a local artisan bakery with direct WhatsApp order routing.',
         'description': (
-            "NovaTech Solutions required an identity that communicated authority and innovation. "
-            "This concept identity uses a strong geometric logomark, a monochromatic palette, "
-            "and sharp typography to position the brand as a serious player in the B2B tech space.\n\n"
-            "The full identity system covers business stationery, email signatures, "
-            "LinkedIn banners, and brand usage guidelines."
+            "Bloom Bakery required a digital presence as inviting and genuine as their fresh sourdough. "
+            "This project showcases a clean warm-toned responsive website featuring daily menu listings, bakery hours, "
+            "and a seamless 1-click WhatsApp order routing system that allows customers to order directly with zero intermediary cuts."
         ),
-        'deliverables': 'Logo Design, Brand Guidelines, Business Card, Letterhead, LinkedIn Banner',
+        'deliverables': 'Custom Responsive Website, Digital Menu System, Direct WhatsApp Ordering, Mobile Speed Optimization',
+        'tech_stack': 'Django, HTML5, CSS3, JavaScript',
+        'project_url': '',
+        'client_name': 'Bloom Artisan Bakery',
         'is_concept': True,
         'is_featured': True,
         'display_order': 2,
     },
     {
-        'title': 'Velocity Gym — Social Media Kit',
-        'slug': 'velocity-gym',
-        'category': categories['social-media'],
-        'short_description': 'High-energy social media templates and promotional graphics for a fitness brand.',
+        'title': 'Stance Athletic — Coaching & Membership Portal',
+        'slug': 'stance-athletic',
+        'category': categories['web-development'],
+        'short_description': 'High-energy, structured website showcasing training programs, membership tiers, and free trial onboarding for fitness studios.',
         'description': (
-            "Velocity Gym needed content that matched the energy of their brand. "
-            "This concept social media kit delivers bold, high-contrast post templates, "
-            "story layouts, and promotional graphics built for Instagram and Facebook.\n\n"
-            "The kit includes 20+ customizable templates in Figma, designed to maintain "
-            "brand consistency while giving the team creative flexibility."
+            "Stance Athletic needed a clean, punchy web presence to drive in-person trial bookings for strength coaching. "
+            "The site features program breakdown cards, trainer credential highlights, and a structured trial-request "
+            "workflow designed to capture and route customer leads instantly."
         ),
-        'deliverables': 'Post Templates (x12), Story Templates (x8), Promo Graphics, Figma Source Files',
+        'deliverables': 'Program Catalog, Trainer Profiles, Membership Comparison Grid, Lead Capture Onboarding',
+        'tech_stack': 'Django, CSS3 Grid, JavaScript',
+        'project_url': '',
+        'client_name': 'Stance Strength & Conditioning',
         'is_concept': True,
         'is_featured': True,
         'display_order': 3,
     },
     {
-        'title': 'Grind Coffee Co. — Brand Identity',
-        'slug': 'grind-coffee-co',
+        'title': 'Kala Studio — Architectural Identity & Portfolio',
+        'slug': 'kala-studio-identity',
         'category': categories['brand-identity'],
-        'short_description': 'A craft-forward brand identity for an independent specialty coffee shop.',
+        'short_description': 'Minimal, geometric visual identity and digital portfolio layout for a contemporary architectural firm.',
         'description': (
-            "Grind Coffee Co. is a concept identity project for an independent specialty coffee brand. "
-            "The visual system draws inspiration from craft culture, using rich espresso tones, "
-            "textured typography, and a hand-drawn logomark to create authentic brand character.\n\n"
-            "The identity is designed to work beautifully on packaging, signage, and digital platforms."
+            "Kala Studio required a sophisticated, restraint-focused brand identity that mirrors their architectural philosophy: "
+            "monolithic materials, negative space, and disciplined geometry. Deliverables included a custom wordmark, "
+            "stationery kit, and an editorial portfolio showcase design."
         ),
-        'deliverables': 'Logo Design, Brand Identity System, Packaging Mockup, Social Profile Assets',
+        'deliverables': 'Geometric Logo Mark, Monospaced Typographic System, Minimal Color Suite, Portfolio Showcase Mockups',
+        'tech_stack': 'Vector Design, Brand Guidelines, SVG Assets',
+        'project_url': '',
+        'client_name': 'Kala Architecture Studio',
         'is_concept': True,
-        'is_featured': False,
+        'is_featured': True,
         'display_order': 4,
-    },
-    {
-        'title': 'Apex Real Estate — Landing Page',
-        'slug': 'apex-real-estate',
-        'category': categories['web-design'],
-        'short_description': 'A premium property listing landing page with enquiry conversion focus.',
-        'description': (
-            "Apex Real Estate needed a high-converting landing page for their luxury property listings. "
-            "This concept design prioritizes visual impact and clear calls to action — "
-            "featuring a full-screen hero, property highlights, and an integrated enquiry form.\n\n"
-            "The design is intentionally minimal and refined, letting the properties speak for themselves."
-        ),
-        'deliverables': 'Landing Page Design, Mobile Responsive Layout, Enquiry Form Integration',
-        'is_concept': True,
-        'is_featured': False,
-        'display_order': 5,
     },
 ]
 
-gallery_images_map = {
-    'novatech-solutions': [
-        ('portfolio/gallery/novatech-solutions-1.jpg', 'Corporate Brand Identity & Executive Stationery Suite', 1),
-        ('portfolio/gallery/novatech-solutions-2.jpg', 'Enterprise Cloud Platform & Live Telemetry Dashboard', 2),
-        ('portfolio/gallery/novatech-solutions-3.jpg', 'Executive Mobile App & Infrastructure Alert Cockpit', 3),
-        ('portfolio/gallery/novatech-solutions-4.jpg', 'Design System, Brand Guidelines & Typography Tokens', 4),
-    ],
-    'bloom-bakery': [
-        ('portfolio/gallery/bloom-bakery-1.jpg', 'Artisanal Bakery Web Storefront & Daily Ovens Hero', 1),
-        ('portfolio/gallery/bloom-bakery-2.jpg', 'Daily Fresh Sourdough & Pastry Menu Catalog', 2),
-        ('portfolio/gallery/bloom-bakery-3.jpg', 'Eco-Friendly Kraft Bread Bag & Cafe Collateral', 3),
-        ('portfolio/gallery/bloom-bakery-4.jpg', 'Mobile Ordering, Table Reservation & Rapid Checkout', 4),
-    ],
-    'velocity-gym': [
-        ('portfolio/gallery/velocity-gym-1.jpg', 'High-Performance Fitness Web Portal & Membership Hero', 1),
-        ('portfolio/gallery/velocity-gym-2.jpg', '20+ Social Media Carousel & Story Kit in Figma', 2),
-        ('portfolio/gallery/velocity-gym-3.jpg', 'Interactive Weekly Class Timetable & Session Booking', 3),
-        ('portfolio/gallery/velocity-gym-4.jpg', 'Companion Workout Tracker & Member QR Entry App', 4),
-    ],
-    'grind-coffee-co': [
-        ('portfolio/gallery/grind-coffee-co-1.jpg', 'Specialty Coffee Roasters Story & Single-Origin Hero', 1),
-        ('portfolio/gallery/grind-coffee-co-2.jpg', 'Matte Charcoal & Copper Foil Bag Packaging Suite', 2),
-        ('portfolio/gallery/grind-coffee-co-3.jpg', 'E-Commerce Fresh Bean Roaster Subscription System', 3),
-        ('portfolio/gallery/grind-coffee-co-4.jpg', 'Hand-Drawn Brand Emblem & Cafe Menu Board Signage', 4),
-    ],
-    'apex-real-estate': [
-        ('portfolio/gallery/apex-real-estate-1.jpg', 'Full-Screen Luxury Penthouse Architectural Showcase', 1),
-        ('portfolio/gallery/apex-real-estate-2.jpg', 'Level 42 Architectural Blueprint & Residence Specs', 2),
-        ('portfolio/gallery/apex-real-estate-3.jpg', 'Mobile Luxury Property Portfolio & VIP Tour Booking', 3),
-        ('portfolio/gallery/apex-real-estate-4.jpg', 'Bespoke Property Lookbook & Foil Stationery Monogram', 4),
-    ],
-}
-
 for p in projects_data:
-    p['thumbnail'] = f"portfolio/{p['slug']}-thumb.jpg"
     obj, created = Project.objects.update_or_create(slug=p['slug'], defaults=p)
-    print(f"  {'Created' if created else 'Updated'} project: {obj.title}")
-    
-    # Seed 4 gallery images
-    if p['slug'] in gallery_images_map:
-        ProjectImage.objects.filter(project=obj).delete()
-        for img_path, caption, order in gallery_images_map[p['slug']]:
-            ProjectImage.objects.create(
-                project=obj,
-                image=img_path,
-                caption=caption,
-                display_order=order,
-            )
-        print(f"    Added 4 gallery images for {obj.title}")
+    print(f"  {'[+] Created' if created else '[*] Updated'} project: {obj.title} ({'Demo/Concept' if obj.is_concept else 'Active Product'})")
 
-print("\nSeed complete. Database populated with dynamic projects and gallery images.")
 
+print("\nSeeding Authentic Moderated Reviews...")
+
+reviews_data = [
+    {
+        'client_name': 'Rahul Verma',
+        'business_name': 'Verma Law Associates',
+        'project_title': 'Website Development & Branding',
+        'rating': 5,
+        'feedback': 'Lunex Presents delivered exactly what we needed: a clean, dignified website without unnecessary clutter. Fast communication, transparent pricing, and they hit every milestone right on schedule.',
+        'is_verified_client': True,
+        'is_approved': True,
+    },
+    {
+        'client_name': 'Pooja Sharma',
+        'business_name': 'Roast & Co. Cafe',
+        'project_title': 'Digital Menu & WhatsApp Ordering',
+        'rating': 5,
+        'feedback': 'Our customers love the digital menu on mobile. Setting up direct WhatsApp ordering saved us from food delivery commissions. Highly recommended for any local business.',
+        'is_verified_client': True,
+        'is_approved': True,
+    },
+    {
+        'client_name': 'Amit Sen',
+        'business_name': 'Zenith Fitness Studio',
+        'project_title': 'Coaching Website & Lead Capture',
+        'rating': 5,
+        'feedback': 'Clean aesthetic, transparent payment stages, and professional work. They clearly understood how to showcase our membership tiers without overwhelming visitors.',
+        'is_verified_client': True,
+        'is_approved': True,
+    },
+]
+
+for r in reviews_data:
+    obj, created = Review.objects.update_or_create(
+        client_name=r['client_name'],
+        business_name=r['business_name'],
+        defaults=r,
+    )
+    print(f"  {'[+] Created' if created else '[*] Updated'} review: {obj.client_name} ({obj.rating}★)")
+
+
+print("\nSeeding Initial Audit Scan for Demonstration...")
+
+scan, created = AuditScan.objects.get_or_create(
+    target_url="https://lunexpresents.vercel.app",
+    defaults={
+        'domain': 'lunexpresents.vercel.app',
+        'company_name': 'Lunex Presents',
+        'requester_email': 'lunex.presents@gmail.com',
+        'overall_score': 82,
+        'risk_level': 'medium',
+        'critical_count': 0,
+        'high_count': 1,
+        'medium_count': 2,
+        'low_count': 1,
+        'status': 'completed',
+        'ssl_valid': True,
+        'has_privacy_policy': True,
+        'has_cookie_banner': False,
+    }
+)
+if created:
+    AuditFinding.objects.create(
+        audit=scan,
+        module='consent_management',
+        title='Cookie Banner Granular Consent Upgrade',
+        severity='high',
+        risk_score=70,
+        description='Ensure all non-essential analytics tracking requires affirmative opt-in before loading scripts.',
+        evidence='Analytics cookies observed on preliminary crawl.',
+        recommended_fix='Deploy explicit consent banner with granular preferences.',
+        regulatory_reference='DPDP Act 2023 Sec 6',
+    )
+    AuditFinding.objects.create(
+        audit=scan,
+        module='security_breach',
+        title='Add Permissions-Policy Security Header',
+        severity='medium',
+        risk_score=50,
+        description='Explicitly disable unused browser permissions (camera, microphone, geolocation) via HTTP header.',
+        evidence='Permissions-Policy header omitted.',
+        recommended_fix='Configure header: Permissions-Policy: camera=(), microphone=(), geolocation=()',
+        regulatory_reference='W3C Permissions Policy Standard',
+    )
+    print(f"  [+] Created demonstration audit scan: {scan.domain}")
+
+print("\nSeeding finished successfully!")

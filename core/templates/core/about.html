@@ -1,164 +1,92 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block title %}About Lunex Presents — Digital Craftsmanship & Purpose{% endblock %}
+
 {% block content %}
+<section class="py-5" style="background-color: var(--lx-bg); border-bottom: 1px solid var(--lx-border);">
+  <div class="container py-4">
+    <div class="lx-eyebrow">
+      <span class="lx-diamond"></span> The Studio
+    </div>
+    <h1 class="mb-3">
+      Who We Are &amp; How We Build.
+    </h1>
+    <p class="lead" style="color: var(--lx-text-secondary); max-width: 760px;">
+      Lunex Presents is an independent digital studio designing and developing web solutions, brand identity systems, and compliance tools for businesses, brands, and creators.
+    </p>
+  </div>
+</section>
 
-<!-- Page Hero -->
-<section class="page-hero" aria-labelledby="about-title">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8">
-        <span class="section-eyebrow">About Us</span>
-        <h1 class="page-hero-title" id="about-title">The Creative Studio Behind Your Brand</h1>
-        <p class="page-hero-subtitle mt-3">
-          We're Lunex Presents — a digital creative agency with a simple belief: every local business deserves world-class digital work.
+<section class="py-5" style="background-color: var(--lx-surface);">
+  <div class="container py-4">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-6">
+        <div class="lx-eyebrow">
+          <span class="lx-diamond"></span> Our Philosophy
+        </div>
+        <h2 class="mb-4">
+          Complete AI Unslop: Thoughtful Design Over Generic Templates
+        </h2>
+        <p style="font-size: 1.05rem; line-height: 1.7; color: var(--lx-text-secondary);">
+          In an era where the internet is inundated with generic, AI-generated website templates filled with meaningless floating spheres and fake statistics, Lunex Presents takes the opposite approach: <strong>human art-direction, disciplined typography, and real engineering</strong>.
+        </p>
+        <p style="font-size: 1.05rem; line-height: 1.7; color: var(--lx-text-secondary);">
+          Every layout is composed with intentional negative space, clear visual hierarchy, and genuine business context. We build digital experiences that feel crafted, trustworthy, and unmistakably distinct.
+        </p>
+      </div>
+      <div class="col-lg-6">
+        <div class="p-5" style="background-color: var(--lx-bg); border: 1px solid var(--lx-border); border-radius: 4px;">
+          <h3 class="h4 mb-3 text-charcoal">Studio Principles</h3>
+          <ul class="list-unstyled mb-0" style="font-size: 0.95rem; line-height: 2; color: var(--lx-text-secondary);">
+            <li><span class="lx-diamond-sm"></span> <strong>Zero Artificial Clutter:</strong> Every visual element has a functional purpose.</li>
+            <li><span class="lx-diamond-sm"></span> <strong>Truth in Portfolio:</strong> Exploratory work is marked as concepts; active products are verified.</li>
+            <li><span class="lx-diamond-sm"></span> <strong>Production Code Quality:</strong> Built on Python, Django, and clean semantic architecture.</li>
+            <li><span class="lx-diamond-sm"></span> <strong>Transparent Milestones:</strong> 40% advance, 40% preview approval, 20% final delivery.</li>
+            <li><span class="lx-diamond-sm"></span> <strong>Client Ownership:</strong> You retain complete ownership of your code and assets.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4 mt-5 pt-4 border-top" style="border-color: var(--lx-border-subtle) !important;">
+      <div class="col-md-4">
+        <h3 class="h5 mb-2 text-charcoal">Design &amp; Typography</h3>
+        <p style="font-size: 0.92rem; color: var(--lx-text-secondary);">
+          Rooted in editorial grids, balanced proportions, and the geometric harmony of our Warm Ivory and Mustard Gold visual identity.
+        </p>
+      </div>
+      <div class="col-md-4">
+        <h3 class="h5 mb-2 text-charcoal">Practical Engineering</h3>
+        <p style="font-size: 0.92rem; color: var(--lx-text-secondary);">
+          High performance, accessible markup, secure database schemas, and zero fragile dependencies.
+        </p>
+      </div>
+      <div class="col-md-4">
+        <h3 class="h5 mb-2 text-charcoal">Regulatory Consciousness</h3>
+        <p style="font-size: 0.92rem; color: var(--lx-text-secondary);">
+          We construct privacy-first platforms aligned with the Indian Digital Personal Data Protection (DPDP) Act 2023 and RBI guidelines.
         </p>
       </div>
     </div>
   </div>
 </section>
 
-<hr style="margin:0; border-color:var(--lx-border);">
-
-<!-- Brand Story -->
-<section class="section-py" aria-labelledby="story-heading">
-  <div class="container">
-    <div class="row align-items-center g-5">
-      <div class="col-lg-6 reveal">
-        <span class="section-eyebrow">Our Story</span>
-        <h2 class="section-title" id="story-heading">Built from a Passion for Craft</h2>
-        <p class="mt-3" style="color:var(--lx-grey-light); line-height:1.8;">
-          Lunex Presents was founded with one clear goal: to bring premium digital design within reach of local businesses and ambitious brands — without compromise on quality, communication, or results.
-        </p>
-        <p style="color:var(--lx-grey-light); line-height:1.8;">
-          We believe that great design is more than aesthetics — it's a business tool. A well-crafted website, a distinctive logo, or a striking social post can transform how the world sees your brand overnight.
-        </p>
-        <p style="color:var(--lx-grey-light); line-height:1.8;">
-          Every project we take on is treated as if it were our own. We ask the right questions, sweat the small details, and don't stop until the work is something both of us are proud of.
-        </p>
-      </div>
-
-      <div class="col-lg-5 offset-lg-1 reveal reveal-delay-2">
-        <div class="row g-4 text-center">
-          <div class="col-6">
-            <div class="lx-card p-3">
-              <div class="about-highlight-number">{{ total_services|default:"3" }}</div>
-              <div class="step-desc mt-1">Core Services</div>
-            </div>
-          </div>
-          <div class="col-6">
-            <div class="lx-card p-3">
-              <div class="about-highlight-number">{{ total_projects|default:"5" }}+</div>
-              <div class="step-desc mt-1">Projects Built</div>
-            </div>
-          </div>
-          <div class="col-6">
-            <div class="lx-card p-3">
-              <div class="about-highlight-number">24h</div>
-              <div class="step-desc mt-1">Response Time</div>
-            </div>
-          </div>
-          <div class="col-6">
-            <div class="lx-card p-3">
-              <div class="about-highlight-number">∞</div>
-              <div class="step-desc mt-1">Revisions Focus</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Mission -->
-<section class="section-py" style="background:var(--lx-bg-alt)" aria-labelledby="mission-heading">
-  <div class="container">
-    <div class="text-center mb-5 reveal">
-      <span class="section-eyebrow">Mission</span>
-      <h2 class="section-title" id="mission-heading">What We Stand For</h2>
-      <div class="section-divider"></div>
-    </div>
-
-    <div class="row g-4">
-      <div class="col-md-4 reveal reveal-delay-1">
-        <div class="lx-card h-100 text-center">
-          <div class="service-icon-wrap mx-auto"><i class="bi bi-gem"></i></div>
-          <h3 class="h5 mb-2">Premium by Default</h3>
-          <p style="color:var(--lx-grey);font-size:0.88rem;">We don't do mediocre. Every deliverable — from the first sketch to the final file — is held to the highest standard.</p>
-        </div>
-      </div>
-      <div class="col-md-4 reveal reveal-delay-2">
-        <div class="lx-card h-100 text-center">
-          <div class="service-icon-wrap mx-auto"><i class="bi bi-people"></i></div>
-          <h3 class="h5 mb-2">Clients First</h3>
-          <p style="color:var(--lx-grey);font-size:0.88rem;">We build around your goals, your audience, and your vision. Clear communication throughout — no surprises.</p>
-        </div>
-      </div>
-      <div class="col-md-4 reveal reveal-delay-3">
-        <div class="lx-card h-100 text-center">
-          <div class="service-icon-wrap mx-auto"><i class="bi bi-arrow-repeat"></i></div>
-          <h3 class="h5 mb-2">Built to Last</h3>
-          <p style="color:var(--lx-grey);font-size:0.88rem;">We create work that ages well — solid technical foundations, timeless design decisions, and assets you'll use for years.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Process / Workflow -->
-<section class="section-py" aria-labelledby="process-heading">
-  <div class="container">
-    <div class="text-center mb-5 reveal">
-      <span class="section-eyebrow">How We Work</span>
-      <h2 class="section-title" id="process-heading">Our Project Process</h2>
-      <div class="section-divider"></div>
-      <p class="section-subtitle mx-auto">A process you can trust — transparent, collaborative, and results-focused.</p>
-    </div>
-
-    <div class="lx-card p-0 reveal">
-      <div class="workflow-steps">
-        <div class="workflow-step">
-          <div class="step-number">01</div>
-          <div class="step-icon"><i class="bi bi-search"></i></div>
-          <div class="step-title">Discover</div>
-          <div class="step-desc">Deep-dive into your brand, goals, and what your audience needs most.</div>
-        </div>
-        <div class="workflow-step">
-          <div class="step-number">02</div>
-          <div class="step-icon"><i class="bi bi-palette"></i></div>
-          <div class="step-title">Design</div>
-          <div class="step-desc">Crafting concepts, iterating with your feedback until it's perfect.</div>
-        </div>
-        <div class="workflow-step">
-          <div class="step-number">03</div>
-          <div class="step-icon"><i class="bi bi-code-slash"></i></div>
-          <div class="step-title">Develop</div>
-          <div class="step-desc">Building the final product — clean code, sharp visuals, real performance.</div>
-        </div>
-        <div class="workflow-step">
-          <div class="step-number">04</div>
-          <div class="step-icon"><i class="bi bi-rocket-takeoff"></i></div>
-          <div class="step-title">Deliver</div>
-          <div class="step-desc">Launch, hand-off, and make sure you're confident in what you've received.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="section-py" style="background:var(--lx-bg-alt)" aria-labelledby="about-cta-heading">
-  <div class="container">
-    <div class="cta-band reveal">
-      <h2 class="section-title" id="about-cta-heading">Ready to Work With Us?</h2>
-      <p class="section-subtitle mx-auto mb-4">
-        Drop us a message and let's talk about what you're building.
-      </p>
-      <a href="{% url 'contact:contact' %}" class="btn btn-primary btn-lg" id="about-cta-btn">
-        <i class="bi bi-envelope me-2" aria-hidden="true"></i>Get in Touch
+<!-- CTA Bar -->
+<section class="py-5" style="background-color: var(--lx-bg-secondary); border-top: 1px solid var(--lx-border);">
+  <div class="container py-3 text-center">
+    <h2 class="mb-3">Ready to build something lasting?</h2>
+    <p class="mb-4 text-muted-grey" style="max-width: 580px; margin-left: auto; margin-right: auto;">
+      Discuss your upcoming website, brand identity, or custom digital solution directly with our team.
+    </p>
+    <div class="d-flex justify-content-center gap-3">
+      <a href="{% url 'contact:start_project' %}" class="btn-lunex-gold">
+        Start a Project <i class="bi bi-arrow-right"></i>
+      </a>
+      <a href="{% url 'core:free_demo' %}" class="btn-lunex-outline">
+        Request Free Demo
       </a>
     </div>
   </div>
 </section>
-
 {% endblock %}

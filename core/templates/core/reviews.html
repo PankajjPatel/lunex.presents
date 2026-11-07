@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Client Reviews &amp; Feedback — Lunex Presents{% endblock %}
+
+{% block content %}
+<section class="py-5" style="background-color: var(--lx-bg); border-bottom: 1px solid var(--lx-border);">
+  <div class="container py-4">
+    <div class="lx-eyebrow">
+      <span class="lx-diamond"></span> Customer Feedback
+    </div>
+    <h1 class="mb-3">
+      Client Reviews &amp; Honest Experiences
+    </h1>
+    <p class="lead" style="color: var(--lx-text-secondary); max-width: 760px;">
+      Read genuine reviews submitted by businesses and creators who partnered with Lunex Presents. All reviews are human-moderated to ensure authenticity.
+    </p>
+  </div>
+</section>
+
+<section class="py-5" style="background-color: var(--lx-surface);">
+  <div class="container py-3">
+    <div class="row g-5">
+      <!-- Reviews List Column -->
+      <div class="col-lg-7">
+        <h2 class="h4 mb-4 text-charcoal">Published Reviews</h2>
+
+        <div class="d-flex flex-column gap-4">
+          {% for review in reviews %}
+            <div class="p-4" style="background-color: var(--lx-bg); border: 1px solid var(--lx-border); border-radius: 4px;">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <div class="text-gold" style="font-size: 1.15rem; letter-spacing: 2px;">
+                  {% for i in review.stars_range %}★{% endfor %}
+                </div>
+                {% if review.is_verified_client %}
+                  <span class="lx-verified-badge">
+                    <i class="bi bi-shield-check"></i> Verified Client
+                  </span>
+                {% endif %}
+              </div>
+              <p class="mb-3" style="font-size: 1rem; line-height: 1.65; color: var(--lx-text-primary); font-style: italic;">
+                “{{ review.feedback }}”
+              </p>
+              <div class="pt-2 border-top d-flex justify-content-between align-items-center" style="border-color: var(--lx-border-subtle) !important;">
+                <div>
+                  <strong class="text-charcoal" style="font-size: 0.95rem;">{{ review.client_name }}</strong>
+                  {% if review.business_name %}
+                    <span class="text-muted-grey" style="font-size: 0.85rem;"> • {{ review.business_name }}</span>
+                  {% endif %}
+                </div>
+                <div class="text-muted-grey" style="font-size: 0.78rem;">
+                  {{ review.created_at|date:"M Y" }}
+                </div>
+              </div>
+            </div>
+          {% empty %}
+            <div class="p-4 text-center" style="background-color: var(--lx-bg); border: 1px dashed var(--lx-border); border-radius: 4px;">
+              <p class="mb-0 text-muted-grey">No reviews published yet. Be the first to share your experience!</p>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Submit Review Form Column -->
+      <div class="col-lg-5">
+        <div class="p-4 p-md-5" style="background-color: var(--lx-bg-secondary); border: 1px solid var(--lx-border); border-radius: 4px;">
+          <h2 class="h4 mb-2 text-charcoal">Leave a Review</h2>
+          <p style="font-size: 0.88rem; color: var(--lx-text-secondary); margin-bottom: 1.75rem;">
+            Worked with us? Share your honest feedback. Submissions are moderated to protect against spam before public display.
+          </p>
+
+          <form action="{% url 'contact:submit_review' %}" method="POST">
+            {% csrf_token %}
+            {{ review_form.website }}
+
+            <div class="mb-3">
+              <label for="{{ review_form.client_name.id_for_label }}" class="form-label fw-semibold" style="font-size: 0.88rem;">
+                Your Full Name <span class="text-danger">*</span>
+              </label>
+              {{ review_form.client_name }}
+            </div>
+
+            <div class="mb-3">
+              <label for="{{ review_form.business_name.id_for_label }}" class="form-label fw-semibold" style="font-size: 0.88rem;">
+                Business or Brand Name
+              </label>
+              {{ review_form.business_name }}
+            </div>
+
+            <div class="mb-3">
+              <label for="{{ review_form.project_title.id_for_label }}" class="form-label fw-semibold" style="font-size: 0.88rem;">
+                Service Delivered
+              </label>
+              {{ review_form.project_title }}
+            </div>
+
+            <div class="mb-3">
+              <label for="{{ review_form.rating.id_for_label }}" class="form-label fw-semibold" style="font-size: 0.88rem;">
+                Your Rating <span class="text-danger">*</span>
+              </label>
+              {{ review_form.rating }}
+            </div>
+
+            <div class="mb-4">
+              <label for="{{ review_form.feedback.id_for_label }}" class="form-label fw-semibold" style="font-size: 0.88rem;">
+                Feedback &amp; Experience <span class="text-danger">*</span>
+              </label>
+              {{ review_form.feedback }}
+            </div>
+
+            <button type="submit" class="btn-lunex-gold w-100 py-2">
+              Submit Review for Moderation <i class="bi bi-arrow-right ms-1"></i>
+            </button>
+            <div class="text-center mt-2" style="font-size: 0.75rem; color: var(--lx-text-muted);">
+              Reviews undergo admin verification before appearing publicly.
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -22,6 +22,7 @@ urlpatterns = [
     path('services/', include('services.urls')),
     path('work/', include('portfolio.urls')),
     path('contact/', include('contact.urls')),
+    path('audit/', include('audit.urls')),
     path(
         'sitemap.xml',
         sitemap,

@@ -2,339 +2,648 @@
 {% load static %}
 
 {% block content %}
-
-<!-- ═══════════════════════════════════════════
-     HERO SECTION
-═══════════════════════════════════════════ -->
-<section class="hero-section" aria-label="Hero">
-  <div class="hero-bg" aria-hidden="true"></div>
-  <div class="hero-grid-overlay" aria-hidden="true"></div>
-
+<!-- ═══════════════════════════════════════════════════════════════
+     1. HERO SECTION (EDITORIAL & GEOMETRIC)
+═══════════════════════════════════════════════════════════════ -->
+<section class="lx-hero">
   <div class="container">
     <div class="row align-items-center g-5">
-
-      <!-- Hero copy -->
-      <div class="col-lg-6">
-        <div class="hero-eyebrow" aria-label="Status">
-          <span class="dot" aria-hidden="true"></span>
-          Available for new projects
-        </div>
-
-        <h1 class="hero-headline">
-          We Build Digital <span class="accent-word">Experiences</span> That Make Brands Stand Out
-        </h1>
-
-        <p class="hero-subtext">
-          Lunex Presents is a digital creative agency crafting premium websites, logos, and social media visuals — built to convert, designed to impress.
-        </p>
-
-        <div class="hero-actions">
-          <a href="{% url 'contact:start_project' %}" class="btn btn-primary btn-lg" id="hero-cta-primary">
-            <i class="bi bi-arrow-right-circle me-2" aria-hidden="true"></i>
-            Start a Project
-          </a>
-          <a href="{% url 'portfolio:work' %}" class="btn btn-outline-light btn-lg" id="hero-cta-secondary">
-            Explore Our Work
-          </a>
-        </div>
-
-        <div class="hero-stats" aria-label="Agency stats">
-          <div>
-            <div class="hero-stat-num">{{ total_projects|default:"5" }}+</div>
-            <div class="hero-stat-label">Projects Built</div>
+      <div class="col-lg-8">
+        <div class="lx-hero-content">
+          <div class="lx-eyebrow">
+            <span class="lx-diamond"></span> Lunex Presents • Digital Studio
           </div>
-          <div>
-            <div class="hero-stat-num">{{ total_services|default:"3" }}</div>
-            <div class="hero-stat-label">Core Services</div>
+          <h1 class="lx-hero-title">
+            Ideas to Digital Experiences that Grow.
+          </h1>
+          <p class="lx-hero-desc">
+            We design, develop and build digital solutions for businesses, brands and creators. Custom web platforms, distinctive visual identities, and privacy compliance systems crafted with precision.
+          </p>
+          <div class="lx-hero-actions">
+            <a href="{% url 'contact:start_project' %}" class="btn-lunex-gold">
+              Start a Project <i class="bi bi-arrow-right"></i>
+            </a>
+            <a href="#featured-work" class="btn-lunex-outline">
+              See Our Work
+            </a>
+            <a href="{% url 'core:free_demo' %}" class="btn-lunex-outline" style="border-style: dashed;">
+              Request Free Demo
+            </a>
           </div>
-          <div>
-            <div class="hero-stat-num">100%</div>
-            <div class="hero-stat-label">Custom Craft</div>
+
+          <!-- Editorial Specifications Grid -->
+          <div class="lx-hero-specs">
+            <div class="lx-spec-item">
+              <div class="lx-spec-number">01 / ARCHITECTURE</div>
+              <p class="lx-spec-label">Human-Designed &amp; AI-Unslop</p>
+            </div>
+            <div class="lx-spec-item">
+              <div class="lx-spec-number">02 / MILESTONES</div>
+              <p class="lx-spec-label">40% • 40% • 20% Phased Delivery</p>
+            </div>
+            <div class="lx-spec-item">
+              <div class="lx-spec-number">03 / PRICING</div>
+              <p class="lx-spec-label">Transparent Rates from ₹3,000</p>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Hero visual -->
-      <div class="col-lg-6 hero-visual">
-        <div class="position-relative">
-          <div class="hero-mockup-card">
-            <div class="mockup-bar">
-              <span class="mockup-dot red" aria-hidden="true"></span>
-              <span class="mockup-dot yellow" aria-hidden="true"></span>
-              <span class="mockup-dot green" aria-hidden="true"></span>
-              <div class="mockup-nav ms-2"></div>
-            </div>
-            <div class="mockup-content-block mockup-accent-line mb-3" style="height:6px;width:60%"></div>
-            <div class="mockup-content-block" style="height:10px;width:90%;margin-bottom:0.5rem"></div>
-            <div class="mockup-content-block" style="height:10px;width:75%;margin-bottom:0.5rem"></div>
-            <div class="mockup-content-block" style="height:10px;width:83%;margin-bottom:1.5rem"></div>
-            <div class="row g-2">
-              <div class="col-4"><div class="mockup-content-block" style="height:60px;border-radius:8px"></div></div>
-              <div class="col-4"><div class="mockup-content-block" style="height:60px;border-radius:8px"></div></div>
-              <div class="col-4"><div class="mockup-content-block" style="height:60px;border-radius:8px"></div></div>
-            </div>
-            <div class="mockup-content-block mockup-accent-line mt-3" style="height:36px;border-radius:6px;width:40%"></div>
+      <div class="col-lg-4 d-none d-lg-block">
+        <!-- Brand Monolith Card -->
+        <div class="p-4" style="background-color: var(--lx-surface); border: 1px solid var(--lx-border); border-radius: 4px; box-shadow: var(--lx-shadow-card);">
+          <div class="text-center py-4">
+            <img src="{% static 'images/logo/lunex-icon.png' %}" alt="Lunex Mark" style="height: 120px; width: auto; object-fit: contain;">
           </div>
-
-          <!-- Floating badges -->
-          <div class="hero-float-badge badge-1" aria-hidden="true">
-            <div class="badge-icon"><i class="bi bi-check2-circle"></i></div>
-            Project Delivered ✓
-          </div>
-          <div class="hero-float-badge badge-2" aria-hidden="true">
-            <div class="badge-icon"><i class="bi bi-stars"></i></div>
-            Premium Quality
+          <div class="pt-3 border-top" style="border-color: var(--lx-border-subtle) !important;">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <span class="font-mono" style="font-size: 0.78rem; color: var(--lx-accent); font-weight: 700;">IDENTITY</span>
+              <span class="badge" style="background: var(--lx-bg-secondary); color: var(--lx-text-primary); font-size: 0.72rem;">EST. 2024</span>
+            </div>
+            <p class="mb-0" style="font-size: 0.85rem; line-height: 1.5; color: var(--lx-text-secondary);">
+              Warm Ivory, Charcoal Black &amp; Mustard Gold. Purposeful geometry without artificial decorations.
+            </p>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════
-     SERVICES OVERVIEW
-═══════════════════════════════════════════ -->
-<section class="section-py" aria-labelledby="services-heading">
+<!-- ═══════════════════════════════════════════════════════════════
+     2. SERVICES OVERVIEW (VARIED EDITORIAL LAYOUT)
+═══════════════════════════════════════════════════════════════ -->
+<section class="lx-services-section" id="services">
   <div class="container">
-    <div class="text-center mb-5 reveal">
-      <span class="section-eyebrow">What We Do</span>
-      <h2 class="section-title" id="services-heading">Services Built for Growth</h2>
-      <div class="section-divider"></div>
-      <p class="section-subtitle mx-auto">
-        From first impression to final pixel — every service is crafted to give your brand the edge it deserves.
-      </p>
+    <div class="row mb-5">
+      <div class="col-lg-7">
+        <div class="lx-eyebrow">
+          <span class="lx-diamond"></span> What We Build
+        </div>
+        <h2 class="lx-section-title">
+          Specialized Digital Services for Modern Ventures
+        </h2>
+        <p class="lx-section-subtitle">
+          Every service is engineered around business outcomes: fast performance, dependable code, and distinct brand perception.
+        </p>
+      </div>
+      <div class="col-lg-5 text-lg-end d-flex align-items-end justify-content-lg-end pb-4">
+        <a href="{% url 'services:services' %}" class="btn-lunex-outline">
+          Explore All Services In-Depth <i class="bi bi-arrow-right"></i>
+        </a>
+      </div>
     </div>
 
-    <div class="row g-4">
-      {% if services %}
-        {% for service in services %}
-        <div class="col-md-6 col-lg-4 reveal reveal-delay-{{ forloop.counter }}">
-          <div class="lx-card h-100">
-            <div class="service-icon-wrap" aria-hidden="true">
-              <i class="{{ service.icon_class }}"></i>
+    <div class="lx-service-grid">
+      {% for service in services %}
+        <div class="lx-service-card">
+          <div>
+            <div class="lx-service-header">
+              <span class="lx-service-index">0{{ forloop.counter }} // SERVICE</span>
+              <i class="{{ service.icon_class }} lx-service-icon"></i>
             </div>
-            <h3 class="h5 mb-2">{{ service.title }}</h3>
-            <p class="text-grey mb-3" style="font-size:0.9rem;">{{ service.short_description }}</p>
-            <a href="{% url 'services:services' %}" class="btn btn-outline-primary btn-sm">
-              Learn More <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
+            <h3 class="lx-service-title">
+              <a href="{% url 'services:service_detail' service.slug %}">{{ service.title }}</a>
+            </h3>
+            <p class="lx-service-desc">
+              {{ service.short_description }}
+            </p>
+            {% if service.ideal_for %}
+              <div class="mb-3" style="font-size: 0.8rem; color: var(--lx-text-muted);">
+                <strong>Ideal for:</strong> {{ service.ideal_for }}
+              </div>
+            {% endif %}
+          </div>
+
+          <div class="lx-service-meta">
+            <span class="lx-service-price">{{ service.starting_price|default:"Custom Quote" }}</span>
+            <a href="{% url 'services:service_detail' service.slug %}" class="lx-service-arrow" aria-label="View {{ service.title }}">
+              <i class="bi bi-arrow-right"></i>
             </a>
           </div>
         </div>
-        {% endfor %}
-      {% else %}
-        <!-- Default service cards when no DB entries yet -->
-        <div class="col-md-6 col-lg-4 reveal reveal-delay-1">
-          <div class="lx-card h-100">
-            <div class="service-icon-wrap"><i class="bi bi-code-slash"></i></div>
-            <h3 class="h5 mb-2">Website Design &amp; Development</h3>
-            <p class="text-grey mb-3" style="font-size:0.9rem;">Custom-built websites that look stunning, load fast, and convert visitors into customers.</p>
-            <a href="{% url 'services:services' %}" class="btn btn-outline-primary btn-sm">Learn More <i class="bi bi-arrow-right ms-1"></i></a>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4 reveal reveal-delay-2">
-          <div class="lx-card h-100">
-            <div class="service-icon-wrap"><i class="bi bi-pen"></i></div>
-            <h3 class="h5 mb-2">Logo &amp; Brand Identity</h3>
-            <p class="text-grey mb-3" style="font-size:0.9rem;">Distinctive logos and complete brand systems that tell your story and build recognition.</p>
-            <a href="{% url 'services:services' %}" class="btn btn-outline-primary btn-sm">Learn More <i class="bi bi-arrow-right ms-1"></i></a>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4 reveal reveal-delay-3">
-          <div class="lx-card h-100">
-            <div class="service-icon-wrap"><i class="bi bi-images"></i></div>
-            <h3 class="h5 mb-2">Posters &amp; Social Media Creatives</h3>
-            <p class="text-grey mb-3" style="font-size:0.9rem;">Eye-catching social media graphics and posters that stop the scroll and drive engagement.</p>
-            <a href="{% url 'services:services' %}" class="btn btn-outline-primary btn-sm">Learn More <i class="bi bi-arrow-right ms-1"></i></a>
-          </div>
-        </div>
-      {% endif %}
-    </div>
-
-    <div class="text-center mt-5 reveal">
-      <a href="{% url 'services:services' %}" class="btn btn-outline-primary">
-        View All Services <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════
-     FEATURED PORTFOLIO
-═══════════════════════════════════════════ -->
-{% if featured_projects %}
-<section class="section-py" style="background:var(--lx-bg-alt)" aria-labelledby="portfolio-heading">
-  <div class="container">
-    <div class="text-center mb-5 reveal">
-      <span class="section-eyebrow">Our Work</span>
-      <h2 class="section-title" id="portfolio-heading">Featured Projects</h2>
-      <div class="section-divider"></div>
-      <p class="section-subtitle mx-auto">A selection of work we're proud of. Every project is built with intention.</p>
-    </div>
-
-    <div class="row g-4">
-      {% for project in featured_projects %}
-      <div class="col-md-6 col-lg-4 reveal reveal-delay-{{ forloop.counter }}">
-        <article class="project-card">
-          <div class="project-thumbnail">
-            {% if project.get_thumbnail_url %}
-              <img src="{{ project.get_thumbnail_url }}" alt="{{ project.title }}" loading="lazy">
-            {% else %}
-              <div class="project-thumbnail-placeholder">
-                <i class="bi bi-image" aria-hidden="true"></i>
-              </div>
-            {% endif %}
-            <div class="project-overlay" aria-hidden="true">
-              <a href="{{ project.get_absolute_url }}" class="btn btn-primary btn-sm">
-                View Project
-              </a>
-            </div>
-          </div>
-          <div class="project-body">
-            {% if project.category %}
-            <div class="project-category mb-1">{{ project.category.name }}</div>
-            {% endif %}
-            <h3 class="project-title">{{ project.title }}</h3>
-            <p class="project-desc">{{ project.short_description }}</p>
-            <div class="project-meta">
-              <a href="{{ project.get_absolute_url }}" class="btn btn-outline-primary btn-sm ms-auto">
-                View Project <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
-              </a>
-            </div>
-          </div>
-        </article>
-      </div>
       {% endfor %}
     </div>
+  </div>
+</section>
 
-    <div class="text-center mt-5 reveal">
-      <a href="{% url 'portfolio:work' %}" class="btn btn-primary">
-        View All Work <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
-      </a>
+<!-- ═══════════════════════════════════════════════════════════════
+     3. FEATURED PORTFOLIO (GENUINE & HONESTLY LABELED)
+═══════════════════════════════════════════════════════════════ -->
+<section class="lx-portfolio-section" id="featured-work">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-lg-8">
+        <div class="lx-eyebrow">
+          <span class="lx-diamond"></span> Selected Work
+        </div>
+        <h2 class="lx-section-title">
+          Genuine Projects &amp; Concept Architecture
+        </h2>
+        <p class="lx-section-subtitle">
+          We maintain absolute honesty in our portfolio. Live production systems and internal tools are labeled as active products, while exploratory case studies are clearly marked as concept designs.
+        </p>
+      </div>
+      <div class="col-lg-4 text-lg-end d-flex align-items-end justify-content-lg-end pb-4">
+        <a href="{% url 'portfolio:work' %}" class="btn-lunex-outline">
+          View Complete Portfolio <i class="bi bi-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="lx-portfolio-grid">
+      {% for project in featured_projects %}
+        <div class="lx-project-card">
+          <div class="lx-project-visual">
+            {% if project.thumbnail %}
+              <img src="{{ project.thumbnail.url }}" alt="{{ project.title }}">
+            {% else %}
+              <div class="d-flex flex-column align-items-center justify-content-center p-4 text-center">
+                <span class="lx-diamond-lg mb-2"></span>
+                <span class="font-mono text-charcoal font-weight-bold" style="font-size: 0.95rem;">{{ project.title }}</span>
+                <span style="font-size: 0.78rem; color: var(--lx-text-muted);">{{ project.category.name|default:"Digital Product" }}</span>
+              </div>
+            {% endif %}
+
+            {% if project.is_concept %}
+              <span class="lx-project-badge-concept">Concept / Demo Project</span>
+            {% else %}
+              <span class="lx-project-badge-active">Active Product</span>
+            {% endif %}
+          </div>
+
+          <div class="lx-project-body">
+            <div>
+              <div class="lx-project-category">{{ project.category.name|default:"Studio Project" }}</div>
+              <h3 class="lx-project-title">
+                <a href="{{ project.get_absolute_url }}">{{ project.title }}</a>
+              </h3>
+              <p class="lx-project-desc">
+                {{ project.short_description }}
+              </p>
+            </div>
+
+            <div>
+              {% if project.tech_stack %}
+                <div class="lx-project-tags">
+                  {% for tech in project.get_tech_stack_list %}
+                    <span class="lx-tag">{{ tech }}</span>
+                  {% endfor %}
+                </div>
+              {% endif %}
+
+              <div class="d-flex justify-content-between align-items-center pt-3 border-top" style="border-color: var(--lx-border-subtle) !important;">
+                <a href="{{ project.get_absolute_url }}" class="font-weight-bold text-charcoal" style="font-size: 0.88rem;">
+                  View Case Study <i class="bi bi-arrow-right ms-1"></i>
+                </a>
+                {% if project.project_url %}
+                  <a href="{{ project.project_url }}" class="btn-lunex-gold py-1 px-3" style="font-size: 0.78rem;">
+                    Launch Tool <i class="bi bi-box-arrow-up-right ms-1"></i>
+                  </a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
     </div>
   </div>
 </section>
-{% endif %}
 
-<!-- ═══════════════════════════════════════════
-     WHY CHOOSE LUNEX
-═══════════════════════════════════════════ -->
-<section class="section-py" aria-labelledby="why-heading">
+<!-- ═══════════════════════════════════════════════════════════════
+     4. HOW WE WORK (4-STAGE PROCESS)
+═══════════════════════════════════════════════════════════════ -->
+<section class="lx-process-section" id="how-we-work">
   <div class="container">
-    <div class="row align-items-center g-5">
-      <div class="col-lg-5 reveal">
-        <span class="section-eyebrow">Why Us</span>
-        <h2 class="section-title" id="why-heading">Why Choose Lunex Presents?</h2>
-        <p class="section-subtitle" style="margin:0; text-align:left;">
-          We're not a template shop. Every project is a collaboration — rooted in your goals, built with craft, and delivered with care.
+    <div class="row mb-5">
+      <div class="col-lg-8">
+        <div class="lx-eyebrow">
+          <span class="lx-diamond"></span> The Process
+        </div>
+        <h2 class="lx-section-title">
+          How We Work — Four Disciplined Stages
+        </h2>
+        <p class="lx-section-subtitle">
+          No guesswork, no vague promises. We follow a clear, collaborative roadmap from discovery to deployment.
         </p>
-        <div class="mt-4">
-          <a href="{% url 'contact:contact' %}" class="btn btn-primary">
-            Let's Work Together <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
+      </div>
+    </div>
+
+    <div class="lx-process-grid">
+      <div class="lx-process-card">
+        <div class="lx-process-step">01</div>
+        <div class="lx-process-name">DISCUSS</div>
+        <p class="lx-process-desc">
+          We understand your business model, target audience, reference benchmarks, and operational requirements through structured onboarding.
+        </p>
+      </div>
+
+      <div class="lx-process-card">
+        <div class="lx-process-step">02</div>
+        <div class="lx-process-name">PLAN</div>
+        <p class="lx-process-desc">
+          We prepare the written proposal, architecture, transparent quotation, deliverables checklist, and project milestone schedule.
+        </p>
+      </div>
+
+      <div class="lx-process-card">
+        <div class="lx-process-step">03</div>
+        <div class="lx-process-name">BUILD</div>
+        <p class="lx-process-desc">
+          We design, develop, and refine the solution. You receive an interactive staging preview/demo to review and approve before final delivery.
+        </p>
+      </div>
+
+      <div class="lx-process-card">
+        <div class="lx-process-step">04</div>
+        <div class="lx-process-name">LAUNCH</div>
+        <p class="lx-process-desc">
+          We rigorously test across devices, deploy to production hosting, configure SSL and SEO, and provide post-handover support.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     5. TRANSPARENT PRICING SYSTEM
+═══════════════════════════════════════════════════════════════ -->
+<section class="lx-pricing-section" id="pricing">
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col-lg-8">
+        <div class="lx-eyebrow">
+          <span class="lx-diamond"></span> Honest Investment
+        </div>
+        <h2 class="lx-section-title">
+          Transparent Website &amp; Digital Solutions Pricing
+        </h2>
+        <p class="lx-section-subtitle">
+          Predictable investment ranges for businesses, cafes, coaches, and startups. No surprise fees.
+        </p>
+      </div>
+    </div>
+
+    <!-- Pricing Table -->
+    <div class="lx-pricing-table-wrap">
+      <table class="lx-pricing-table" aria-label="Website Pricing Table">
+        <thead>
+          <tr>
+            <th>Website / Solution Type</th>
+            <th>Suggested Price Range</th>
+            <th>Primary Deliverables</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for tier in pricing_tiers %}
+            <tr>
+              <td>
+                <div class="font-weight-bold text-charcoal mb-1" style="font-size: 1.05rem;">{{ tier.name }}</div>
+                <div style="font-size: 0.82rem; color: var(--lx-text-muted);">{{ tier.tag }}</div>
+              </td>
+              <td>
+                <span class="lx-price-highlight" style="font-size: 1.15rem; color: var(--lx-accent);">{{ tier.price }}</span>
+              </td>
+              <td>
+                <div style="font-size: 0.86rem; color: var(--lx-text-secondary); max-width: 440px;">
+                  {{ tier.desc }}
+                </div>
+              </td>
+              <td>
+                <a href="{% url 'contact:contact' %}?type=quote&service={{ tier.name|urlencode }}" class="btn-lunex-dark py-1 px-3" style="font-size: 0.82rem;">
+                  Get Quote
+                </a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Essential Conditions Box -->
+    <div class="lx-pricing-disclaimer-box">
+      <div class="d-flex align-items-start gap-3">
+        <i class="bi bi-info-circle-fill text-gold mt-1" style="font-size: 1.3rem;"></i>
+        <div>
+          <h4 class="mb-2" style="font-size: 1rem; color: #5D4300;">Transparent Pricing Conditions:</h4>
+          <p class="mb-1">
+            <strong>• Indicative Starting Ranges:</strong> Prices displayed above are starting estimates, not fixed guarantees. Final pricing depends on your specific page count, feature complexity, third-party integrations, and timeline requirements.
+          </p>
+          <p class="mb-0">
+            <strong>• Hosting &amp; Domain:</strong> Domain registration, production hosting, third-party SMS/email APIs, and payment gateway transaction fees are billed separately unless explicitly included in your quotation.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         6. PAYMENT TERMS (40% / 40% / 20%)
+    ═══════════════════════════════════════════════════════════════ -->
+    <div class="lx-payment-terms">
+      <div class="row align-items-center">
+        <div class="col-lg-7">
+          <div class="lx-eyebrow text-gold">
+            <span class="lx-diamond"></span> Financial Security &amp; Trust
+          </div>
+          <h3 class="mb-3">Standard Milestone Payment Terms</h3>
+          <p class="mb-0">
+            To ensure complete transparency and mutual trust, we operate strictly on an approved milestone payment structure. You only pay subsequent installments after reviewing verified project progress.
+          </p>
+        </div>
+        <div class="col-lg-5 text-lg-end mt-4 mt-lg-0">
+          <a href="{% url 'core:payment_policy' %}" class="btn-lunex-outline-light">
+            Read Service &amp; Payment Policy <i class="bi bi-arrow-right"></i>
           </a>
         </div>
       </div>
 
-      <div class="col-lg-6 offset-lg-1 reveal reveal-delay-2">
-        <div class="why-item">
-          <div class="why-icon"><i class="bi bi-person-check" aria-hidden="true"></i></div>
-          <div>
-            <div class="why-title">Built for Your Business</div>
-            <div class="why-desc">No generic templates. Every design is tailored to your brand, audience, and goals.</div>
-          </div>
+      <div class="lx-milestones-grid">
+        <div class="lx-milestone-item">
+          <div class="lx-milestone-pct">40%</div>
+          <div class="lx-milestone-title">Advance Deposit</div>
+          <p class="lx-milestone-desc">
+            Paid before project kickoff to initiate architectural planning, wireframes, and design drafting.
+          </p>
         </div>
-        <div class="why-item">
-          <div class="why-icon"><i class="bi bi-phone" aria-hidden="true"></i></div>
-          <div>
-            <div class="why-title">Mobile-First &amp; Fast</div>
-            <div class="why-desc">All work is optimized for every screen size and built for real-world performance.</div>
-          </div>
+        <div class="lx-milestone-item">
+          <div class="lx-milestone-pct">40%</div>
+          <div class="lx-milestone-title">Milestone Approval</div>
+          <p class="lx-milestone-desc">
+            Paid after the interactive working preview/demo is presented and approved by you.
+          </p>
         </div>
-        <div class="why-item">
-          <div class="why-icon"><i class="bi bi-chat-dots" aria-hidden="true"></i></div>
-          <div>
-            <div class="why-title">Clear Communication</div>
-            <div class="why-desc">Regular updates, honest timelines, and zero confusing jargon throughout the process.</div>
-          </div>
-        </div>
-        <div class="why-item">
-          <div class="why-icon"><i class="bi bi-shield-check" aria-hidden="true"></i></div>
-          <div>
-            <div class="why-title">Quality Guaranteed</div>
-            <div class="why-desc">We don't ship work we're not proud of. Every deliverable is polished and production-ready.</div>
-          </div>
+        <div class="lx-milestone-item">
+          <div class="lx-milestone-pct">20%</div>
+          <div class="lx-milestone-title">Final Handover</div>
+          <p class="lx-milestone-desc">
+            Paid before final production deployment, domain connection, or source code handover.
+          </p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════
-     WORKFLOW
-═══════════════════════════════════════════ -->
-<section class="section-py" style="background:var(--lx-bg-alt)" aria-labelledby="workflow-heading">
-  <div class="container">
-    <div class="text-center mb-5 reveal">
-      <span class="section-eyebrow">Our Process</span>
-      <h2 class="section-title" id="workflow-heading">How We Work</h2>
-      <div class="section-divider"></div>
-      <p class="section-subtitle mx-auto">A clear, structured process so you always know what's happening and what's next.</p>
-    </div>
-
-    <div class="lx-card p-0 reveal">
-      <div class="workflow-steps">
-        <div class="workflow-step">
-          <div class="step-number">01</div>
-          <div class="step-icon"><i class="bi bi-search" aria-hidden="true"></i></div>
-          <div class="step-title">Discover</div>
-          <div class="step-desc">We learn about your brand, goals, audience, and what success looks like.</div>
-        </div>
-        <div class="workflow-step">
-          <div class="step-number">02</div>
-          <div class="step-icon"><i class="bi bi-palette" aria-hidden="true"></i></div>
-          <div class="step-title">Design</div>
-          <div class="step-desc">We craft concepts, gather feedback, and refine until you love it.</div>
-        </div>
-        <div class="workflow-step">
-          <div class="step-number">03</div>
-          <div class="step-icon"><i class="bi bi-code-slash" aria-hidden="true"></i></div>
-          <div class="step-title">Develop</div>
-          <div class="step-desc">We build the final product — clean, fast, and exactly as designed.</div>
-        </div>
-        <div class="workflow-step">
-          <div class="step-number">04</div>
-          <div class="step-icon"><i class="bi bi-rocket-takeoff" aria-hidden="true"></i></div>
-          <div class="step-title">Deliver</div>
-          <div class="step-desc">We launch, hand over files, and make sure you're set up for success.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════
-     CTA BAND
-═══════════════════════════════════════════ -->
-<section class="section-py" aria-labelledby="cta-heading">
-  <div class="container">
-    <div class="cta-band reveal">
-      <span class="section-eyebrow">Ready?</span>
-      <h2 class="section-title mt-2" id="cta-heading">Let's Build Something Great Together</h2>
-      <p class="section-subtitle mx-auto mb-4">
-        Tell us about your project and we'll get back to you within 24 hours.
+<!-- ═══════════════════════════════════════════════════════════════
+     7. FREE INITIAL DESIGN DEMO CTA
+═══════════════════════════════════════════════════════════════ -->
+<section class="container">
+  <div class="lx-free-demo-banner">
+    <div>
+      <span class="lx-demo-badge">Risk-Free Concept</span>
+      <h3 class="mb-2" style="font-size: 1.55rem;">
+        Want to see how your website could look before getting started?
+      </h3>
+      <p class="mb-2" style="font-size: 1.05rem; color: var(--lx-text-secondary); max-width: 680px;">
+        Request a free initial design demo or preview from Lunex Presents. We'll compose an initial concept tailored to your brand.
       </p>
-      <div class="d-flex gap-3 justify-content-center flex-wrap">
-        <a href="{% url 'contact:contact' %}" class="btn btn-primary btn-lg" id="cta-start-project">
-          <i class="bi bi-arrow-right-circle me-2" aria-hidden="true"></i>
-          Start a Project
+      <p class="lx-demo-terms-note">
+        <strong>Terms:</strong> A free demo provides an initial concept preview. Full development begins after scope, quotation, and payment terms are formally approved.
+      </p>
+    </div>
+    <div class="d-flex flex-column gap-2 flex-shrink-0">
+      <a href="{% url 'core:free_demo' %}" class="btn-lunex-gold">
+        Request Free Demo <i class="bi bi-arrow-right"></i>
+      </a>
+      <a href="{% url 'contact:contact' %}?type=quote" class="btn-lunex-outline">
+        Get Custom Quote
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     8. CUSTOMER REVIEWS (GENUINE & MODERATED)
+═══════════════════════════════════════════════════════════════ -->
+<section class="lx-reviews-section" id="reviews">
+  <div class="container">
+    <div class="row mb-5 align-items-end">
+      <div class="col-lg-8">
+        <div class="lx-eyebrow">
+          <span class="lx-diamond"></span> Authentic Feedback
+        </div>
+        <h2 class="lx-section-title">
+          What Clients Say About Working With Us
+        </h2>
+        <p class="lx-section-subtitle mb-0">
+          Genuine, unvarnished reviews from real business owners. All submissions are moderated before publishing.
+        </p>
+      </div>
+      <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
+        <a href="{% url 'core:reviews' %}" class="btn-lunex-outline">
+          View All &amp; Leave a Review <i class="bi bi-star"></i>
         </a>
-        <a href="https://instagram.com/lunex.presents" target="_blank" rel="noopener noreferrer" class="btn btn-outline-light btn-lg">
-          <i class="bi bi-instagram me-2" aria-hidden="true"></i>
-          Follow on Instagram
-        </a>
+      </div>
+    </div>
+
+    <div class="lx-reviews-grid">
+      {% for review in approved_reviews %}
+        <div class="lx-review-card">
+          <div>
+            <div class="lx-review-stars">
+              {% for i in review.stars_range %}★{% endfor %}
+            </div>
+            <p class="lx-review-feedback">
+              “{{ review.feedback }}”
+            </p>
+          </div>
+          <div class="lx-review-author">
+            <div>
+              <p class="lx-author-name">{{ review.client_name }}</p>
+              <p class="lx-author-biz">{{ review.business_name|default:"Client Partner" }}</p>
+            </div>
+            {% if review.is_verified_client %}
+              <span class="lx-verified-badge">
+                <i class="bi bi-check-circle-fill"></i> Verified
+              </span>
+            {% endif %}
+          </div>
+        </div>
+      {% empty %}
+        <div class="col-12 text-center py-4" style="background-color: var(--lx-surface); border: 1px dashed var(--lx-border); border-radius: 4px;">
+          <p class="mb-0 text-muted-grey">Reviews are currently undergoing moderation.</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     9. COMPLIANCE SAAS SPOTLIGHT (INTERNAL PRODUCT)
+═══════════════════════════════════════════════════════════════ -->
+<section class="py-5" style="background-color: #101116; color: #FFFFFF; border-top: 1px solid #23252E; border-bottom: 1px solid #23252E;">
+  <div class="container py-4">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-7">
+        <div class="lx-eyebrow text-gold">
+          <span class="lx-diamond"></span> SaaS Product by Lunex Presents
+        </div>
+        <h2 class="text-white mb-3" style="font-size: 2.2rem;">
+          Know Your Compliance Risks Before They Become Expensive.
+        </h2>
+        <p style="color: #A3A3A8; font-size: 1.05rem; line-height: 1.65; max-width: 620px;">
+          Audit your website for missing age verification, DPDP Act 2023 gaps, cookie consent banners, insecure session recording, and RBI recurring auto-debit compliance with our automated scanner.
+        </p>
+        <div class="d-flex flex-wrap gap-3 mt-4">
+          <a href="{% url 'audit:home' %}" class="btn-lunex-gold">
+            Launch Compliance Scanner <i class="bi bi-shield-check"></i>
+          </a>
+          <a href="{% url 'audit:dashboard' %}" class="btn-lunex-outline-light">
+            Explore Dashboard
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="p-4" style="background-color: #181920; border: 1px solid #2A2C38; border-radius: 8px;">
+          <div class="d-flex justify-content-between align-items-center pb-3 border-bottom" style="border-color: #2A2C38 !important;">
+            <span class="font-mono text-gold" style="font-size: 0.82rem;">LIVE SCANNER DEMO</span>
+            <span class="badge" style="background: rgba(34, 197, 94, 0.2); color: #22C55E;">ACTIVE ENGINE</span>
+          </div>
+          <form action="{% url 'audit:start_scan' %}" method="POST" class="mt-3">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="id_hero_url" class="form-label text-white" style="font-size: 0.85rem;">Enter Website URL to Audit:</label>
+              <input type="url" name="url" id="id_hero_url" class="form-control lx-input" placeholder="https://yourwebsite.com" required style="background: #0E0F14; border-color: #313444; color: #FFFFFF;">
+            </div>
+            <button type="submit" class="btn-lunex-gold w-100 py-2">
+              Run Free Compliance Scan <i class="bi bi-arrow-right"></i>
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- ═══════════════════════════════════════════════════════════════
+     10. GET A QUOTE / CONTACT ENQUIRY SYSTEM
+═══════════════════════════════════════════════════════════════ -->
+<section class="lx-contact-section" id="contact">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="text-center mb-5">
+          <div class="lx-eyebrow">
+            <span class="lx-diamond"></span> Get In Touch
+          </div>
+          <h2 class="lx-section-title">
+            Start Your Project or Request a Quote
+          </h2>
+          <p class="lx-section-subtitle mx-auto">
+            Choose your purpose below. We respond to all verified enquiries within 24 hours with clear, direct next steps.
+          </p>
+        </div>
+
+        <div class="lx-form-card">
+          <!-- Form Mode Tabs -->
+          <div class="lx-form-tabs">
+            <button type="button" class="lx-tab-btn active" data-type="general" onclick="switchEnquiryTab('general', this)">
+              General Enquiry
+            </button>
+            <button type="button" class="lx-tab-btn" data-type="quote" onclick="switchEnquiryTab('quote', this)">
+              Custom Quote Request
+            </button>
+            <button type="button" class="lx-tab-btn" data-type="demo" onclick="switchEnquiryTab('demo', this)">
+              Free Demo Request
+            </button>
+          </div>
+
+          <form action="{% url 'contact:contact' %}" method="POST" id="mainContactForm">
+            {% csrf_token %}
+            {{ contact_form.website }}
+            <input type="hidden" name="enquiry_type" id="form_enquiry_type" value="general">
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="{{ contact_form.name.id_for_label }}" class="form-label fw-semibold" style="font-size: 0.9rem;">
+                  Your Full Name <span class="text-danger">*</span>
+                </label>
+                {{ contact_form.name }}
+              </div>
+
+              <div class="col-md-6">
+                <label for="{{ contact_form.email.id_for_label }}" class="form-label fw-semibold" style="font-size: 0.9rem;">
+                  Email Address <span class="text-danger">*</span>
+                </label>
+                {{ contact_form.email }}
+              </div>
+
+              <div class="col-md-6">
+                <label for="{{ contact_form.phone.id_for_label }}" class="form-label fw-semibold" style="font-size: 0.9rem;">
+                  Phone / WhatsApp Number
+                </label>
+                {{ contact_form.phone }}
+              </div>
+
+              <div class="col-md-6">
+                <label for="{{ contact_form.business_name.id_for_label }}" class="form-label fw-semibold" style="font-size: 0.9rem;">
+                  Business / Brand Name
+                </label>
+                {{ contact_form.business_name }}
+              </div>
+
+              <div class="col-md-6">
+                <label for="{{ contact_form.service_interest.id_for_label }}" class="form-label fw-semibold" style="font-size: 0.9rem;">
+                  Service Required
+                </label>
+                {{ contact_form.service_interest }}
+              </div>
+
+              <div class="col-md-6">
+                <label for="{{ contact_form.website_type.id_for_label }}" class="form-label fw-semibold" style="font-size: 0.9rem;">
+                  Website / Solution Type
+                </label>
+                {{ contact_form.website_type }}
+              </div>
+
+              <div class="col-md-6">
+                <label for="{{ contact_form.budget_range.id_for_label }}" class="form-label fw-semibold" style="font-size: 0.9rem;">
+                  Budget Range (Optional)
+                </label>
+                {{ contact_form.budget_range }}
+              </div>
+
+              <div class="col-md-6">
+                <label for="{{ contact_form.expected_features.id_for_label }}" class="form-label fw-semibold" style="font-size: 0.9rem;">
+                  Expected Features
+                </label>
+                {{ contact_form.expected_features }}
+              </div>
+
+              <div class="col-12">
+                <label for="{{ contact_form.message.id_for_label }}" class="form-label fw-semibold" style="font-size: 0.9rem;">
+                  Project Details &amp; Requirements <span class="text-danger">*</span>
+                </label>
+                {{ contact_form.message }}
+              </div>
+
+              <div class="col-12 mt-4">
+                <button type="submit" class="btn-lunex-gold w-100 py-3" style="font-size: 1rem;">
+                  Submit Request to Lunex Presents <i class="bi bi-send-fill ms-2"></i>
+                </button>
+                <div class="text-center mt-3" style="font-size: 0.8rem; color: var(--lx-text-muted);">
+                  🔒 Your information is confidential and will never be shared or used for spam.
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function switchEnquiryTab(type, btn) {
+  document.querySelectorAll('.lx-tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const typeField = document.getElementById('form_enquiry_type');
+  if (typeField) {
+    typeField.value = type;
+  }
+}
+</script>
 {% endblock %}

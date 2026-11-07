@@ -1,89 +1,87 @@
-<footer class="lx-footer" aria-label="Site footer">
+{% load static %}
+<footer class="lx-footer">
   <div class="container">
     <div class="row g-5">
-      <!-- Brand column -->
+      <!-- Brand & Business Info -->
       <div class="col-lg-4">
-        <div class="footer-brand-name mb-1">
-          Lunex <span class="accent">Presents</span>
+        <div class="mb-3">
+          <img
+            src="{% static 'images/logo/lunex-logo.svg' %}"
+            alt="Lunex Presents"
+            style="height: 38px; filter: brightness(0) invert(1);"
+            onerror="this.onerror=null; this.src='{% static 'images/logo/lunex-icon.png' %}';"
+          >
         </div>
-        <p class="footer-tagline">Digital Creative Agency</p>
-        <p class="text-grey mt-3" style="font-size:0.85rem; line-height:1.7;">
-          We craft premium websites, brand identities, and social media visuals that help local businesses make a lasting impression.
+        <p style="color: #A3A3A8; font-size: 0.95rem; line-height: 1.65; max-width: 340px;">
+          Digital solutions for businesses, brands and creators. Custom web development, brand identity systems, and privacy compliance tools built with genuine craftsmanship.
         </p>
-        <div class="footer-social mt-3">
-          <a href="https://x.com/lunex_presents" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Lunex Presents on Twitter / X">
-            <i class="bi bi-twitter-x" aria-hidden="true"></i>
-          </a>
-          <a href="https://instagram.com/lunex.presents" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Lunex Presents on Instagram">
-            <i class="bi bi-instagram" aria-hidden="true"></i>
-          </a>
-          <a href="mailto:lunex.presents@gmail.com" class="social-link" aria-label="Email Lunex Presents">
-            <i class="bi bi-envelope" aria-hidden="true"></i>
+        <div class="mt-4">
+          <a href="mailto:lunex.presents@gmail.com" class="d-inline-flex align-items-center gap-2 text-white font-mono" style="font-size: 0.92rem;">
+            <i class="bi bi-envelope-fill text-gold"></i>
+            lunex.presents@gmail.com
           </a>
         </div>
       </div>
 
-      <!-- Pages -->
+      <!-- Quick Navigation -->
       <div class="col-6 col-lg-2">
-        <p class="footer-heading">Pages</p>
-        <ul class="footer-links">
+        <h5>Explore</h5>
+        <ul class="lx-footer-links">
           <li><a href="{% url 'core:home' %}">Home</a></li>
-          <li><a href="{% url 'services:services' %}">Services</a></li>
-          <li><a href="{% url 'portfolio:work' %}">Work</a></li>
-          <li><a href="{% url 'core:about' %}">About</a></li>
-          <li><a href="{% url 'contact:contact' %}">Contact</a></li>
+          <li><a href="{% url 'services:services' %}">All Services</a></li>
+          <li><a href="{% url 'portfolio:work' %}">Our Work</a></li>
+          <li><a href="{% url 'core:pricing' %}">Pricing System</a></li>
+          <li><a href="{% url 'core:free_demo' %}">Free Demo</a></li>
+          <li><a href="{% url 'core:about' %}">About Lunex</a></li>
+          <li><a href="{% url 'core:reviews' %}">Customer Reviews</a></li>
+          <li><a href="{% url 'audit:home' %}">Compliance SaaS</a></li>
         </ul>
       </div>
 
       <!-- Services -->
       <div class="col-6 col-lg-3">
-        <p class="footer-heading">Services</p>
-        <ul class="footer-links">
-          <li><a href="{% url 'services:services' %}">Website Design &amp; Development</a></li>
-          <li><a href="{% url 'services:services' %}">Logo &amp; Brand Identity</a></li>
-          <li><a href="{% url 'services:services' %}">Posters &amp; Social Media</a></li>
+        <h5>Services</h5>
+        <ul class="lx-footer-links">
+          <li><a href="{% url 'services:services' %}">Website Development</a></li>
+          <li><a href="{% url 'services:services' %}">Branding &amp; Graphic Design</a></li>
+          <li><a href="{% url 'services:services' %}">Social Media Creatives</a></li>
+          <li><a href="{% url 'services:services' %}">Business Automation</a></li>
+          <li><a href="{% url 'services:services' %}">Online Ordering &amp; Booking</a></li>
+          <li><a href="{% url 'services:services' %}">Custom Digital Solutions</a></li>
         </ul>
       </div>
 
-      <!-- Contact -->
+      <!-- Legal & Policies -->
       <div class="col-lg-3">
-        <p class="footer-heading">Get in Touch</p>
-        <ul class="footer-links">
-          <li>
-            <a href="mailto:lunex.presents@gmail.com">
-              <i class="bi bi-envelope me-1" aria-hidden="true"></i>
-              lunex.presents@gmail.com
-            </a>
-          </li>
-          <li>
-            <a href="https://x.com/lunex_presents" target="_blank" rel="noopener noreferrer">
-              <i class="bi bi-twitter-x me-1" aria-hidden="true"></i>
-              @lunex_presents
-            </a>
-          </li>
-          <li>
-            <a href="https://instagram.com/lunex.presents" target="_blank" rel="noopener noreferrer">
-              <i class="bi bi-instagram me-1" aria-hidden="true"></i>
-              @lunex.presents
-            </a>
-          </li>
+        <h5>Legal &amp; Policies</h5>
+        <ul class="lx-footer-links">
+          <li><a href="{% url 'core:privacy_policy' %}">Privacy Policy</a></li>
+          <li><a href="{% url 'core:terms_and_conditions' %}">Terms and Conditions</a></li>
+          <li><a href="{% url 'core:refund_policy' %}">Refund &amp; Cancellation</a></li>
+          <li><a href="{% url 'core:payment_policy' %}">Service &amp; Payment Policy</a></li>
         </ul>
-        <div class="mt-3">
-          <a href="{% url 'contact:start_project' %}" class="btn btn-primary btn-sm">
-            Start a Project
-          </a>
+        <div class="mt-4 p-3" style="background-color: #1F222B; border-radius: 4px; border: 1px solid #2C303B;">
+          <p class="mb-0" style="font-size: 0.78rem; line-height: 1.5; color: #9A9AA2;">
+            <strong class="text-white">Note:</strong> Prices are indicative starting ranges. Final pricing depends on project scope, pages, and features.
+          </p>
         </div>
       </div>
     </div>
 
-    <!-- Footer bottom bar -->
-    <div class="footer-bottom d-flex flex-column flex-sm-row align-items-start align-items-sm-center justify-content-between gap-2">
-      <p class="footer-copy mb-0">
+    <!-- Bottom Bar -->
+    <div class="lx-footer-bottom">
+      <div>
         &copy; {% now "Y" %} Lunex Presents. All rights reserved.
-      </p>
-      <p class="footer-copy mb-0">
-        Built with passion by Lunex Presents.
-      </p>
+      </div>
+      <div class="d-flex align-items-center gap-3">
+        <a href="https://instagram.com/lunex.presents" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <i class="bi bi-instagram"></i> @lunex.presents
+        </a>
+        <span style="opacity: 0.3;">•</span>
+        <a href="https://x.com/lunex_presents" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter">
+          <i class="bi bi-twitter-x"></i> @lunex_presents
+        </a>
+      </div>
     </div>
   </div>
 </footer>

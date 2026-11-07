@@ -1,70 +1,80 @@
 {% load static %}
-<nav class="lx-navbar navbar navbar-expand-lg" aria-label="Lunex Presents navigation">
+<header class="lx-header">
   <div class="container">
-    <!-- Brand -->
-    <a class="navbar-brand" href="{% url 'core:home' %}">
-      Lunex <span class="brand-accent">Presents</span>
-    </a>
+    <nav class="navbar navbar-expand-lg p-0" aria-label="Lunex Presents Navigation">
+      <!-- Brand Logo -->
+      <a class="navbar-brand lx-brand-logo-link py-2" href="{% url 'core:home' %}">
+        <img
+          src="{% static 'images/logo/lunex-logo.svg' %}"
+          alt="Lunex Presents"
+          class="lx-nav-logo-img"
+          onerror="this.onerror=null; this.src='{% static 'images/logo/lunex-icon.png' %}';"
+        >
+      </a>
 
-    <!-- Mobile controls (Theme toggle + Navbar hamburger) -->
-    <div class="d-flex align-items-center gap-2 d-lg-none">
+      <!-- Mobile Hamburger Toggle -->
       <button
-        class="theme-toggle-btn theme-toggle-sm"
-        type="button"
-        onclick="event.stopPropagation(); window.toggleLunexTheme();"
-        aria-label="Switch to light theme"
-        title="Toggle Theme"
-      >
-        <i class="bi bi-sun-fill theme-icon theme-icon-sun"></i>
-        <i class="bi bi-moon-stars-fill theme-icon theme-icon-moon"></i>
-      </button>
-
-      <button
-        class="navbar-toggler"
+        class="navbar-toggler border-0 p-2"
         type="button"
         data-bs-toggle="collapse"
-        data-bs-target="#navbarMenu"
-        aria-controls="navbarMenu"
+        data-bs-target="#lunexNavMenu"
+        aria-controls="lunexNavMenu"
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-    </div>
 
-    <!-- Nav links -->
-    <div class="collapse navbar-collapse" id="navbarMenu">
-      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'core:home' %}">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'services:services' %}">Services</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'portfolio:work' %}">Work</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'core:about' %}">About</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'contact:contact' %}">Contact</a>
-        </li>
-        <!-- Desktop Theme Toggle Button -->
-        <li class="nav-item ms-lg-2 mt-2 mt-lg-0 d-none d-lg-flex align-items-center">
-          <button
-            class="theme-toggle-btn theme-toggle-sm"
-            id="theme-toggle"
-            type="button"
-            onclick="event.stopPropagation(); window.toggleLunexTheme();"
-            aria-label="Switch to light theme"
-            title="Toggle Light / Dark Theme"
-          >
-            <i class="bi bi-sun-fill theme-icon theme-icon-sun"></i>
-            <i class="bi bi-moon-stars-fill theme-icon theme-icon-moon"></i>
-          </button>
-        </li>
-      </ul>
-    </div>
+      <!-- Navigation Links -->
+      <div class="collapse navbar-collapse" id="lunexNavMenu">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3 py-3 py-lg-0">
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.url_name == 'home' and request.resolver_match.app_name == 'core' %}active{% endif %}" href="{% url 'core:home' %}">
+              Home
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.app_name == 'services' %}active{% endif %}" href="{% url 'services:services' %}">
+              Services
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.app_name == 'portfolio' %}active{% endif %}" href="{% url 'portfolio:work' %}">
+              Portfolio
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.url_name == 'pricing' %}active{% endif %}" href="{% url 'core:pricing' %}">
+              Pricing
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="{% url 'core:about' %}">
+              About
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.url_name == 'reviews' %}active{% endif %}" href="{% url 'core:reviews' %}">
+              Reviews
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link d-inline-flex align-items-center {% if request.resolver_match.app_name == 'audit' %}active{% endif %}" href="{% url 'audit:home' %}">
+              Compliance SaaS <span class="lx-nav-badge">Tool</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}" href="{% url 'contact:contact' %}">
+              Contact
+            </a>
+          </li>
+          <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+            <a class="btn-lunex-gold" href="{% url 'contact:start_project' %}">
+              Start a Project
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
   </div>
-</nav>
+</header>

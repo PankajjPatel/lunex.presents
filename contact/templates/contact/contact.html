@@ -1,184 +1,131 @@
 {% extends "base.html" %}
 {% load static %}
-{% block content %}
 
-<!-- Page Hero -->
-<section class="page-hero" aria-labelledby="contact-title">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-7">
-        <span class="section-eyebrow">Get in Touch</span>
-        <h1 class="page-hero-title" id="contact-title">Contact Us</h1>
-        <p class="page-hero-subtitle mt-3">
-          Have a question, inquiry, or want to collaborate? Send us a message or connect directly across our channels.
-        </p>
-      </div>
+{% block title %}{{ page_title|default:"Contact & Request a Quote — Lunex Presents" }}{% endblock %}
+
+{% block content %}
+<section class="py-5" style="background-color: var(--lx-bg); border-bottom: 1px solid var(--lx-border);">
+  <div class="container py-4">
+    <div class="lx-eyebrow">
+      <span class="lx-diamond"></span> Contact &amp; Briefing
     </div>
+    <h1 class="mb-3">
+      Let's Discuss Your Digital Solution
+    </h1>
+    <p class="lead" style="color: var(--lx-text-secondary); max-width: 760px;">
+      Have an upcoming website project, brand redesign, or custom system requirement? Send us a direct message or request an itemized quotation.
+    </p>
   </div>
 </section>
 
-<hr style="margin:0; border-color:var(--lx-border);">
-
-<section class="section-py" aria-label="Contact form and information">
-  <div class="container">
+<section class="py-5" style="background-color: var(--lx-surface);">
+  <div class="container py-3">
     <div class="row g-5">
+      <div class="col-lg-5">
+        <h2 class="h4 mb-4 text-charcoal">Studio Direct Channels</h2>
 
-      <!-- Form -->
-      <div class="col-lg-7 reveal">
-        <div class="lx-card">
-          <h2 class="h4 mb-1">Send a Message</h2>
-          <p style="font-size:0.875rem;color:var(--lx-grey);margin-bottom:1.75rem;">
-            Drop your question or message below and we'll respond within 24 hours.
+        <div class="p-4 mb-4" style="background-color: var(--lx-bg); border: 1px solid var(--lx-border); border-radius: 4px;">
+          <h3 class="h6 text-uppercase font-mono text-muted-grey mb-3">Direct Contact</h3>
+          <p class="mb-2">
+            <i class="bi bi-envelope-fill text-gold me-2"></i>
+            <a href="mailto:lunex.presents@gmail.com" class="fw-bold text-charcoal">lunex.presents@gmail.com</a>
           </p>
+          <p class="mb-2">
+            <i class="bi bi-instagram text-gold me-2"></i>
+            <a href="https://instagram.com/lunex.presents" target="_blank" rel="noopener noreferrer" class="text-charcoal">@lunex.presents</a>
+          </p>
+          <p class="mb-0">
+            <i class="bi bi-twitter-x text-gold me-2"></i>
+            <a href="https://x.com/lunex_presents" target="_blank" rel="noopener noreferrer" class="text-charcoal">@lunex_presents</a>
+          </p>
+        </div>
 
-          {% if form.non_field_errors %}
-          <div class="alert alert-danger mb-3" role="alert">
-            {% for error in form.non_field_errors %}{{ error }}{% endfor %}
+        <div class="p-4" style="background-color: var(--lx-bg-secondary); border: 1px solid var(--lx-border); border-radius: 4px;">
+          <h3 class="h6 text-charcoal fw-bold mb-2">Our Response SLA:</h3>
+          <p class="mb-0" style="font-size: 0.9rem; line-height: 1.6; color: var(--lx-text-secondary);">
+            We review and respond to all project enquiries within <strong>24 business hours</strong>. You will receive a direct reply outlining next steps, initial scope review, or scheduling options.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-lg-7">
+        <div class="lx-form-card">
+          <!-- Form Tabs -->
+          <div class="lx-form-tabs">
+            <button type="button" class="lx-tab-btn {% if initial_type == 'general' %}active{% endif %}" onclick="setTab('general', this)">
+              General Enquiry
+            </button>
+            <button type="button" class="lx-tab-btn {% if initial_type == 'quote' %}active{% endif %}" onclick="setTab('quote', this)">
+              Custom Quote Request
+            </button>
+            <button type="button" class="lx-tab-btn {% if initial_type == 'demo' %}active{% endif %}" onclick="setTab('demo', this)">
+              Free Demo Request
+            </button>
           </div>
-          {% endif %}
 
-          <form method="post" action="{% url 'contact:contact' %}" id="contact-form" novalidate>
+          <form action="{% url 'contact:contact' %}" method="POST">
             {% csrf_token %}
-
-            <!-- Honeypot -->
-            <div style="display:none;" aria-hidden="true">
-              {{ form.website }}
-            </div>
+            {{ form.website }}
+            <input type="hidden" name="enquiry_type" id="enquiry_type_input" value="{{ initial_type }}">
 
             <div class="row g-3">
-              <!-- Name -->
-              <div class="col-sm-6">
-                <label for="id_name" class="form-label">{{ form.name.label }} <span class="text-accent">*</span></label>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold" style="font-size: 0.88rem;">Your Full Name <span class="text-danger">*</span></label>
                 {{ form.name }}
-                {% if form.name.errors %}
-                <div class="invalid-feedback d-block">{{ form.name.errors|join:", " }}</div>
-                {% endif %}
               </div>
-
-              <!-- Email -->
-              <div class="col-sm-6">
-                <label for="id_email" class="form-label">{{ form.email.label }} <span
-                    class="text-accent">*</span></label>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold" style="font-size: 0.88rem;">Email Address <span class="text-danger">*</span></label>
                 {{ form.email }}
-                {% if form.email.errors %}
-                <div class="invalid-feedback d-block">{{ form.email.errors|join:", " }}</div>
-                {% endif %}
               </div>
-
-              <!-- Service of interest -->
-              <div class="col-12">
-                <label for="id_service_interest" class="form-label">{{ form.service_interest.label }}</label>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold" style="font-size: 0.88rem;">Phone / WhatsApp</label>
+                {{ form.phone }}
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold" style="font-size: 0.88rem;">Business / Brand Name</label>
+                {{ form.business_name }}
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold" style="font-size: 0.88rem;">Service Required</label>
                 {{ form.service_interest }}
-                {% if form.service_interest.errors %}
-                <div class="invalid-feedback d-block">{{ form.service_interest.errors|join:", " }}</div>
-                {% endif %}
               </div>
-
-              <!-- Message -->
+              <div class="col-md-6">
+                <label class="form-label fw-semibold" style="font-size: 0.88rem;">Website Type</label>
+                {{ form.website_type }}
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold" style="font-size: 0.88rem;">Budget Range</label>
+                {{ form.budget_range }}
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold" style="font-size: 0.88rem;">Expected Features</label>
+                {{ form.expected_features }}
+              </div>
               <div class="col-12">
-                <label for="id_message" class="form-label">{{ form.message.label }} <span
-                    class="text-accent">*</span></label>
+                <label class="form-label fw-semibold" style="font-size: 0.88rem;">Project Details &amp; Requirements <span class="text-danger">*</span></label>
                 {{ form.message }}
-                {% if form.message.errors %}
-                <div class="invalid-feedback d-block">{{ form.message.errors|join:", " }}</div>
-                {% endif %}
-                <div class="form-text" style="color:var(--lx-grey); font-size:0.78rem;">
-                  Minimum 20 characters. Let us know how we can help.
-                </div>
               </div>
-
-              <!-- Submit -->
               <div class="col-12 mt-4">
-                <button type="submit" class="btn btn-primary w-100">
-                  <i class="bi bi-send me-2" aria-hidden="true"></i>
-                  Send Message
+                <button type="submit" class="btn-lunex-gold w-100 py-3">
+                  Submit Enquiry <i class="bi bi-send-fill ms-2"></i>
                 </button>
               </div>
             </div>
           </form>
         </div>
       </div>
-
-      <!-- Contact Details & Social Cards -->
-      <div class="col-lg-5 reveal reveal-delay-2">
-        <div class="contact-info-card">
-          <h2 class="h5 mb-4">Direct Contact &amp; Social</h2>
-
-          <!-- Email -->
-          <div class="contact-method">
-            <div class="contact-method-icon">
-              <i class="bi bi-envelope" aria-hidden="true"></i>
-            </div>
-            <div>
-              <div class="contact-method-label">Email Us Directly</div>
-              <div class="contact-method-value">
-                <a href="mailto:lunex.presents@gmail.com" class="text-accent">
-                  lunex.presents@gmail.com
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Twitter / X -->
-          <div class="contact-method">
-            <div class="contact-method-icon">
-              <i class="bi bi-twitter-x" aria-hidden="true"></i>
-            </div>
-            <div>
-              <div class="contact-method-label">Twitter / X</div>
-              <div class="contact-method-value">
-                <a href="https://x.com/lunex_presents" target="_blank" rel="noopener noreferrer" class="text-accent">
-                  @lunex_presents
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Instagram -->
-          <div class="contact-method">
-            <div class="contact-method-icon">
-              <i class="bi bi-instagram" aria-hidden="true"></i>
-            </div>
-            <div>
-              <div class="contact-method-label">Instagram</div>
-              <div class="contact-method-value">
-                <a href="https://instagram.com/lunex.presents" target="_blank" rel="noopener noreferrer"
-                  class="text-accent">
-                  @lunex.presents
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Response time -->
-          <div class="contact-method">
-            <div class="contact-method-icon">
-              <i class="bi bi-clock-history" aria-hidden="true"></i>
-            </div>
-            <div>
-              <div class="contact-method-label">Response Time</div>
-              <div class="contact-method-value">Within 24 Hours</div>
-            </div>
-          </div>
-
-          <!-- Callout to Start a Project -->
-          <div class="p-3 mt-4 rounded-3"
-            style="background:rgba(37,139,250,0.08); border:1px solid rgba(37,139,250,0.18);">
-            <div class="fw-bold mb-1" style="font-size:0.92rem; color:var(--lx-heading);">Looking to build a project?
-            </div>
-            <p class="mb-2" style="font-size:0.83rem; color:var(--lx-grey);">
-              Share your project scope, timeline, and goals through our project planner.
-            </p>
-            <a href="{% url 'contact:start_project' %}" class="btn btn-outline-primary btn-sm">
-              Start a Project Brief <i class="bi bi-arrow-right ms-1"></i>
-            </a>
-          </div>
-
-        </div>
-      </div>
-
     </div>
   </div>
 </section>
+{% endblock %}
 
+{% block extra_js %}
+<script>
+function setTab(type, btn) {
+  document.querySelectorAll('.lx-tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const input = document.getElementById('enquiry_type_input');
+  if (input) input.value = type;
+}
+</script>
 {% endblock %}

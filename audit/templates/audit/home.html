@@ -1,0 +1,214 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}AuditFlow — Intelligent Compliance &amp; Privacy Audit SaaS by Lunex Presents{% endblock %}
+
+{% block content %}
+<div class="audit-saas-theme py-5" style="background-color: #090909; color: #ECECED; min-height: 100vh;">
+  <!-- SaaS Hero -->
+  <section class="container py-5">
+    <div class="text-center mx-auto" style="max-width: 820px;">
+      <div class="d-inline-flex align-items-center gap-2 px-3 py-1 mb-4 rounded-pill" style="background: rgba(183, 131, 0, 0.15); border: 1px solid rgba(183, 131, 0, 0.35); font-size: 0.8rem; color: #E5A91A;">
+        <span class="lx-diamond-sm" style="background: #E5A91A;"></span> A Proprietary SaaS Tool by Lunex Presents
+      </div>
+
+      <h1 class="text-white mb-3" style="font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 800; letter-spacing: -0.03em;">
+        Know Your Compliance Risks Before They Become Expensive.
+      </h1>
+
+      <p class="mb-4" style="color: #9E9EA4; font-size: 1.2rem; line-height: 1.6;">
+        Monitor privacy practices, identify compliance gaps, and safeguard user trust with one intelligent scanner. Auditing DPDP Act 2023, security headers, cookie tracking, and RBI recurring auto-debit rules.
+      </p>
+
+      <!-- Live Scanner Form -->
+      <div class="p-3 p-md-4 mt-4 text-start mx-auto" style="max-width: 680px; background: #141414; border: 1px solid #292929; border-radius: 8px; box-shadow: 0 12px 40px rgba(0,0,0,0.6);">
+        <form action="{% url 'audit:start_scan' %}" method="POST">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="id_scan_url" class="form-label text-white fw-bold" style="font-size: 0.88rem;">Website or App URL to Audit</label>
+            <div class="input-group">
+              <span class="input-group-text bg-dark border-secondary text-secondary">
+                <i class="bi bi-globe"></i>
+              </span>
+              <input
+                type="url"
+                name="url"
+                id="id_scan_url"
+                class="form-control bg-dark border-secondary text-white py-2"
+                placeholder="https://example.com"
+                required
+                style="font-size: 0.95rem;"
+              >
+            </div>
+          </div>
+
+          <div class="row g-2 mb-3">
+            <div class="col-md-6">
+              <input
+                type="text"
+                name="company_name"
+                class="form-control bg-dark border-secondary text-white py-2"
+                placeholder="Business / Company Name (Optional)"
+                style="font-size: 0.85rem;"
+              >
+            </div>
+            <div class="col-md-6">
+              <input
+                type="email"
+                name="email"
+                class="form-control bg-dark border-secondary text-white py-2"
+                placeholder="Your Email for Report (Optional)"
+                style="font-size: 0.85rem;"
+              >
+            </div>
+          </div>
+
+          <button type="submit" class="btn-lunex-gold w-100 py-3 text-white fw-bold" style="font-size: 1rem; border-radius: 6px;">
+            Execute Compliance Audit <i class="bi bi-shield-check ms-2"></i>
+          </button>
+        </form>
+        <div class="d-flex justify-content-between align-items-center mt-3 pt-2 border-top border-secondary" style="font-size: 0.75rem; color: #737373;">
+          <span>✓ Real HTTP Header Inspection</span>
+          <span>✓ SSL / Security Analysis</span>
+          <span>✓ Free Instant Report</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Compliance Vectors Grid -->
+  <section class="container py-5 border-top" style="border-color: #202020 !important;">
+    <div class="text-center mb-5">
+      <div class="font-mono text-gold text-uppercase" style="font-size: 0.82rem; letter-spacing: 0.15em;">CORE AUDIT CAPABILITIES</div>
+      <h2 class="text-white mt-1">Six Layers of Regulatory Safeguards</h2>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="audit-card h-100">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <i class="bi bi-person-exclamation text-warning" style="font-size: 1.4rem;"></i>
+            <h3 class="h5 text-white mb-0">Age Verification</h3>
+          </div>
+          <p style="color: #8E8E93; font-size: 0.9rem; line-height: 1.6;">
+            Evaluates mandatory parental consent and age-gating requirements under Section 9 of the DPDP Act 2023 for platforms handling data of minors.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="audit-card h-100">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <i class="bi bi-ui-checks-grid text-primary" style="font-size: 1.4rem;"></i>
+            <h3 class="h5 text-white mb-0">Consent Management</h3>
+          </div>
+          <p style="color: #8E8E93; font-size: 0.9rem; line-height: 1.6;">
+            Inspects privacy policy disclosures, cookie consent banners, affirmative opt-in requirements, and consent withdrawal mechanisms.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="audit-card h-100">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <i class="bi bi-shield-lock text-success" style="font-size: 1.4rem;"></i>
+            <h3 class="h5 text-white mb-0">Data Protection &amp; PII</h3>
+          </div>
+          <p style="color: #8E8E93; font-size: 0.9rem; line-height: 1.6;">
+            Detects unencrypted PII form transmissions, sensitive input exposure risks, and verifies data retention safeguards.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="audit-card h-100">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <i class="bi bi-hdd-network text-danger" style="font-size: 1.4rem;"></i>
+            <h3 class="h5 text-white mb-0">Security Headers</h3>
+          </div>
+          <p style="color: #8E8E93; font-size: 0.9rem; line-height: 1.6;">
+            Live verification of HSTS, Content-Security-Policy (CSP), X-Frame-Options (Clickjacking defense), and Permissions-Policy.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="audit-card h-100">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <i class="bi bi-eye-slash text-warning" style="font-size: 1.4rem;"></i>
+            <h3 class="h5 text-white mb-0">Session Replay Privacy</h3>
+          </div>
+          <p style="color: #8E8E93; font-size: 0.9rem; line-height: 1.6;">
+            Flags presence of Clarity, Hotjar, or FullStory scripts that may inadvertently record user passwords, financial inputs, or keystrokes without masking.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="audit-card h-100">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <i class="bi bi-credit-card-2-front text-info" style="font-size: 1.4rem;"></i>
+            <h3 class="h5 text-white mb-0">Auto-Debit Compliance</h3>
+          </div>
+          <p style="color: #8E8E93; font-size: 0.9rem; line-height: 1.6;">
+            Audits recurring subscription checkouts against RBI e-mandate guidelines (pre-debit notifications, transparent renewal terms, and 1-click cancellation).
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recent Public Scans Activity -->
+  {% if recent_scans %}
+    <section class="container py-5 border-top" style="border-color: #202020 !important;">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="h5 text-white mb-0">Recent Live Audits</h2>
+        <a href="{% url 'audit:dashboard' %}" class="btn btn-sm btn-outline-secondary text-white">
+          View Audit Dashboard <i class="bi bi-arrow-right ms-1"></i>
+        </a>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-dark table-hover mb-0" style="background: #141414; border: 1px solid #242424; border-radius: 6px;">
+          <thead>
+            <tr style="border-bottom: 1px solid #2A2A2A; font-size: 0.8rem; color: #888;">
+              <th class="p-3">TARGET DOMAIN</th>
+              <th class="p-3">COMPLIANCE SCORE</th>
+              <th class="p-3">RISK EXPOSURE</th>
+              <th class="p-3">DATE</th>
+              <th class="p-3 text-end">ACTION</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for scan in recent_scans %}
+              <tr style="border-bottom: 1px solid #1E1E1E;">
+                <td class="p-3 font-mono text-white fw-bold">{{ scan.domain|default:scan.target_url }}</td>
+                <td class="p-3">
+                  <span class="font-mono fw-bold text-gold">{{ scan.overall_score }}%</span>
+                </td>
+                <td class="p-3">
+                  {% if scan.risk_level == 'critical' %}
+                    <span class="badge-critical">Critical Risk</span>
+                  {% elif scan.risk_level == 'high' %}
+                    <span class="badge-high">High Risk</span>
+                  {% elif scan.risk_level == 'compliant' %}
+                    <span class="badge-compliant">Compliant</span>
+                  {% else %}
+                    <span class="badge-medium">Moderate</span>
+                  {% endif %}
+                </td>
+                <td class="p-3 text-secondary" style="font-size: 0.85rem;">{{ scan.created_at|date:"d M Y" }}</td>
+                <td class="p-3 text-end">
+                  <a href="{% url 'audit:report' scan.id %}" class="btn btn-sm btn-outline-warning py-1 px-3">
+                    View Report
+                  </a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  {% endif %}
+</div>
+{% endblock %}

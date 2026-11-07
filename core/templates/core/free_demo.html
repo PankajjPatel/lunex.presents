@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Request a Free Initial Design Demo — Lunex Presents{% endblock %}
+
+{% block content %}
+<section class="py-5" style="background-color: var(--lx-bg); border-bottom: 1px solid var(--lx-border);">
+  <div class="container py-4">
+    <div class="lx-eyebrow">
+      <span class="lx-diamond"></span> Risk-Free Concept
+    </div>
+    <h1 class="mb-3">
+      Request a Free Initial Design Demo
+    </h1>
+    <p class="lead" style="color: var(--lx-text-secondary); max-width: 760px;">
+      Want to see how your website could look before making any financial commitment? Request an initial design concept or preview from Lunex Presents.
+    </p>
+  </div>
+</section>
+
+<section class="py-5" style="background-color: var(--lx-surface);">
+  <div class="container py-3">
+    <div class="row g-5">
+      <div class="col-lg-5">
+        <h2 class="h4 mb-3 text-charcoal">How the Free Demo Works</h2>
+        <p style="font-size: 0.98rem; line-height: 1.7; color: var(--lx-text-secondary);">
+          We understand investing in a digital platform requires confidence. We provide an initial concept preview tailored to your brand identity.
+        </p>
+
+        <div class="p-4 my-4" style="background-color: var(--lx-bg); border: 1px solid var(--lx-border); border-left: 4px solid var(--lx-accent); border-radius: 4px;">
+          <h3 class="h6 mb-2 text-charcoal fw-bold">Essential Free Demo Conditions:</h3>
+          <ul class="mb-0 ps-3" style="font-size: 0.88rem; line-height: 1.8; color: var(--lx-text-secondary);">
+            <li>A free demo is an <strong>initial visual concept or structural preview</strong>.</li>
+            <li>It does <strong>not</strong> include a full multi-page production website, custom backend APIs, or deployment.</li>
+            <li>Full development begins only after the project scope, formal quotation, and milestone payment terms are approved.</li>
+          </ul>
+        </div>
+
+        <div class="pt-3">
+          <h3 class="h6 text-charcoal mb-2">What you receive:</h3>
+          <ul class="list-unstyled" style="font-size: 0.92rem; line-height: 2; color: var(--lx-text-secondary);">
+            <li><span class="lx-diamond-sm"></span> Visual hero layout concept</li>
+            <li><span class="lx-diamond-sm"></span> Proposed typography and palette system</li>
+            <li><span class="lx-diamond-sm"></span> Itemized scope and timeline proposal</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-lg-7">
+        <div class="p-4 p-md-5" style="background-color: var(--lx-bg-secondary); border: 1px solid var(--lx-border); border-radius: 4px;">
+          <h2 class="h4 mb-2 text-charcoal">Demo Request Brief</h2>
+          <p style="font-size: 0.88rem; color: var(--lx-text-secondary); margin-bottom: 2rem;">
+            Provide your business context below. We will review your brief and get back to you with an initial concept.
+          </p>
+
+          <form action="{% url 'contact:contact' %}" method="POST">
+            {% csrf_token %}
+            {{ form.website }}
+            <input type="hidden" name="enquiry_type" value="demo">
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label fw-semibold" style="font-size: 0.88rem;">Your Full Name <span class="text-danger">*</span></label>
+                {{ form.name }}
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold" style="font-size: 0.88rem;">Email Address <span class="text-danger">*</span></label>
+                {{ form.email }}
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold" style="font-size: 0.88rem;">WhatsApp Number</label>
+                {{ form.phone }}
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold" style="font-size: 0.88rem;">Business / Brand Name</label>
+                {{ form.business_name }}
+              </div>
+              <div class="col-12">
+                <label class="form-label fw-semibold" style="font-size: 0.88rem;">Website Type Needed</label>
+                {{ form.website_type }}
+              </div>
+              <div class="col-12">
+                <label class="form-label fw-semibold" style="font-size: 0.88rem;">What does your business do &amp; what are your style preferences? <span class="text-danger">*</span></label>
+                {{ form.message }}
+              </div>
+              <div class="col-12 mt-4">
+                <button type="submit" class="btn-lunex-gold w-100 py-3">
+                  Submit Free Demo Request <i class="bi bi-arrow-right ms-2"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

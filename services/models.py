@@ -7,11 +7,25 @@ class Service(models.Model):
     title = models.CharField(max_length=100)
     slug = models.SlugField(unique=True)
     short_description = models.CharField(
-        max_length=200,
-        help_text="Brief summary shown on cards.",
+        max_length=255,
+        help_text="Brief summary shown on editorial service cards.",
     )
     full_description = models.TextField(
-        help_text="Full description shown on the services page.",
+        help_text="Detailed description and service scope.",
+    )
+    deliverables = models.TextField(
+        blank=True,
+        help_text="Key deliverables (newline or comma-separated).",
+    )
+    starting_price = models.CharField(
+        max_length=60,
+        blank=True,
+        help_text="Indicative starting price, e.g. 'From ₹7,000' or 'Custom Quote'.",
+    )
+    ideal_for = models.CharField(
+        max_length=200,
+        blank=True,
+        help_text="Target business, e.g. 'Local Businesses, Brands & Creators'.",
     )
     icon_class = models.CharField(
         max_length=60,
@@ -28,3 +42,10 @@ class Service(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_deliverables_list(self):
+        """Return deliverables as clean list."""
+        if not self.deliverables:
+            return []
+        items = [d.strip() for d in self.deliverables.replace('\n', ',').split(',') if d.strip()]
+        return items

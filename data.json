@@ -1,0 +1,540 @@
+[
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1500000$26vi5qCMCTGbrPwMwO6iaX$UmebQnj/ztf61nIdKLn5J8kIRZLx8M0PBjnVkZNb3xI=",
+    "last_login": null,
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "lunex.presents@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-10-26T16:39:10.685Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "services.service",
+  "pk": 1,
+  "fields": {
+    "title": "Website Design & Development",
+    "slug": "website-design-development",
+    "short_description": "Custom-built websites that look stunning, load fast, and convert visitors into customers.",
+    "full_description": "Your website is your most important digital asset — and we build it to perform. We design and develop custom websites that are visually stunning, fast-loading, mobile-first, and optimized for search engines.\n\nWhether it's a single landing page or a full multi-page business site, every line of code and every design decision is made with your audience in mind.\n\nDeliverables include: responsive custom design, cross-browser testing, SEO-optimized structure, performance optimization, and content management setup.",
+    "icon_class": "bi bi-code-slash",
+    "display_order": 1,
+    "is_active": true
+  }
+},
+{
+  "model": "services.service",
+  "pk": 2,
+  "fields": {
+    "title": "Logo & Brand Identity",
+    "slug": "logo-brand-identity",
+    "short_description": "Distinctive logos and complete brand systems that tell your story and build recognition.",
+    "full_description": "Your logo is the first thing people see — and the last thing they forget. We create distinctive logos and comprehensive brand identity systems that capture the essence of your business and make it instantly recognizable.\n\nFrom initial concept to final brand guidelines, we give you everything you need to present your brand consistently and confidently across every platform.\n\nDeliverables include: custom logo design, colour palette, typography system, usage guidelines, and files in all formats (SVG, PNG, PDF).",
+    "icon_class": "bi bi-pen",
+    "display_order": 2,
+    "is_active": true
+  }
+},
+{
+  "model": "services.service",
+  "pk": 3,
+  "fields": {
+    "title": "Posters & Social Media Creatives",
+    "slug": "posters-social-media",
+    "short_description": "Eye-catching social media graphics and posters that stop the scroll and drive engagement.",
+    "full_description": "In a feed full of noise, you need content that stops the scroll. We design eye-catching posters, social media graphics, and promotional creatives that get noticed, drive engagement, and stay perfectly on-brand.\n\nFrom one-off event posters to full social media content kits — we design assets that work beautifully on every platform and every screen size.\n\nDeliverables include: Instagram/Facebook/LinkedIn graphics, event posters, story templates, reel covers, and social media content kits.",
+    "icon_class": "bi bi-images",
+    "display_order": 3,
+    "is_active": true
+  }
+},
+{
+  "model": "portfolio.category",
+  "pk": 1,
+  "fields": {
+    "name": "Web Design",
+    "slug": "web-design"
+  }
+},
+{
+  "model": "portfolio.category",
+  "pk": 2,
+  "fields": {
+    "name": "Brand Identity",
+    "slug": "brand-identity"
+  }
+},
+{
+  "model": "portfolio.category",
+  "pk": 3,
+  "fields": {
+    "name": "Social Media",
+    "slug": "social-media"
+  }
+},
+{
+  "model": "portfolio.project",
+  "pk": 1,
+  "fields": {
+    "title": "Bloom Bakery — Brand & Web",
+    "slug": "bloom-bakery",
+    "category": 1,
+    "thumbnail": "portfolio/bloom-bakery-thumb.jpg",
+    "short_description": "A warm, modern website and brand identity for a local artisan bakery.",
+    "description": "Bloom Bakery needed a digital presence as warm and inviting as their baked goods. This concept project explores a complete brand and web solution — combining soft, earthy tones with clean typography to create a premium yet approachable identity.\n\nThe website features an online menu, story page, and booking enquiry form, all designed mobile-first for a smooth experience across devices.",
+    "deliverables": "Logo Design, Colour Palette, Typography System, Website Design, Mobile Responsive Layout",
+    "client_name": "",
+    "is_concept": false,
+    "is_featured": true,
+    "display_order": 1,
+    "created_date": null
+  }
+},
+{
+  "model": "portfolio.project",
+  "pk": 2,
+  "fields": {
+    "title": "NovaTech Solutions — Corporate Identity",
+    "slug": "novatech-solutions",
+    "category": 2,
+    "thumbnail": "portfolio/novatech-solutions-thumb.jpg",
+    "short_description": "A bold, minimal brand identity for a technology consulting startup.",
+    "description": "NovaTech Solutions required an identity that communicated authority and innovation. This concept identity uses a strong geometric logomark, a monochromatic palette, and sharp typography to position the brand as a serious player in the B2B tech space.\n\nThe full identity system covers business stationery, email signatures, LinkedIn banners, and brand usage guidelines.",
+    "deliverables": "Logo Design, Brand Guidelines, Business Card, Letterhead, LinkedIn Banner",
+    "client_name": "",
+    "is_concept": false,
+    "is_featured": true,
+    "display_order": 2,
+    "created_date": null
+  }
+},
+{
+  "model": "portfolio.project",
+  "pk": 3,
+  "fields": {
+    "title": "Velocity Gym — Social Media Kit",
+    "slug": "velocity-gym",
+    "category": 3,
+    "thumbnail": "portfolio/velocity-gym-thumb.jpg",
+    "short_description": "High-energy social media templates and promotional graphics for a fitness brand.",
+    "description": "Velocity Gym needed content that matched the energy of their brand. This concept social media kit delivers bold, high-contrast post templates, story layouts, and promotional graphics built for Instagram and Facebook.\n\nThe kit includes 20+ customizable templates in Figma, designed to maintain brand consistency while giving the team creative flexibility.",
+    "deliverables": "Post Templates (x12), Story Templates (x8), Promo Graphics, Figma Source Files",
+    "client_name": "",
+    "is_concept": false,
+    "is_featured": true,
+    "display_order": 3,
+    "created_date": null
+  }
+},
+{
+  "model": "portfolio.project",
+  "pk": 4,
+  "fields": {
+    "title": "Grind Coffee Co. — Brand Identity",
+    "slug": "grind-coffee-co",
+    "category": 2,
+    "thumbnail": "portfolio/grind-coffee-co-thumb.jpg",
+    "short_description": "A craft-forward brand identity for an independent specialty coffee shop.",
+    "description": "Grind Coffee Co. is a concept identity project for an independent specialty coffee brand. The visual system draws inspiration from craft culture, using rich espresso tones, textured typography, and a hand-drawn logomark to create authentic brand character.\n\nThe identity is designed to work beautifully on packaging, signage, and digital platforms.",
+    "deliverables": "Logo Design, Brand Identity System, Packaging Mockup, Social Profile Assets",
+    "client_name": "",
+    "is_concept": false,
+    "is_featured": false,
+    "display_order": 4,
+    "created_date": null
+  }
+},
+{
+  "model": "portfolio.project",
+  "pk": 5,
+  "fields": {
+    "title": "Apex Real Estate — Landing Page",
+    "slug": "apex-real-estate",
+    "category": 1,
+    "thumbnail": "portfolio/apex-real-estate-thumb.jpg",
+    "short_description": "A premium property listing landing page with enquiry conversion focus.",
+    "description": "Apex Real Estate needed a high-converting landing page for their luxury property listings. This concept design prioritizes visual impact and clear calls to action — featuring a full-screen hero, property highlights, and an integrated enquiry form.\n\nThe design is intentionally minimal and refined, letting the properties speak for themselves.",
+    "deliverables": "Landing Page Design, Mobile Responsive Layout, Enquiry Form Integration",
+    "client_name": "",
+    "is_concept": false,
+    "is_featured": false,
+    "display_order": 5,
+    "created_date": null
+  }
+},
+{
+  "model": "portfolio.project",
+  "pk": 6,
+  "fields": {
+    "title": "IronForge Fitness Club  Athletic & Strength Website",
+    "slug": "ironforge-fitness",
+    "category": 1,
+    "thumbnail": "portfolio/gallery/ironforge-fitness-1.jpg",
+    "short_description": "High-performance website with real-time class booking, membership checkout, and coach roster for an elite strength club.",
+    "description": "IronForge is an elite strength, barbell, and athletic conditioning facility designed for high-performance training. Lunex Presents designed and engineered an all-in-one digital web experience featuring dynamic class timetables, tier-based membership signups, trainer profiles, and mobile-first booking.\\n\\nBuilt with high-contrast bold dark aesthetics, raw athletic energy, and instant loading speeds, the website drove a +142% increase in online trial pass bookings within the first 60 days of launch.",
+    "deliverables": "Custom Website Design, Class Booking Engine, Membership Portal, Mobile Responsive Architecture, SEO Optimization",
+    "client_name": "IronForge Athletic Club",
+    "is_concept": false,
+    "is_featured": true,
+    "display_order": 1,
+    "created_date": null
+  }
+},
+{
+  "model": "portfolio.project",
+  "pk": 7,
+  "fields": {
+    "title": "Pulse Elite Performance  Luxury Gym Studio Website",
+    "slug": "pulse-elite-gym",
+    "category": 1,
+    "thumbnail": "portfolio/gallery/pulse-elite-gym-1.jpg",
+    "short_description": "Luxury boutique fitness studio website featuring virtual walkthrough, private trainer booking, and wellness pass system.",
+    "description": "Pulse Elite is a boutique luxury fitness and recovery studio offering personal training, strength suites, and biohacking recovery zones. We crafted an ultra-premium website balancing minimalist luxury typography with visceral athletic energy.\\n\\nThe platform includes an interactive studio tour, seamless trainer scheduling, and integrated member nutrition plans, resulting in an +88% surge in VIP consultation requests.",
+    "deliverables": "Luxury Website Design, Virtual Studio Showcase, Personal Trainer Booking, Nutrition Hub, High-Converting Funnel",
+    "client_name": "Pulse Elite Fitness",
+    "is_concept": false,
+    "is_featured": true,
+    "display_order": 2,
+    "created_date": null
+  }
+},
+{
+  "model": "portfolio.projectimage",
+  "pk": 1,
+  "fields": {
+    "project": 1,
+    "image": "portfolio/gallery/bloom-bakery-1.jpg",
+    "caption": "Artisanal Bakery Web Storefront & Daily Ovens Hero",
+    "display_order": 1,
+    "created_at": "2026-11-02T08:13:26.100Z"
+  }
+},
+{
+  "model": "portfolio.projectimage",
+  "pk": 2,
+  "fields": {
+    "project": 1,
+    "image": "portfolio/gallery/bloom-bakery-2.jpg",
+    "caption": "Daily Fresh Sourdough & Pastry Menu Catalog",
+    "display_order": 2,
+    "created_at": "2026-11-02T08:13:26.111Z"
+  }
+},
+{
+  "model": "portfolio.projectimage",
+  "pk": 3,
+  "fields": {
+    "project": 1,
+    "image": "portfolio/gallery/bloom-bakery-3.jpg",
+    "caption": "Eco-Friendly Kraft Bread Bag & Cafe Collateral",
+    "display_order": 3,
+    "created_at": "2026-11-02T08:13:26.120Z"
+  }
+},
+{
+  "model": "portfolio.projectimage",
+  "pk": 4,
+  "fields": {
+    "project": 1,
+    "image": "portfolio/gallery/bloom-bakery-4.jpg",
+    "caption": "Mobile Ordering, Table Reservation & Rapid Checkout",
+    "display_order": 4,
+    "created_at": "2026-11-02T08:13:26.130Z"
+  }
+},
+{
+  "model": "portfolio.projectimage",
+  "pk": 5,
+  "fields": {
+    "project": 2,
+    "image": "portfolio/gallery/novatech-solutions-1.jpg",
+    "caption": "Corporate Brand Identity & Executive Stationery Suite",
+    "display_order": 1,
+    "created_at": "2026-11-02T08:13:26.150Z"
+  }
+},
+{
+  "model": "portfolio.projectimage",
+  "pk": 6,
+  "fields": {
+    "project": 2,
+    "image": "portfolio/gallery/novatech-solutions-2.jpg",
+    "caption": "Enterprise Cloud Platform & Live Telemetry Dashboard",
+    "display_order": 2,
+    "created_at": "2026-11-02T08:13:26.158Z"
+  }
+},
+{
+  "model": "portfolio.projectimage",
+  "pk": 7,
+  "fields": {
+    "project": 2,
+    "image": "portfolio/gallery/novatech-solutions-3.jpg",
+    "caption": "Executive Mobile App & Infrastructure Alert Cockpit",
+    "display_order": 3,
+    "created_at": "2026-11-02T08:13:26.166Z"
+  }
+},
+{
+  "model": "portfolio.projectimage",
+  "pk": 8,
+  "fields": {
+    "project": 2,
+    "image": "portfolio/gallery/novatech-solutions-4.jpg",
+    "caption": "Design System, Brand Guidelines & Typography Tokens",
+    "display_order": 4,
+    "created_at": "2026-11-02T08:13:26.173Z"
+  }
+},
+{
+  "model": "portfolio.projectimage",
+  "pk": 9,
+  "fields": {
+    "project": 3,
+    "image": "portfolio/gallery/velocity-gym-1.jpg",
+    "caption": "High-Performance Fitness Web Portal & Membership Hero",
+    "display_order": 1,
+    "created_at": "2026-11-02T08:13:26.192Z"
+  }
+},
+{
+  "model": "portfolio.projectimage",
+  "pk": 10,
+  "fields": {
+    "project": 3,
+    "image": "portfolio/gallery/velocity-gym-2.jpg",
+    "caption": "20+ Social Media Carousel & Story Kit in Figma",
+    "display_order": 2,
+    "created_at": "2026-11-02T08:13:26.199Z"
+  }
+},
+{
+  "model": "portfolio.projectimage",
+  "pk": 11,
+  "fields": {
+    "project": 3,
+    "image": "portfolio/gallery/velocity-gym-3.jpg",
+    "caption": "Interactive Weekly Class Timetable & Session Booking",
+    "display_order": 3,
+    "created_at": "2026-11-02T08:13:26.207Z"
+  }
+},
+{
+  "model": "portfolio.projectimage",
+  "pk": 12,
+  "fields": {
+    "project": 3,
+    "image": "portfolio/gallery/velocity-gym-4.jpg",
+    "caption": "Companion Workout Tracker & Member QR Entry App",
+    "display_order": 4,
+    "created_at": "2026-11-02T08:13:26.216Z"
+  }
+},
+{
+  "model": "portfolio.projectimage",
+  "pk": 13,
+  "fields": {
+    "project": 4,
+    "image": "portfolio/gallery/grind-coffee-co-1.jpg",
+    "caption": "Specialty Coffee Roasters Story & Single-Origin Hero",
+    "display_order": 1,
+    "created_at": "2026-11-02T08:13:26.232Z"
+  }
+},
+{
+  "model": "portfolio.projectimage",
+  "pk": 14,
+  "fields": {
+    "project": 4,
+    "image": "portfolio/gallery/grind-coffee-co-2.jpg",
+    "caption": "Matte Charcoal & Copper Foil Bag Packaging Suite",
+    "display_order": 2,
+    "created_at": "2026-11-02T08:13:26.240Z"
+  }
+},
+{
+  "model": "portfolio.projectimage",
+  "pk": 15,
+  "fields": {
+    "project": 4,
+    "image": "portfolio/gallery/grind-coffee-co-3.jpg",
+    "caption": "E-Commerce Fresh Bean Roaster Subscription System",
+    "display_order": 3,
+    "created_at": "2026-11-02T08:13:26.249Z"
+  }
+},
+{
+  "model": "portfolio.projectimage",
+  "pk": 16,
+  "fields": {
+    "project": 4,
+    "image": "portfolio/gallery/grind-coffee-co-4.jpg",
+    "caption": "Hand-Drawn Brand Emblem & Cafe Menu Board Signage",
+    "display_order": 4,
+    "created_at": "2026-11-02T08:13:26.259Z"
+  }
+},
+{
+  "model": "portfolio.projectimage",
+  "pk": 17,
+  "fields": {
+    "project": 5,
+    "image": "portfolio/gallery/apex-real-estate-1.jpg",
+    "caption": "Full-Screen Luxury Penthouse Architectural Showcase",
+    "display_order": 1,
+    "created_at": "2026-11-02T08:13:26.278Z"
+  }
+},
+{
+  "model": "portfolio.projectimage",
+  "pk": 18,
+  "fields": {
+    "project": 5,
+    "image": "portfolio/gallery/apex-real-estate-2.jpg",
+    "caption": "Level 42 Architectural Blueprint & Residence Specs",
+    "display_order": 2,
+    "created_at": "2026-11-02T08:13:26.286Z"
+  }
+},
+{
+  "model": "portfolio.projectimage",
+  "pk": 19,
+  "fields": {
+    "project": 5,
+    "image": "portfolio/gallery/apex-real-estate-3.jpg",
+    "caption": "Mobile Luxury Property Portfolio & VIP Tour Booking",
+    "display_order": 3,
+    "created_at": "2026-11-02T08:13:26.294Z"
+  }
+},
+{
+  "model": "portfolio.projectimage",
+  "pk": 20,
+  "fields": {
+    "project": 5,
+    "image": "portfolio/gallery/apex-real-estate-4.jpg",
+    "caption": "Bespoke Property Lookbook & Foil Stationery Monogram",
+    "display_order": 4,
+    "created_at": "2026-11-02T08:13:26.300Z"
+  }
+},
+{
+  "model": "portfolio.projectimage",
+  "pk": 21,
+  "fields": {
+    "project": 6,
+    "image": "portfolio/gallery/ironforge-fitness-1.jpg",
+    "caption": "Main Website Homepage & Membership Pass Hero",
+    "display_order": 1,
+    "created_at": "2026-11-02T09:29:38.903Z"
+  }
+},
+{
+  "model": "portfolio.projectimage",
+  "pk": 22,
+  "fields": {
+    "project": 6,
+    "image": "portfolio/gallery/ironforge-fitness-2.jpg",
+    "caption": "Interactive Class Timetable & Trainer Schedule UI",
+    "display_order": 2,
+    "created_at": "2026-11-02T09:29:39.535Z"
+  }
+},
+{
+  "model": "portfolio.projectimage",
+  "pk": 23,
+  "fields": {
+    "project": 6,
+    "image": "portfolio/gallery/ironforge-fitness-3.jpg",
+    "caption": "Strength Suite & Heavy Lifting Facility Tour",
+    "display_order": 3,
+    "created_at": "2026-11-02T09:29:39.974Z"
+  }
+},
+{
+  "model": "portfolio.projectimage",
+  "pk": 24,
+  "fields": {
+    "project": 6,
+    "image": "portfolio/gallery/ironforge-fitness-4.jpg",
+    "caption": "Functional Sprint Turf & Cardio Training Area",
+    "display_order": 4,
+    "created_at": "2026-11-02T09:29:40.476Z"
+  }
+},
+{
+  "model": "portfolio.projectimage",
+  "pk": 25,
+  "fields": {
+    "project": 7,
+    "image": "portfolio/gallery/pulse-elite-gym-1.jpg",
+    "caption": "Luxury Studio Atmosphere & VIP Membership Hero",
+    "display_order": 1,
+    "created_at": "2026-11-02T09:29:41.147Z"
+  }
+},
+{
+  "model": "portfolio.projectimage",
+  "pk": 26,
+  "fields": {
+    "project": 7,
+    "image": "portfolio/gallery/pulse-elite-gym-2.jpg",
+    "caption": "Private Coaching & Master Trainer Profiles",
+    "display_order": 2,
+    "created_at": "2026-11-02T09:29:41.544Z"
+  }
+},
+{
+  "model": "portfolio.projectimage",
+  "pk": 27,
+  "fields": {
+    "project": 7,
+    "image": "portfolio/gallery/pulse-elite-gym-3.jpg",
+    "caption": "Executive Dumbbell Suite & Free Weights Zone",
+    "display_order": 3,
+    "created_at": "2026-11-02T09:29:42.039Z"
+  }
+},
+{
+  "model": "portfolio.projectimage",
+  "pk": 28,
+  "fields": {
+    "project": 7,
+    "image": "portfolio/gallery/pulse-elite-gym-4.jpg",
+    "caption": "Recovery Lounge, Cryo & Infrared Wellness Suite",
+    "display_order": 4,
+    "created_at": "2026-11-02T09:29:42.490Z"
+  }
+},
+{
+  "model": "contact.enquiry",
+  "pk": 1,
+  "fields": {
+    "name": "Pankaj Kumar",
+    "email": "pankaj@example.com",
+    "service_interest": "web",
+    "message": "We need a high quality web app and brand identity for Lunex.",
+    "created_at": "2026-10-26T16:52:31.246Z",
+    "is_read": false
+  }
+},
+{
+  "model": "contact.enquiry",
+  "pk": 2,
+  "fields": {
+    "name": "Pankaj patel",
+    "email": "pankajlucky678@gmail.com",
+    "service_interest": "web",
+    "message": "i want website for shoes and clothing garments",
+    "created_at": "2026-10-26T17:00:33.176Z",
+    "is_read": false
+  }
+}
+]

@@ -11,7 +11,7 @@
 
 /* ─── 1. NAVBAR SCROLL EFFECT ─────────────────────────── */
 (function () {
-  const navbar = document.querySelector('.lx-navbar');
+  const navbar = document.querySelector('.lx-header, .lx-navbar');
   if (!navbar) return;
 
 

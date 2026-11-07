@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="section-padding bg-ivory">
+  <div class="container">
+    <!-- Header -->
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-5 pb-3 border-bottom border-warm">
+      <div>
+        <span class="badge bg-secondary text-uppercase mb-2" style="letter-spacing: 0.1em; font-size: 0.7rem;">AuditFlow Operations</span>
+        <h1 class="font-serif display-5 text-charcoal mb-1">Compliance Monitoring Dashboard</h1>
+        <p class="text-muted small mb-0">Central oversight of automated privacy, DPDP Act 2023, and security assessments.</p>
+      </div>
+      <div class="mt-3 mt-md-0">
+        <a href="{% url 'audit:home' %}" class="btn-lunex-gold btn-sm">+ Run New Audit</a>
+      </div>
+    </div>
+
+    <!-- Stats Overview -->
+    <div class="row g-4 mb-5">
+      <div class="col-md-3">
+        <div class="bg-white-card p-4 border-warm">
+          <div class="small text-muted text-uppercase fw-semibold" style="letter-spacing: 0.05em;">Total Audits Run</div>
+          <div class="display-5 text-charcoal fw-bold my-2">{{ total_audits }}</div>
+          <div class="small text-muted">Across target domains</div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="bg-white-card p-4 border-warm">
+          <div class="small text-danger text-uppercase fw-semibold" style="letter-spacing: 0.05em;">Open Critical Risks</div>
+          <div class="display-5 text-danger fw-bold my-2">{{ critical_total }}</div>
+          <div class="small text-muted">Statutory non-compliance</div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="bg-white-card p-4 border-warm">
+          <div class="small text-warning text-uppercase fw-semibold" style="letter-spacing: 0.05em;">Open High Risks</div>
+          <div class="display-5 text-warning fw-bold my-2">{{ high_total }}</div>
+          <div class="small text-muted">Security header & consent gaps</div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="bg-white-card p-4 border-warm">
+          <div class="small text-success text-uppercase fw-semibold" style="letter-spacing: 0.05em;">Remediated Items</div>
+          <div class="display-5 text-success fw-bold my-2">{{ resolved_total }}</div>
+          <div class="small text-muted">Marked resolved across scans</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scans Table -->
+    <div class="bg-white-card p-4 p-lg-5 border-warm">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="font-serif h4 text-charcoal mb-0">Recent Assessments</h2>
+        <span class="small text-muted">Showing latest {{ scans|length }} scans</span>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <thead>
+            <tr class="border-bottom border-warm text-muted small text-uppercase" style="letter-spacing: 0.05em;">
+              <th scope="col" class="pb-3">Domain / Company</th>
+              <th scope="col" class="pb-3 text-center">Score</th>
+              <th scope="col" class="pb-3 text-center">Critical</th>
+              <th scope="col" class="pb-3 text-center">High</th>
+              <th scope="col" class="pb-3 text-center">Medium</th>
+              <th scope="col" class="pb-3">Date</th>
+              <th scope="col" class="pb-3 text-end">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for s in scans %}
+            <tr class="border-bottom border-warm">
+              <td>
+                <div class="fw-bold text-charcoal">{{ s.domain }}</div>
+                {% if s.company_name %}<div class="small text-muted">{{ s.company_name }}</div>{% endif %}
+                <div class="small text-muted font-monospace" style="font-size: 0.75rem;">{{ s.target_url|truncatechars:40 }}</div>
+              </td>
+              <td class="text-center">
+                <span class="fw-bold fs-5 {% if s.compliance_score >= 80 %}text-success{% elif s.compliance_score >= 50 %}text-warning{% else %}text-danger{% endif %}">
+                  {{ s.compliance_score }}
+                </span>
+                <span class="small text-muted">/100</span>
+              </td>
+              <td class="text-center">
+                {% if s.critical_count > 0 %}
+                <span class="badge bg-danger">{{ s.critical_count }}</span>
+                {% else %}
+                <span class="text-muted small">0</span>
+                {% endif %}
+              </td>
+              <td class="text-center">
+                {% if s.high_count > 0 %}
+                <span class="badge bg-warning text-dark">{{ s.high_count }}</span>
+                {% else %}
+                <span class="text-muted small">0</span>
+                {% endif %}
+              </td>
+              <td class="text-center">
+                {% if s.medium_count > 0 %}
+                <span class="badge bg-info text-dark">{{ s.medium_count }}</span>
+                {% else %}
+                <span class="text-muted small">0</span>
+                {% endif %}
+              </td>
+              <td class="small text-muted">
+                {{ s.created_at|date:"d M Y" }}<br>
+                <span style="font-size: 0.75rem;">{{ s.created_at|date:"H:i" }} IST</span>
+              </td>
+              <td class="text-end">
+                <a href="{% url 'audit:report' s.id %}" class="btn-lunex-gold btn-sm py-1 px-3" style="font-size: 0.8rem;">View Report &rarr;</a>
+              </td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="7" class="text-center py-5">
+                <div class="font-serif h5 text-charcoal mb-2">No audits recorded yet.</div>
+                <p class="text-muted small mb-3">Run an automated compliance scan on your website or client domain.</p>
+                <a href="{% url 'audit:home' %}" class="btn-lunex-gold btn-sm">Start First Audit</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

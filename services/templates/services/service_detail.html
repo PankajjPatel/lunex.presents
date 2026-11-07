@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ service.title }} — Lunex Presents{% endblock %}
+
+{% block content %}
+<section class="py-5" style="background-color: var(--lx-bg); border-bottom: 1px solid var(--lx-border);">
+  <div class="container py-4">
+    <div class="lx-eyebrow">
+      <span class="lx-diamond"></span> Service Offering
+    </div>
+    <h1 class="mb-3">{{ service.title }}</h1>
+    <p class="lead" style="color: var(--lx-text-secondary); max-width: 760px;">
+      {{ service.short_description }}
+    </p>
+  </div>
+</section>
+
+<section class="py-5" style="background-color: var(--lx-surface);">
+  <div class="container py-3">
+    <div class="row g-5">
+      <div class="col-lg-8">
+        <div class="p-4 p-md-5" style="background: var(--lx-bg); border: 1px solid var(--lx-border); border-radius: 4px;">
+          <h2 class="h4 mb-4 text-charcoal">Overview &amp; Scope</h2>
+          <div style="font-size: 1.05rem; line-height: 1.8; color: var(--lx-text-secondary); white-space: pre-line;">
+            {{ service.full_description }}
+          </div>
+
+          {% if service.deliverables %}
+            <h3 class="h5 mt-5 mb-3 text-charcoal">What We Deliver</h3>
+            <ul class="list-unstyled" style="font-size: 0.95rem; line-height: 2.2; color: var(--lx-text-secondary);">
+              {% for d in service.get_deliverables_list %}
+                <li><span class="lx-diamond-sm"></span> <strong>{{ d }}</strong></li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="p-4" style="background: var(--lx-bg-secondary); border: 1px solid var(--lx-border); border-radius: 4px; position: sticky; top: 90px;">
+          <div class="mb-3">
+            <span class="d-block font-mono text-muted-grey" style="font-size: 0.78rem;">ESTIMATED INVESTMENT</span>
+            <span class="h3 font-weight-bold text-gold font-mono">{{ service.starting_price|default:"Custom Quote" }}</span>
+          </div>
+
+          {% if service.ideal_for %}
+            <div class="mb-4">
+              <span class="d-block font-mono text-muted-grey" style="font-size: 0.78rem;">IDEAL FIT</span>
+              <p class="mb-0 text-charcoal" style="font-size: 0.9rem;">{{ service.ideal_for }}</p>
+            </div>
+          {% endif %}
+
+          <div class="d-flex flex-column gap-2">
+            <a href="{% url 'contact:contact' %}?type=quote&service={{ service.title|urlencode }}" class="btn-lunex-gold w-100">
+              Request a Custom Quote <i class="bi bi-arrow-right"></i>
+            </a>
+            <a href="{% url 'core:free_demo' %}" class="btn-lunex-outline w-100">
+              Request Free Concept Demo
+            </a>
+          </div>
+
+          <div class="mt-4 pt-3 border-top" style="border-color: var(--lx-border) !important; font-size: 0.78rem; color: var(--lx-text-muted);">
+            40% advance deposit • 40% milestone approval • 20% final handover.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

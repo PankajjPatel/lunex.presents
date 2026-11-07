@@ -1,0 +1,242 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Transparent Website Pricing — Lunex Presents{% endblock %}
+
+{% block content %}
+<section class="py-5" style="background-color: var(--lx-bg); border-bottom: 1px solid var(--lx-border);">
+  <div class="container py-4">
+    <div class="lx-eyebrow">
+      <span class="lx-diamond"></span> Transparent Pricing System
+    </div>
+    <h1 class="mb-3">
+      Clear, Honest Investment for Digital Excellence
+    </h1>
+    <p class="lead" style="color: var(--lx-text-secondary); max-width: 760px;">
+      We believe client trust begins with transparent numbers. Below are our starting indicative ranges for websites, applications, and custom software.
+    </p>
+  </div>
+</section>
+
+<section class="py-5" style="background-color: var(--lx-bg-secondary);">
+  <div class="container py-3">
+    <!-- Pricing Grid Cards -->
+    <div class="row g-4 mb-5">
+      <!-- 1. Basic Landing Page -->
+      <div class="col-lg-4 col-md-6">
+        <div class="p-4 h-100 d-flex flex-column justify-content-between" style="background: var(--lx-surface); border: 1px solid var(--lx-border); border-radius: 4px;">
+          <div>
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <span class="badge" style="background: var(--lx-bg-secondary); color: var(--lx-text-primary);">SINGLE PAGE</span>
+              <span class="font-mono text-muted-grey" style="font-size: 0.8rem;">3-5 DAYS</span>
+            </div>
+            <h3 class="h4 mb-2">Basic Landing Page</h3>
+            <p style="font-size: 0.9rem; color: var(--lx-text-secondary);">
+              High-converting single-page landing site for campaign launches, lead capture, and event promotion.
+            </p>
+            <div class="py-3 border-top border-bottom my-3" style="border-color: var(--lx-border-subtle) !important;">
+              <span class="font-mono h3 text-charcoal font-weight-bold">₹3,000 – ₹5,000</span>
+              <div style="font-size: 0.78rem; color: var(--lx-text-muted);">Starting price range</div>
+            </div>
+            <ul class="list-unstyled mb-4" style="font-size: 0.88rem; line-height: 1.8; color: var(--lx-text-secondary);">
+              <li><i class="bi bi-check text-gold me-2"></i> 1 Custom Designed Sectioned Page</li>
+              <li><i class="bi bi-check text-gold me-2"></i> Mobile &amp; Tablet Responsive</li>
+              <li><i class="bi bi-check text-gold me-2"></i> Lead Capture &amp; Contact Form</li>
+              <li><i class="bi bi-check text-gold me-2"></i> Basic Search Engine Optimization</li>
+              <li><i class="bi bi-check text-gold me-2"></i> WhatsApp Click-to-Chat Button</li>
+            </ul>
+          </div>
+          <a href="{% url 'contact:contact' %}?type=quote&service=Basic+Landing+Page" class="btn-lunex-dark w-100">
+            Get Started
+          </a>
+        </div>
+      </div>
+
+      <!-- 2. Portfolio Website -->
+      <div class="col-lg-4 col-md-6">
+        <div class="p-4 h-100 d-flex flex-column justify-content-between" style="background: var(--lx-surface); border: 1px solid var(--lx-border); border-radius: 4px;">
+          <div>
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <span class="badge" style="background: var(--lx-bg-secondary); color: var(--lx-text-primary);">CREATIVE</span>
+              <span class="font-mono text-muted-grey" style="font-size: 0.8rem;">5-7 DAYS</span>
+            </div>
+            <h3 class="h4 mb-2">Portfolio Website</h3>
+            <p style="font-size: 0.9rem; color: var(--lx-text-secondary);">
+              Editorial visual showcase for designers, photographers, consultants, and independent creative professionals.
+            </p>
+            <div class="py-3 border-top border-bottom my-3" style="border-color: var(--lx-border-subtle) !important;">
+              <span class="font-mono h3 text-charcoal font-weight-bold">₹4,000 – ₹8,000</span>
+              <div style="font-size: 0.78rem; color: var(--lx-text-muted);">Starting price range</div>
+            </div>
+            <ul class="list-unstyled mb-4" style="font-size: 0.88rem; line-height: 1.8; color: var(--lx-text-secondary);">
+              <li><i class="bi bi-check text-gold me-2"></i> Up to 4 Curated Custom Pages</li>
+              <li><i class="bi bi-check text-gold me-2"></i> Filterable Case Study / Project Gallery</li>
+              <li><i class="bi bi-check text-gold me-2"></i> Biography &amp; Experience Section</li>
+              <li><i class="bi bi-check text-gold me-2"></i> Social Integration &amp; Contact Direct</li>
+              <li><i class="bi bi-check text-gold me-2"></i> High-Speed Asset Compression</li>
+            </ul>
+          </div>
+          <a href="{% url 'contact:contact' %}?type=quote&service=Portfolio+Website" class="btn-lunex-dark w-100">
+            Get Started
+          </a>
+        </div>
+      </div>
+
+      <!-- 3. Business Website (Highlighted) -->
+      <div class="col-lg-4 col-md-6">
+        <div class="p-4 h-100 d-flex flex-column justify-content-between position-relative" style="background: var(--lx-surface); border: 2px solid var(--lx-accent); border-radius: 4px; box-shadow: var(--lx-shadow-card);">
+          <div class="position-absolute top-0 end-0 m-3">
+            <span class="badge" style="background: var(--lx-accent); color: #fff;">MOST POPULAR</span>
+          </div>
+          <div>
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <span class="badge" style="background: var(--lx-bg-secondary); color: var(--lx-text-primary);">BUSINESS</span>
+              <span class="font-mono text-muted-grey" style="font-size: 0.8rem;">7-12 DAYS</span>
+            </div>
+            <h3 class="h4 mb-2">Business Website</h3>
+            <p style="font-size: 0.9rem; color: var(--lx-text-secondary);">
+              Comprehensive digital presence for local businesses, corporate firms, clinics, agencies, and service providers.
+            </p>
+            <div class="py-3 border-top border-bottom my-3" style="border-color: var(--lx-border-subtle) !important;">
+              <span class="font-mono h3 text-charcoal font-weight-bold">₹7,000 – ₹15,000</span>
+              <div style="font-size: 0.78rem; color: var(--lx-text-muted);">Starting price range</div>
+            </div>
+            <ul class="list-unstyled mb-4" style="font-size: 0.88rem; line-height: 1.8; color: var(--lx-text-secondary);">
+              <li><i class="bi bi-check text-gold me-2"></i> Up to 7 Clean Structured Pages</li>
+              <li><i class="bi bi-check text-gold me-2"></i> Service Catalog &amp; Deliverables Breakdown</li>
+              <li><i class="bi bi-check text-gold me-2"></i> WhatsApp &amp; Email Enquiry Routing</li>
+              <li><i class="bi bi-check text-gold me-2"></i> Dedicated Content Management Admin</li>
+              <li><i class="bi bi-check text-gold me-2"></i> Google Business &amp; Analytics Integration</li>
+            </ul>
+          </div>
+          <a href="{% url 'contact:contact' %}?type=quote&service=Business+Website" class="btn-lunex-gold w-100">
+            Get Custom Quote
+          </a>
+        </div>
+      </div>
+
+      <!-- 4. Restaurant / Cafe Website -->
+      <div class="col-lg-4 col-md-6">
+        <div class="p-4 h-100 d-flex flex-column justify-content-between" style="background: var(--lx-surface); border: 1px solid var(--lx-border); border-radius: 4px;">
+          <div>
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <span class="badge" style="background: var(--lx-bg-secondary); color: var(--lx-text-primary);">HOSPITALITY</span>
+              <span class="font-mono text-muted-grey" style="font-size: 0.8rem;">8-14 DAYS</span>
+            </div>
+            <h3 class="h4 mb-2">Restaurant / Cafe Website</h3>
+            <p style="font-size: 0.9rem; color: var(--lx-text-secondary);">
+              Interactive digital food &amp; drinks menu with instant WhatsApp order routing and table booking requests.
+            </p>
+            <div class="py-3 border-top border-bottom my-3" style="border-color: var(--lx-border-subtle) !important;">
+              <span class="font-mono h3 text-charcoal font-weight-bold">₹8,000 – ₹18,000</span>
+              <div style="font-size: 0.78rem; color: var(--lx-text-muted);">Starting price range</div>
+            </div>
+            <ul class="list-unstyled mb-4" style="font-size: 0.88rem; line-height: 1.8; color: var(--lx-text-secondary);">
+              <li><i class="bi bi-check text-gold me-2"></i> Mobile-Optimized Food &amp; Drinks Menu</li>
+              <li><i class="bi bi-check text-gold me-2"></i> Direct WhatsApp Order Dispatch (0% Commission)</li>
+              <li><i class="bi bi-check text-gold me-2"></i> Table Reservation Request Workflow</li>
+              <li><i class="bi bi-check text-gold me-2"></i> Location Map &amp; Operating Hours Card</li>
+            </ul>
+          </div>
+          <a href="{% url 'contact:contact' %}?type=quote&service=Restaurant+Cafe+Website" class="btn-lunex-dark w-100">
+            Get Started
+          </a>
+        </div>
+      </div>
+
+      <!-- 5. Gym / Coaching Website -->
+      <div class="col-lg-4 col-md-6">
+        <div class="p-4 h-100 d-flex flex-column justify-content-between" style="background: var(--lx-surface); border: 1px solid var(--lx-border); border-radius: 4px;">
+          <div>
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <span class="badge" style="background: var(--lx-bg-secondary); color: var(--lx-text-primary);">FITNESS &amp; COACHING</span>
+              <span class="font-mono text-muted-grey" style="font-size: 0.8rem;">8-14 DAYS</span>
+            </div>
+            <h3 class="h4 mb-2">Gym / Coaching Website</h3>
+            <p style="font-size: 0.9rem; color: var(--lx-text-secondary);">
+              Program schedules, trainer profiles, membership tier comparisons, and free trial onboarding flows.
+            </p>
+            <div class="py-3 border-top border-bottom my-3" style="border-color: var(--lx-border-subtle) !important;">
+              <span class="font-mono h3 text-charcoal font-weight-bold">₹7,000 – ₹15,000</span>
+              <div style="font-size: 0.78rem; color: var(--lx-text-muted);">Starting price range</div>
+            </div>
+            <ul class="list-unstyled mb-4" style="font-size: 0.88rem; line-height: 1.8; color: var(--lx-text-secondary);">
+              <li><i class="bi bi-check text-gold me-2"></i> Training Program Showcases &amp; Batches</li>
+              <li><i class="bi bi-check text-gold me-2"></i> Membership Plans Comparison Grid</li>
+              <li><i class="bi bi-check text-gold me-2"></i> Free Trial Booking &amp; Lead Qualification</li>
+              <li><i class="bi bi-check text-gold me-2"></i> Trainer Bios &amp; Verified Testimonials</li>
+            </ul>
+          </div>
+          <a href="{% url 'contact:contact' %}?type=quote&service=Gym+Coaching+Website" class="btn-lunex-dark w-100">
+            Get Started
+          </a>
+        </div>
+      </div>
+
+      <!-- 6. E-commerce Website -->
+      <div class="col-lg-4 col-md-6">
+        <div class="p-4 h-100 d-flex flex-column justify-content-between" style="background: var(--lx-surface); border: 1px solid var(--lx-border); border-radius: 4px;">
+          <div>
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <span class="badge" style="background: var(--lx-bg-secondary); color: var(--lx-text-primary);">COMMERCE</span>
+              <span class="font-mono text-muted-grey" style="font-size: 0.8rem;">14-25 DAYS</span>
+            </div>
+            <h3 class="h4 mb-2">E-commerce Website</h3>
+            <p style="font-size: 0.9rem; color: var(--lx-text-secondary);">
+              Full-featured online store with product catalog, cart, checkout, Indian payment gateway, and order tracking.
+            </p>
+            <div class="py-3 border-top border-bottom my-3" style="border-color: var(--lx-border-subtle) !important;">
+              <span class="font-mono h3 text-charcoal font-weight-bold">₹15,000 – ₹35,000+</span>
+              <div style="font-size: 0.78rem; color: var(--lx-text-muted);">Starting price range</div>
+            </div>
+            <ul class="list-unstyled mb-4" style="font-size: 0.88rem; line-height: 1.8; color: var(--lx-text-secondary);">
+              <li><i class="bi bi-check text-gold me-2"></i> Product Catalog with Category Filters</li>
+              <li><i class="bi bi-check text-gold me-2"></i> Shopping Cart &amp; Razorpay / Cashfree Setup</li>
+              <li><i class="bi bi-check text-gold me-2"></i> Customer Accounts &amp; Order History</li>
+              <li><i class="bi bi-check text-gold me-2"></i> Inventory &amp; Order Management Admin</li>
+            </ul>
+          </div>
+          <a href="{% url 'contact:contact' %}?type=quote&service=Ecommerce+Website" class="btn-lunex-gold w-100">
+            Get Custom Quote
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Transparent Conditions Box -->
+    <div class="lx-pricing-disclaimer-box mb-5">
+      <h3 class="h5 mb-2" style="color: #5D4300;">Conditions &amp; Clarifications</h3>
+      <ul class="mb-0 ps-3" style="color: #5D4300; font-size: 0.92rem; line-height: 1.7;">
+        <li><strong>Indicative Starting Ranges:</strong> Prices are starting baseline estimates and not fixed guarantees. Final quotation depends on total page count, specific features, custom animations, integrations, and project scope.</li>
+        <li><strong>Infrastructure:</strong> Domain name purchase, production server hosting, third-party SMS/email gateways, and transactional payment charges are paid directly to providers or billed separately.</li>
+        <li><strong>Scope Adjustments:</strong> Any features requested beyond the approved milestone document will be scoped separately.</li>
+      </ul>
+    </div>
+
+    <!-- Milestone Structure Banner -->
+    <div class="lx-payment-terms mb-4">
+      <h3 class="text-white mb-2">Our 40% — 40% — 20% Milestone Framework</h3>
+      <p style="color: var(--lx-dark-muted); max-width: 680px;">
+        Every project is safeguarded with clear delivery checkpoints. You approve the working demo before releasing the milestone payment.
+      </p>
+      <div class="row g-4 mt-2">
+        <div class="col-md-4">
+          <div class="lx-milestone-pct">40%</div>
+          <div class="text-white fw-bold mb-1">Advance Deposit</div>
+          <div style="font-size: 0.85rem; color: #9A9AA2;">Project architecture, wireframing, and design drafting.</div>
+        </div>
+        <div class="col-md-4">
+          <div class="lx-milestone-pct">40%</div>
+          <div class="text-white fw-bold mb-1">Milestone Preview</div>
+          <div style="font-size: 0.85rem; color: #9A9AA2;">Working demo presented and approved on staging.</div>
+        </div>
+        <div class="col-md-4">
+          <div class="lx-milestone-pct">20%</div>
+          <div class="text-white fw-bold mb-1">Final Handover</div>
+          <div style="font-size: 0.85rem; color: #9A9AA2;">Production deployment, SSL, and credentials handover.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

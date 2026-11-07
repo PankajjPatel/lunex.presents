@@ -1,27 +1,25 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Enquiry Received — Lunex Presents{% endblock %}
 
 {% block content %}
-<section class="section-py" style="min-height:70vh;display:flex;align-items:center;" aria-labelledby="success-heading">
-  <div class="container text-center">
-    <div style="max-width:520px;margin:0 auto;">
-      <div style="width:72px;height:72px;background:rgba(39,174,96,0.12);border:1px solid rgba(39,174,96,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;color:#27ae60;margin:0 auto 2rem;">
-        <i class="bi bi-check-lg" aria-hidden="true"></i>
+<section class="py-5 text-center" style="background-color: var(--lx-bg); min-height: 70vh; display: flex; align-items: center;">
+  <div class="container py-5">
+    <div class="p-5 mx-auto" style="max-width: 620px; background: var(--lx-surface); border: 1px solid var(--lx-border); border-radius: 4px; box-shadow: var(--lx-shadow-card);">
+      <div class="mb-4">
+        <span class="lx-diamond-lg"></span>
       </div>
-      <h1 class="section-title" id="success-heading">Enquiry Received!</h1>
-      <p style="color:var(--lx-grey-light);line-height:1.8;margin-bottom:2rem;">
-        Thank you for reaching out to Lunex Presents. We've received your message and we'll get back to you within <strong style="color:var(--lx-white);">24 hours</strong>.
+      <h1 class="h2 mb-3 text-charcoal">Enquiry Successfully Received</h1>
+      <p style="font-size: 1.05rem; line-height: 1.7; color: var(--lx-text-secondary); margin-bottom: 2rem;">
+        Thank you for reaching out to Lunex Presents. Our studio team will review your brief and contact you within <strong>24 business hours</strong> with next steps.
       </p>
-      <p style="color:var(--lx-grey);font-size:0.875rem;margin-bottom:2.5rem;">
-        In the meantime, feel free to explore our portfolio or follow us on Instagram for latest work.
-      </p>
-      <div class="d-flex gap-3 justify-content-center flex-wrap">
-        <a href="{% url 'portfolio:work' %}" class="btn btn-primary" id="success-view-work-btn">
-          <i class="bi bi-grid me-2" aria-hidden="true"></i>View Our Work
+      <div class="d-flex flex-wrap justify-content-center gap-3">
+        <a href="{% url 'core:home' %}" class="btn-lunex-gold">
+          Return to Homepage
         </a>
-        <a href="https://instagram.com/lunex.presents" target="_blank" rel="noopener noreferrer" class="btn btn-outline-light">
-          <i class="bi bi-instagram me-2" aria-hidden="true"></i>Instagram
+        <a href="{% url 'portfolio:work' %}" class="btn-lunex-outline">
+          Explore Our Work
         </a>
       </div>
     </div>

@@ -3,7 +3,7 @@ from django.urls import reverse
 
 
 class Category(models.Model):
-    """Portfolio project category, e.g. Web Design, Logo Design."""
+    """Portfolio project category, e.g. Web Development, Brand Identity, SaaS & Systems."""
 
     name = models.CharField(max_length=60)
     slug = models.SlugField(unique=True)
@@ -18,9 +18,9 @@ class Category(models.Model):
 
 
 class Project(models.Model):
-    """A portfolio project."""
+    """A portfolio project showcasing genuine agency work or concepts."""
 
-    title = models.CharField(max_length=120)
+    title = models.CharField(max_length=140)
     slug = models.SlugField(unique=True)
     category = models.ForeignKey(
         Category,
@@ -33,27 +33,36 @@ class Project(models.Model):
         upload_to='portfolio/',
         blank=True,
         null=True,
-        help_text="Main project image (recommended: 800×600px).",
+        help_text="Main project image (recommended: 1200x800px).",
     )
     short_description = models.CharField(
-        max_length=200,
+        max_length=240,
         help_text="One-liner shown on the portfolio grid card.",
     )
     description = models.TextField(
-        help_text="Full project description shown on the detail page.",
+        help_text="Full project description and context shown on the detail page.",
     )
     deliverables = models.TextField(
         blank=True,
-        help_text="Comma-separated list of deliverables, e.g. Logo, Brand Guide, Social Kit.",
+        help_text="Comma-separated deliverables, e.g. Website, Brand Identity, UI/UX.",
+    )
+    tech_stack = models.CharField(
+        max_length=200,
+        blank=True,
+        help_text="Technology stack, e.g. 'Django, Python, PostgreSQL, WhiteNoise'.",
+    )
+    project_url = models.URLField(
+        blank=True,
+        help_text="Live project URL if deployed.",
     )
     client_name = models.CharField(
         max_length=100,
         blank=True,
-        help_text="Client or brand name. Leave blank to keep anonymous.",
+        help_text="Client or brand name. Leave blank if internal/concept.",
     )
     is_concept = models.BooleanField(
         default=False,
-        help_text="Mark as concept/practice project.",
+        help_text="Clearly marks this as a 'Demo Project' or 'Concept Project'.",
     )
     is_featured = models.BooleanField(
         default=False,
@@ -63,7 +72,7 @@ class Project(models.Model):
     created_date = models.DateField(
         blank=True,
         null=True,
-        help_text="Approximate project date.",
+        help_text="Project completion date.",
     )
 
     class Meta:
@@ -82,6 +91,12 @@ class Project(models.Model):
         if not self.deliverables:
             return []
         return [d.strip() for d in self.deliverables.split(',') if d.strip()]
+
+    def get_tech_stack_list(self):
+        """Return tech stack items as a clean list."""
+        if not self.tech_stack:
+            return []
+        return [t.strip() for t in self.tech_stack.split(',') if t.strip()]
 
     def get_thumbnail_url(self):
         """Return project thumbnail url or first gallery image url."""
@@ -103,7 +118,6 @@ class Project(models.Model):
         return self.images.all()
 
 
-
 class ProjectImage(models.Model):
     """Gallery image for a project (multi-image showcase)."""
 
@@ -114,12 +128,12 @@ class ProjectImage(models.Model):
     )
     image = models.ImageField(
         upload_to='portfolio/gallery/',
-        help_text="Gallery image (recommended: 1200×800px).",
+        help_text="Gallery image (recommended: 1200x800px).",
     )
     caption = models.CharField(
         max_length=150,
         blank=True,
-        help_text="Caption or view label, e.g. 'Platform Dashboard', 'Mobile App', 'Brand Stationery'.",
+        help_text="Caption or view label, e.g. 'Brand Guide', 'Mobile View'.",
     )
     display_order = models.PositiveSmallIntegerField(
         default=0,
@@ -134,4 +148,3 @@ class ProjectImage(models.Model):
 
     def __str__(self):
         return f"{self.project.title} — {self.caption or f'Image #{self.display_order}'}"
-
