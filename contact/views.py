@@ -1,7 +1,49 @@
+import logging
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.core.mail import send_mail
+from django.conf import settings
 from .forms import ContactForm, ReviewForm
 from .models import Enquiry, Review
+
+logger = logging.getLogger(__name__)
+
+
+def _send_enquiry_notification(enquiry):
+    """Send email notification to admin when a new enquiry is received."""
+    try:
+        subject = f'[Lunex Presents] New {enquiry.get_enquiry_type_display()} from {enquiry.name}'
+        body = f"""New enquiry received on Lunex Presents website.
+
+Type: {enquiry.get_enquiry_type_display()}
+Name: {enquiry.name}
+Email: {enquiry.email}
+Phone: {enquiry.phone or 'Not provided'}
+Business: {enquiry.business_name or 'Not provided'}
+Service: {enquiry.get_service_interest_display()}
+Website Type: {enquiry.get_website_type_display() if enquiry.website_type else 'Not specified'}
+Budget: {enquiry.get_budget_range_display() if enquiry.budget_range else 'Not specified'}
+
+Expected Features:
+{enquiry.expected_features or 'Not specified'}
+
+Message / Requirements:
+{enquiry.message}
+
+---
+Submitted: {enquiry.created_at.strftime('%d %b %Y, %I:%M %p IST')}
+Manage at: https://lunexpresents.vercel.app/dashboard/enquiries/
+"""
+        admin_email = getattr(settings, 'ADMIN_EMAIL', 'lunex.presents@gmail.com')
+        send_mail(
+            subject=subject,
+            message=body,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[admin_email],
+            fail_silently=True,
+        )
+    except Exception as e:
+        logger.error(f'Failed to send enquiry notification email: {e}')
 
 
 def contact(request):
@@ -14,6 +56,7 @@ def contact(request):
         form = ContactForm(request.POST)
         if form.is_valid():
             enquiry = form.save()
+            _send_enquiry_notification(enquiry)
             messages.success(
                 request,
                 f"Thank you, {enquiry.name}! Your {enquiry.get_enquiry_type_display()} has been received. We will contact you at {enquiry.email} within 24 hours."
@@ -37,6 +80,7 @@ def start_project(request):
         form = ContactForm(request.POST)
         if form.is_valid():
             enquiry = form.save()
+            _send_enquiry_notification(enquiry)
             messages.success(
                 request,
                 f"Thank you, {enquiry.name}! Your project brief has been received. We'll prepare a structured scope and quotation for you shortly."
@@ -59,6 +103,7 @@ def free_demo_request(request):
         form = ContactForm(request.POST)
         if form.is_valid():
             enquiry = form.save()
+            _send_enquiry_notification(enquiry)
             messages.success(
                 request,
                 f"Demo request received! We'll review your business concept and reach out with an initial visual preview."

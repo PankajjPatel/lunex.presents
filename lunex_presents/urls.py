@@ -25,6 +25,7 @@ urlpatterns = [
     path('work/', include('portfolio.urls')),
     path('contact/', include('contact.urls')),
     path('audit/', include('audit.urls')),
+    path('dashboard/', include('dashboard.urls')),
     path(
         'sitemap.xml',
         sitemap,

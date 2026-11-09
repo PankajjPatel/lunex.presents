@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'portfolio.apps.PortfolioConfig',
     'contact.apps.ContactConfig',
     'audit.apps.AuditConfig',
+    'dashboard.apps.DashboardConfig',
 ]
 
 MIDDLEWARE = [
@@ -108,11 +109,13 @@ STORAGES = {
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Email (console backend by default, override in production)
-MAILERS = {
-    'default': {
-        'BACKEND': 'django.core.mail.backends.console.EmailBackend',
-    },
-}
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_FROM_EMAIL = 'Lunex Presents <lunex.presents@gmail.com>'
+ADMIN_EMAIL = 'lunex.presents@gmail.com'
+
+# Login URL for @login_required
+LOGIN_URL = '/dashboard/login/'
+LOGIN_REDIRECT_URL = '/dashboard/'
 
 # Lunex Presents brand settings (accessible in templates via context processor)
 BRAND_NAME = 'Lunex Presents'

@@ -75,6 +75,34 @@
               Contact
             </a>
           </li>
+
+          <!-- Locked Admin Portal Access -->
+          {% if user.is_authenticated and user.is_staff %}
+          <li class="nav-item dropdown ms-lg-1">
+            <a class="nav-link dropdown-toggle d-inline-flex align-items-center gap-1 active fw-semibold text-charcoal" href="#" id="adminMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-shield-lock-fill text-gold"></i>
+              <span>Admin</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end shadow-sm border-warm bg-white-card p-2" aria-labelledby="adminMenuLink" style="font-size: 0.85rem; min-width: 210px;">
+              <li><div class="dropdown-header text-muted text-uppercase" style="font-size: 0.68rem; letter-spacing: 0.08em;">Signed in: {{ user.username }}</div></li>
+              <li><a class="dropdown-item py-2" href="{% url 'dashboard:home' %}"><i class="bi bi-grid me-2 text-gold"></i>Dashboard Overview</a></li>
+              <li><a class="dropdown-item py-2" href="{% url 'dashboard:enquiries' %}"><i class="bi bi-inbox me-2 text-gold"></i>Customer Enquiries</a></li>
+              <li><a class="dropdown-item py-2" href="{% url 'dashboard:reviews' %}"><i class="bi bi-star me-2 text-gold"></i>Moderate Reviews</a></li>
+              <li><a class="dropdown-item py-2" href="{% url 'dashboard:portfolio' %}"><i class="bi bi-folder me-2 text-gold"></i>Manage Portfolio</a></li>
+              <li><a class="dropdown-item py-2" href="{% url 'dashboard:services' %}"><i class="bi bi-gear me-2 text-gold"></i>Services &amp; Pricing</a></li>
+              <li><a class="dropdown-item py-2" href="/admin/" target="_blank"><i class="bi bi-box-arrow-up-right me-2 text-gold"></i>Django Admin</a></li>
+              <li><hr class="dropdown-divider border-warm my-1"></li>
+              <li><a class="dropdown-item py-2 text-danger" href="{% url 'dashboard:logout' %}"><i class="bi bi-box-arrow-right me-2"></i>Sign Out</a></li>
+            </ul>
+          </li>
+          {% else %}
+          <li class="nav-item ms-lg-1">
+            <a class="nav-link text-muted" href="{% url 'dashboard:login' %}" title="Admin Login (Restricted)" style="font-size: 0.82rem; opacity: 0.8;">
+              <i class="bi bi-lock-fill me-1 text-gold"></i>Admin
+            </a>
+          </li>
+          {% endif %}
+
           <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
             <a href="{% url 'contact:start_project' %}" class="btn-lunex-gold btn-sm d-inline-flex align-items-center gap-2">
               <span>Start a Project</span>

@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="section-padding-sm bg-ivory">
+  {% include "dashboard/dashboard_nav.html" %}
+
+  <div class="container">
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+      <div>
+        <h1 class="font-serif display-6 text-charcoal mb-1">Customer Enquiries &amp; Quotes</h1>
+        <p class="text-muted small mb-0">Review project proposals, demo requests, and direct questions submitted by clients.</p>
+      </div>
+
+      <!-- Filters -->
+      <div class="d-flex flex-wrap gap-2 mt-2 mt-md-0">
+        <a href="?type=all&status={{ current_status }}" class="btn btn-sm {% if current_type == 'all' %}btn-dark{% else %}btn-outline-secondary{% endif %}" style="font-size: 0.75rem;">All Types</a>
+        <a href="?type=quote&status={{ current_status }}" class="btn btn-sm {% if current_type == 'quote' %}btn-dark{% else %}btn-outline-secondary{% endif %}" style="font-size: 0.75rem;">Quotes</a>
+        <a href="?type=demo&status={{ current_status }}" class="btn btn-sm {% if current_type == 'demo' %}btn-dark{% else %}btn-outline-secondary{% endif %}" style="font-size: 0.75rem;">Demos</a>
+        <a href="?type=general&status={{ current_status }}" class="btn btn-sm {% if current_type == 'general' %}btn-dark{% else %}btn-outline-secondary{% endif %}" style="font-size: 0.75rem;">General</a>
+        
+        <span class="border-end border-warm mx-1"></span>
+
+        <a href="?type={{ current_type }}&status=unread" class="btn btn-sm {% if current_status == 'unread' %}btn-danger{% else %}btn-outline-danger{% endif %}" style="font-size: 0.75rem;">
+          Unread ({{ unread_count }})
+        </a>
+        <a href="?type={{ current_type }}&status=read" class="btn btn-sm {% if current_status == 'read' %}btn-secondary{% else %}btn-outline-secondary{% endif %}" style="font-size: 0.75rem;">
+          Read
+        </a>
+      </div>
+    </div>
+
+    <!-- Enquiries Table -->
+    <div class="bg-white-card p-4 p-md-5 border-warm">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <thead>
+            <tr class="text-muted small text-uppercase border-bottom border-warm" style="font-size: 0.72rem;">
+              <th scope="col" class="pb-3">Status</th>
+              <th scope="col" class="pb-3">Client / Business</th>
+              <th scope="col" class="pb-3">Type</th>
+              <th scope="col" class="pb-3">Service</th>
+              <th scope="col" class="pb-3">Budget</th>
+              <th scope="col" class="pb-3">Date</th>
+              <th scope="col" class="pb-3 text-end">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for e in enquiries %}
+            <tr class="border-bottom border-warm {% if not e.is_read %}bg-cream{% endif %}">
+              <td>
+                {% if not e.is_read %}
+                <span class="badge bg-danger">New</span>
+                {% else %}
+                <span class="badge bg-light text-muted border border-warm">Read</span>
+                {% endif %}
+              </td>
+              <td>
+                <div class="fw-bold text-charcoal">{{ e.name }}</div>
+                <div class="small"><a href="mailto:{{ e.email }}" class="text-muted text-decoration-none">{{ e.email }}</a></div>
+                {% if e.phone %}<div class="small text-muted font-mono" style="font-size: 0.75rem;">{{ e.phone }}</div>{% endif %}
+                {% if e.business_name %}<div class="small text-muted fst-italic">{{ e.business_name }}</div>{% endif %}
+              </td>
+              <td>
+                <span class="badge {% if e.enquiry_type == 'quote' %}bg-primary{% elif e.enquiry_type == 'demo' %}bg-success{% else %}bg-secondary{% endif %}" style="font-size: 0.7rem;">
+                  {{ e.get_enquiry_type_display }}
+                </span>
+              </td>
+              <td class="small text-charcoal">
+                {{ e.get_service_interest_display }}
+                {% if e.website_type %}
+                <div class="text-muted" style="font-size: 0.75rem;">{{ e.get_website_type_display }}</div>
+                {% endif %}
+              </td>
+              <td class="small text-charcoal font-mono" style="font-size: 0.8rem;">
+                {{ e.get_budget_range_display|default:"Flexible" }}
+              </td>
+              <td class="small text-muted">
+                {{ e.created_at|date:"d M Y" }}<br>
+                <span style="font-size: 0.75rem;">{{ e.created_at|date:"H:i" }} IST</span>
+              </td>
+              <td class="text-end">
+                <a href="{% url 'dashboard:enquiry_detail' e.id %}" class="btn btn-sm btn-outline-dark py-1 px-3" style="font-size: 0.8rem;">
+                  View &rarr;
+                </a>
+              </td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="7" class="text-center py-5 text-muted">
+                <div class="h5 font-serif mb-1">No enquiries found</div>
+                <p class="small mb-0">No submissions match the selected filters.</p>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

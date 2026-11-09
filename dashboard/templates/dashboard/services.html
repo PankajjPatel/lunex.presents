@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="section-padding-sm bg-ivory">
+  {% include "dashboard/dashboard_nav.html" %}
+
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <div>
+        <h1 class="font-serif display-6 text-charcoal mb-1">Services &amp; Pricing</h1>
+        <p class="text-muted small mb-0">Overview of active agency services, indicative starting prices, and deliverables.</p>
+      </div>
+
+      <a href="/admin/services/service/" target="_blank" class="btn-lunex-gold btn-sm">
+        <i class="bi bi-box-arrow-up-right me-1"></i>Manage in Django Admin
+      </a>
+    </div>
+
+    <div class="row g-4">
+      {% for s in services %}
+      <div class="col-md-6 col-lg-4">
+        <div class="bg-white-card p-4 border-warm h-100 d-flex flex-column justify-content-between">
+          <div>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <span class="badge bg-cream text-charcoal border border-warm" style="font-size: 0.7rem;">
+                Order #{{ s.display_order }}
+              </span>
+              {% if s.is_active %}
+              <span class="badge bg-success" style="font-size: 0.65rem;">Active</span>
+              {% else %}
+              <span class="badge bg-secondary" style="font-size: 0.65rem;">Draft</span>
+              {% endif %}
+            </div>
+
+            <h3 class="font-serif h5 text-charcoal mb-2">{{ s.title }}</h3>
+            <p class="small text-muted mb-3">{{ s.short_description }}</p>
+
+            <div class="p-3 bg-cream border-warm mb-3">
+              <div class="small text-muted">Starting Price</div>
+              <div class="fw-bold text-gold font-mono">{{ s.starting_price|default:"Custom Quote" }}</div>
+              {% if s.ideal_for %}
+              <div class="small text-muted mt-2">Ideal For: <span class="text-charcoal">{{ s.ideal_for }}</span></div>
+              {% endif %}
+            </div>
+
+            <div class="small">
+              <span class="fw-semibold text-charcoal">Key Deliverables:</span>
+              <ul class="text-muted small ps-3 mt-1 mb-0">
+                {% for d in s.get_deliverables_list|slice:":3" %}
+                <li>{{ d }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+
+          <div class="pt-3 mt-3 border-top border-warm d-flex justify-content-between align-items-center">
+            <a href="/services/{{ s.slug }}/" target="_blank" class="small text-charcoal fw-semibold text-decoration-none">
+              View Public Page &rarr;
+            </a>
+            <a href="/admin/services/service/{{ s.id }}/change/" target="_blank" class="btn btn-sm btn-outline-dark py-0 px-2" style="font-size: 0.72rem;">
+              Edit
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+{% endblock %}

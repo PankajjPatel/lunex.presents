@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="section-padding-sm bg-ivory">
+  {% include "dashboard/dashboard_nav.html" %}
+
+  <div class="container">
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+      <div>
+        <h1 class="font-serif display-6 text-charcoal mb-1">Portfolio Projects</h1>
+        <p class="text-muted small mb-0">Manage case studies, showcase projects, and demo concept items.</p>
+      </div>
+
+      <a href="{% url 'dashboard:portfolio_add' %}" class="btn-lunex-gold btn-sm">
+        <i class="bi bi-plus-lg me-1"></i>Add New Project
+      </a>
+    </div>
+
+    <!-- Projects Table -->
+    <div class="bg-white-card p-4 p-md-5 border-warm">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <thead>
+            <tr class="text-muted small text-uppercase border-bottom border-warm" style="font-size: 0.72rem;">
+              <th scope="col" class="pb-3">Project Title</th>
+              <th scope="col" class="pb-3">Category</th>
+              <th scope="col" class="pb-3">Type</th>
+              <th scope="col" class="pb-3">Featured</th>
+              <th scope="col" class="pb-3">Order</th>
+              <th scope="col" class="pb-3 text-end">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for p in projects %}
+            <tr class="border-bottom border-warm">
+              <td>
+                <div class="d-flex align-items-center gap-3">
+                  {% if p.thumbnail %}
+                  <img src="{{ p.thumbnail.url }}" alt="{{ p.title }}" style="width: 50px; height: 35px; object-fit: cover; border-radius: 2px;" class="border-warm">
+                  {% else %}
+                  <div class="bg-cream border-warm d-flex align-items-center justify-content-center" style="width: 50px; height: 35px; font-size: 0.7rem; color: #888;">No img</div>
+                  {% endif %}
+                  <div>
+                    <div class="fw-bold text-charcoal">{{ p.title }}</div>
+                    <div class="small text-muted font-monospace" style="font-size: 0.72rem;">/work/{{ p.slug }}/</div>
+                  </div>
+                </div>
+              </td>
+              <td class="small text-charcoal">{{ p.category.name|default:"Uncategorized" }}</td>
+              <td>
+                {% if p.is_concept %}
+                <span class="badge bg-secondary" style="font-size: 0.65rem;">Demo Concept</span>
+                {% else %}
+                <span class="badge bg-success" style="font-size: 0.65rem;">Client Project</span>
+                {% endif %}
+              </td>
+              <td>
+                {% if p.is_featured %}
+                <span class="text-gold fw-bold small">★ Featured</span>
+                {% else %}
+                <span class="text-muted small">—</span>
+                {% endif %}
+              </td>
+              <td class="small text-muted font-mono">{{ p.display_order }}</td>
+              <td class="text-end">
+                <div class="d-inline-flex gap-2">
+                  <a href="{{ p.get_absolute_url }}" target="_blank" class="btn btn-sm btn-outline-secondary py-1 px-2" style="font-size: 0.75rem;" title="View Live">
+                    <i class="bi bi-box-arrow-up-right"></i>
+                  </a>
+                  <a href="{% url 'dashboard:portfolio_edit' p.id %}" class="btn btn-sm btn-outline-dark py-1 px-2" style="font-size: 0.75rem;">
+                    Edit
+                  </a>
+                  <form method="POST" action="{% url 'dashboard:portfolio_delete' p.id %}" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-outline-danger py-1 px-2" style="font-size: 0.75rem;" onclick="return confirm('Delete project {{ p.title }}?')">
+                      <i class="bi bi-trash"></i>
+                    </button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="6" class="text-center py-5 text-muted">
+                <div class="h5 font-serif mb-2">No projects in portfolio</div>
+                <a href="{% url 'dashboard:portfolio_add' %}" class="btn-lunex-gold btn-sm">Add Your First Project</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

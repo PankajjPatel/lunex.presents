@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="section-padding-sm bg-ivory">
+  {% include "dashboard/dashboard_nav.html" %}
+
+  <div class="container">
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 pb-3 border-bottom border-warm">
+      <div>
+        <a href="{% url 'dashboard:enquiries' %}" class="small text-muted text-decoration-none">&larr; Back to Enquiries</a>
+        <h1 class="font-serif display-6 text-charcoal mb-0 mt-2">Enquiry #{{ enquiry.id }} from {{ enquiry.name }}</h1>
+      </div>
+      <div class="d-flex gap-2 align-items-center mt-3 mt-md-0">
+        <form method="POST" action="{% url 'dashboard:enquiry_mark_read' enquiry.id %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-sm {% if enquiry.is_read %}btn-outline-secondary{% else %}btn-success{% endif %}">
+            {% if enquiry.is_read %}Mark as Unread{% else %}Mark as Read{% endif %}
+          </button>
+        </form>
+        <a href="mailto:{{ enquiry.email }}?subject=Regarding your {{ enquiry.get_enquiry_type_display }} with Lunex Presents" class="btn-lunex-gold btn-sm">
+          <i class="bi bi-envelope-fill me-1"></i>Reply to Client
+        </a>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-lg-8">
+        <!-- Message / Requirements -->
+        <div class="bg-white-card p-4 p-md-5 border-warm mb-4">
+          <div class="small fw-semibold text-muted text-uppercase mb-2" style="letter-spacing: 0.05em; font-size: 0.72rem;">Client Requirements / Brief</div>
+          <div class="p-4 bg-cream border-warm text-charcoal" style="line-height: 1.8; white-space: pre-line;">
+            {{ enquiry.message }}
+          </div>
+
+          {% if enquiry.expected_features %}
+          <div class="mt-4">
+            <div class="small fw-semibold text-muted text-uppercase mb-2" style="letter-spacing: 0.05em; font-size: 0.72rem;">Expected Features</div>
+            <div class="p-3 bg-cream border-warm text-charcoal small">
+              {{ enquiry.expected_features|linebreaksbr }}
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <!-- Client Details Card -->
+        <div class="bg-white-card p-4 border-warm mb-4">
+          <div class="small fw-semibold text-muted text-uppercase mb-3" style="letter-spacing: 0.05em; font-size: 0.72rem;">Client Information</div>
+          
+          <div class="mb-3">
+            <div class="small text-muted">Customer Name</div>
+            <div class="fw-bold text-charcoal">{{ enquiry.name }}</div>
+          </div>
+
+          <div class="mb-3">
+            <div class="small text-muted">Email Address</div>
+            <div><a href="mailto:{{ enquiry.email }}" class="text-charcoal fw-medium">{{ enquiry.email }}</a></div>
+          </div>
+
+          {% if enquiry.phone %}
+          <div class="mb-3">
+            <div class="small text-muted">Phone Number</div>
+            <div class="font-mono text-charcoal">{{ enquiry.phone }}</div>
+          </div>
+          {% endif %}
+
+          {% if enquiry.business_name %}
+          <div class="mb-3">
+            <div class="small text-muted">Business / Brand</div>
+            <div class="text-charcoal">{{ enquiry.business_name }}</div>
+          </div>
+          {% endif %}
+
+          <div class="mb-3">
+            <div class="small text-muted">Enquiry Purpose</div>
+            <span class="badge {% if enquiry.enquiry_type == 'quote' %}bg-primary{% elif enquiry.enquiry_type == 'demo' %}bg-success{% else %}bg-secondary{% endif %}">
+              {{ enquiry.get_enquiry_type_display }}
+            </span>
+          </div>
+
+          <div class="mb-3">
+            <div class="small text-muted">Service Required</div>
+            <div class="fw-medium text-charcoal">{{ enquiry.get_service_interest_display }}</div>
+          </div>
+
+          {% if enquiry.website_type %}
+          <div class="mb-3">
+            <div class="small text-muted">Website Type</div>
+            <div class="text-charcoal small">{{ enquiry.get_website_type_display }}</div>
+          </div>
+          {% endif %}
+
+          <div class="mb-3">
+            <div class="small text-muted">Budget Range</div>
+            <div class="font-mono text-charcoal">{{ enquiry.get_budget_range_display|default:"Flexible" }}</div>
+          </div>
+
+          <div class="pt-3 border-top border-warm">
+            <div class="small text-muted">Submitted At</div>
+            <div class="small text-charcoal">{{ enquiry.created_at|date:"d F Y, H:i:s" }} IST</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

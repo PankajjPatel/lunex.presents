@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="section-padding-sm bg-ivory">
+  {% include "dashboard/dashboard_nav.html" %}
+
+  <div class="container">
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+      <div>
+        <h1 class="font-serif display-6 text-charcoal mb-1">Customer Reviews Moderation</h1>
+        <p class="text-muted small mb-0">Verify client feedback and control which testimonials appear publicly on the website.</p>
+      </div>
+
+      <!-- Filters -->
+      <div class="d-flex gap-2 mt-2 mt-md-0">
+        <a href="?filter=all" class="btn btn-sm {% if current_filter == 'all' %}btn-dark{% else %}btn-outline-secondary{% endif %}" style="font-size: 0.8rem;">All Reviews</a>
+        <a href="?filter=pending" class="btn btn-sm {% if current_filter == 'pending' %}btn-warning text-dark{% else %}btn-outline-warning text-dark{% endif %}" style="font-size: 0.8rem;">
+          Pending Approval ({{ pending_count }})
+        </a>
+        <a href="?filter=approved" class="btn btn-sm {% if current_filter == 'approved' %}btn-success{% else %}btn-outline-success{% endif %}" style="font-size: 0.8rem;">Approved</a>
+      </div>
+    </div>
+
+    <!-- Reviews Grid -->
+    <div class="row g-4">
+      {% for r in reviews %}
+      <div class="col-md-6 col-lg-4">
+        <div class="bg-white-card p-4 border-warm h-100 d-flex flex-column justify-content-between {% if not r.is_approved %}border-warning{% endif %}">
+          <div>
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <div>
+                <span class="badge {% if r.is_approved %}bg-success{% else %}bg-warning text-dark{% endif %} text-uppercase" style="font-size: 0.65rem; letter-spacing: 0.05em;">
+                  {% if r.is_approved %}Live on Site{% else %}Pending Moderation{% endif %}
+                </span>
+                {% if r.is_verified_client %}
+                <span class="badge bg-cream text-charcoal border border-warm" style="font-size: 0.65rem;">
+                  <i class="bi bi-patch-check-fill text-gold me-1"></i>Verified Client
+                </span>
+                {% endif %}
+              </div>
+              <div class="text-gold small">
+                ★ {{ r.rating }}/5
+              </div>
+            </div>
+
+            <h3 class="h5 text-charcoal mb-1">{{ r.client_name }}</h3>
+            {% if r.business_name %}<div class="small text-muted mb-1">{{ r.business_name }}</div>{% endif %}
+            {% if r.project_title %}<div class="small text-muted fst-italic mb-2" style="font-size: 0.78rem;">Project: {{ r.project_title }}</div>{% endif %}
+
+            <div class="p-3 bg-cream border-warm text-charcoal small my-3" style="line-height: 1.6;">
+              "{{ r.feedback }}"
+            </div>
+            
+            <div class="small text-muted" style="font-size: 0.75rem;">Submitted on {{ r.created_at|date:"d M Y, H:i" }}</div>
+          </div>
+
+          <!-- Moderation Actions -->
+          <div class="pt-3 mt-3 border-top border-warm d-flex flex-wrap gap-2">
+            <form method="POST" action="{% url 'dashboard:review_approve' r.id %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-sm {% if r.is_approved %}btn-outline-secondary{% else %}btn-success{% endif %}" style="font-size: 0.75rem;">
+                {% if r.is_approved %}Unpublish{% else %}✓ Approve &amp; Publish{% endif %}
+              </button>
+            </form>
+
+            <form method="POST" action="{% url 'dashboard:review_verify' r.id %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-sm {% if r.is_verified_client %}btn-outline-warning text-dark{% else %}btn-outline-dark{% endif %}" style="font-size: 0.75rem;">
+                {% if r.is_verified_client %}Remove Badge{% else %}Mark Verified{% endif %}
+              </button>
+            </form>
+
+            <form method="POST" action="{% url 'dashboard:review_delete' r.id %}" class="ms-auto">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-sm btn-outline-danger" style="font-size: 0.75rem;" onclick="return confirm('Permanently delete review by {{ r.client_name }}?')">
+                <i class="bi bi-trash"></i>
+              </button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+      {% empty %}
+      <div class="col-12">
+        <div class="bg-white-card p-5 text-center border-warm">
+          <div class="font-serif h4 text-charcoal mb-2">No reviews match your filter.</div>
+          <p class="text-muted small mb-0">Check the public review submission form on the website.</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+{% endblock %}
