@@ -64,3 +64,4 @@ class ProjectForm(forms.ModelForm):
             'display_order': forms.NumberInput(attrs={'class': 'form-control bg-cream border-warm'}),
             'created_date': forms.DateInput(attrs={'class': 'form-control bg-cream border-warm', 'type': 'date'}),
         }
+

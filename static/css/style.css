@@ -1179,3 +1179,135 @@ a:hover {
     font-size: 0.8rem;
   }
 }
+
+
+/* ─── 15. LIGHT & DARK THEME SYSTEM (DEFAULT: LIGHT) ─── */
+.bg-ivory {
+  background-color: var(--lx-bg) !important;
+}
+.bg-cream {
+  background-color: var(--lx-bg-secondary) !important;
+}
+.bg-white-card {
+  background-color: var(--lx-surface) !important;
+}
+.border-warm {
+  border-color: var(--lx-border) !important;
+}
+
+/* Theme Toggle Button */
+.lx-theme-toggle-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--lx-border);
+  background-color: transparent;
+  color: var(--lx-text-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--lx-transition);
+  cursor: pointer;
+  padding: 0;
+}
+
+.lx-theme-toggle-btn:hover {
+  border-color: var(--lx-accent);
+  color: var(--lx-accent);
+  transform: rotate(15deg);
+}
+
+/* Dark Theme Variables & Component Adaptations */
+[data-theme="dark"] {
+  --lx-bg: #101116; /* Deep Charcoal Black */
+  --lx-bg-secondary: #16181F; /* Soft Charcoal */
+  --lx-surface: #1D2028; /* Dark Surface Card */
+  --lx-text-primary: #F5F1E9; /* Warm Ivory text */
+  --lx-text-secondary: #A3A3A8; /* Light Muted Grey */
+  --lx-text-muted: #7A7A82;
+  --lx-border: #2C303B; /* Subtle Dark Border */
+  --lx-border-subtle: #242731;
+  --lx-accent: #D49B00; /* Vibrant Mustard Gold */
+  --lx-accent-hover: #E5AC1A;
+  --lx-accent-light: #2C2614;
+
+  color-scheme: dark;
+}
+
+[data-theme="dark"] body {
+  background-color: var(--lx-bg);
+  color: var(--lx-text-primary);
+}
+
+[data-theme="dark"] .lx-header {
+  background-color: rgba(16, 17, 22, 0.94);
+  border-bottom-color: var(--lx-border);
+}
+
+[data-theme="dark"] .form-control,
+[data-theme="dark"] .form-select {
+  background-color: #16181F !important;
+  color: #F5F1E9 !important;
+  border-color: #2C303B !important;
+}
+
+[data-theme="dark"] .form-control:focus,
+[data-theme="dark"] .form-select:focus {
+  background-color: #1A1D25 !important;
+  color: #F5F1E9 !important;
+  border-color: var(--lx-accent) !important;
+}
+
+[data-theme="dark"] .accordion-button {
+  background-color: var(--lx-surface) !important;
+  color: var(--lx-text-primary) !important;
+}
+
+[data-theme="dark"] .accordion-button:not(.collapsed) {
+  background-color: var(--lx-bg-secondary) !important;
+  color: var(--lx-accent) !important;
+}
+
+[data-theme="dark"] .table {
+  color: var(--lx-text-primary);
+}
+
+[data-theme="dark"] .table > :not(caption) > * > * {
+  background-color: transparent;
+  border-bottom-color: var(--lx-border);
+  color: var(--lx-text-primary);
+}
+
+[data-theme="dark"] .table-hover > tbody > tr:hover > * {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+[data-theme="dark"] .btn-lunex-outline {
+  border-color: var(--lx-border);
+  color: var(--lx-text-primary) !important;
+}
+
+[data-theme="dark"] .btn-lunex-outline:hover {
+  background-color: var(--lx-accent);
+  border-color: var(--lx-accent);
+  color: #101116 !important;
+}
+
+[data-theme="dark"] .dropdown-menu {
+  background-color: var(--lx-surface) !important;
+  border-color: var(--lx-border) !important;
+}
+
+[data-theme="dark"] .dropdown-item {
+  color: var(--lx-text-primary) !important;
+}
+
+[data-theme="dark"] .dropdown-item:hover {
+  background-color: var(--lx-bg-secondary) !important;
+}
+
+[data-theme="dark"] .modal-content {
+  background-color: var(--lx-surface) !important;
+  color: var(--lx-text-primary) !important;
+  border-color: var(--lx-border) !important;
+}

@@ -5,8 +5,66 @@
 
 'use strict';
 
-/* ─── 0. THEME CONTROLLER ─────────────────────────────── */
-// Theme switching is handled cleanly by window.toggleLunexTheme in base.html
+/* ─── 0. THEME CONTROLLER (DEFAULT: LIGHT) ─────────────── */
+(function () {
+  function getTheme() {
+    try {
+      return localStorage.getItem('lunex-theme') || 'light';
+    } catch (e) {
+      return 'light';
+    }
+  }
+
+  function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    try {
+      localStorage.setItem('lunex-theme', theme);
+    } catch (e) {}
+
+    const moonIcons = document.querySelectorAll('.lx-theme-icon-moon');
+    const sunIcons = document.querySelectorAll('.lx-theme-icon-sun');
+    const logoImgs = document.querySelectorAll('.lx-nav-logo-img');
+
+    if (theme === 'dark') {
+      moonIcons.forEach(el => el.classList.add('d-none'));
+      sunIcons.forEach(el => el.classList.remove('d-none'));
+      logoImgs.forEach(img => {
+        if (!img.getAttribute('data-light-src')) {
+          img.setAttribute('data-light-src', img.src);
+        }
+        img.src = '/static/images/logo/lunex-logo-dark.svg?v=20261107';
+      });
+    } else {
+      moonIcons.forEach(el => el.classList.remove('d-none'));
+      sunIcons.forEach(el => el.classList.add('d-none'));
+      logoImgs.forEach(img => {
+        const lightSrc = img.getAttribute('data-light-src');
+        if (lightSrc) {
+          img.src = lightSrc;
+        }
+      });
+    }
+  }
+
+  window.toggleLunexTheme = function () {
+    const current = getTheme();
+    const next = current === 'dark' ? 'light' : 'dark';
+    applyTheme(next);
+  };
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const theme = getTheme();
+    applyTheme(theme);
+
+    const triggers = document.querySelectorAll('.lx-theme-toggle-trigger');
+    triggers.forEach(btn => {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        window.toggleLunexTheme();
+      });
+    });
+  });
+})();
 
 
 /* ─── 1. NAVBAR SCROLL EFFECT ─────────────────────────── */
