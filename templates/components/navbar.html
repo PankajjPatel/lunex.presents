@@ -2,15 +2,18 @@
 <header class="lx-header">
   <div class="container">
     <nav class="navbar navbar-expand-lg p-0" aria-label="Lunex Presents Navigation">
-      <!-- Brand Logo: Exact Original Logo -->
-      <a class="navbar-brand d-inline-flex align-items-center gap-2 py-2" href="{% url 'core:home' %}" aria-label="Lunex Presents Homepage">
+      <!-- Brand Logo: Iconic Geometric Mark + Typography Lockup -->
+      <a class="navbar-brand d-inline-flex align-items-center gap-3 py-2" href="{% url 'core:home' %}" aria-label="Lunex Presents Homepage">
         <img
-          src="{% static 'images/logo/lunex-logo.png' %}?v=20261107"
+          src="{% static 'images/logo/lunex-icon.png' %}?v=20261109"
           alt="Lunex Presents"
-          class="lx-nav-logo-img"
-          style="height: 48px; width: auto; object-fit: contain; border-radius: 4px;"
-          onerror="this.onerror=null; this.src='{% static 'images/logo/lunex-brand-original.png' %}';"
+          class="lx-nav-logo-mark"
+          style="height: 38px; width: 38px; object-fit: contain; border-radius: 4px;"
         >
+        <div class="d-flex flex-column justify-content-center lh-1">
+          <span class="text-charcoal brand-title" style="font-size: 1.18rem; font-weight: 800; letter-spacing: 0.14em;">LUNEX</span>
+          <span class="text-gold brand-subtitle" style="font-size: 0.62rem; font-weight: 700; letter-spacing: 0.24em; margin-top: 3px;">.PRESENTS</span>
+        </div>
       </a>
 
       <!-- Mobile Controls (Theme Toggle + Hamburger) -->
@@ -38,7 +41,7 @@
         </button>
       </div>
 
-      <!-- Navigation Links -->
+      <!-- Clean Agency Navigation Links (No SaaS, No Help clutter) -->
       <div class="collapse navbar-collapse" id="lunexNavMenu">
         <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3 py-3 py-lg-0">
           <li class="nav-item">
@@ -72,23 +75,12 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link d-inline-flex align-items-center {% if request.resolver_match.app_name == 'audit' %}active{% endif %}" href="{% url 'audit:home' %}">
-              Compliance SaaS <span class="lx-nav-badge">Tool</span>
-            </a>
-          </li>
-          <!-- Help Option -->
-          <li class="nav-item">
-            <a class="nav-link {% if request.resolver_match.url_name == 'help' and request.resolver_match.app_name == 'core' %}active{% endif %}" href="{% url 'core:help' %}">
-              <i class="bi bi-question-circle me-1 text-gold"></i>Help
-            </a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link {% if request.resolver_match.url_name == 'contact' and request.resolver_match.app_name == 'contact' %}active{% endif %}" href="{% url 'contact:contact' %}">
               Contact
             </a>
           </li>
 
-          <!-- Locked Admin Portal Access -->
+          <!-- Admin Portal Dropdown (ONLY visible when logged in) -->
           {% if user.is_authenticated and user.is_staff %}
           <li class="nav-item dropdown ms-lg-1">
             <a class="nav-link dropdown-toggle d-inline-flex align-items-center gap-1 active fw-semibold text-charcoal" href="#" id="adminMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -107,12 +99,6 @@
               <li><a class="dropdown-item py-2 text-danger" href="{% url 'dashboard:logout' %}"><i class="bi bi-box-arrow-right me-2"></i>Sign Out</a></li>
             </ul>
           </li>
-          {% else %}
-          <li class="nav-item ms-lg-1">
-            <a class="nav-link text-muted" href="{% url 'dashboard:login' %}" title="Admin Login (Restricted)" style="font-size: 0.82rem; opacity: 0.8;">
-              <i class="bi bi-lock-fill me-1 text-gold"></i>Admin
-            </a>
-          </li>
           {% endif %}
 
           <!-- Desktop Theme Toggle -->
@@ -129,6 +115,7 @@
             </button>
           </li>
 
+          <!-- Primary CTA Button -->
           <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
             <a href="{% url 'contact:start_project' %}" class="btn-lunex-gold btn-sm d-inline-flex align-items-center gap-2">
               <span>Start a Project</span>

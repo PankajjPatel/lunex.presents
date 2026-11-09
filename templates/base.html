@@ -17,7 +17,7 @@
 
   <!-- Title & SEO Meta -->
   <title>{% block title %}{{ page_title|default:"Lunex Presents — Ideas to Digital Experiences that Grow" }}{% endblock %}</title>
-  <meta name="description" content="{% block meta_description %}{{ meta_description|default:"We design, develop and build digital solutions for businesses, brands and creators. Web development, brand identity, social creatives, and privacy compliance." }}{% endblock %}">
+  <meta name="description" content="{% block meta_description %}{{ meta_description|default:"We design, develop and build digital solutions for businesses, brands and creators. Web development, brand identity, social creatives, and business systems." }}{% endblock %}">
   <meta name="author" content="Lunex Presents">
   <meta name="robots" content="index, follow">
 
@@ -87,14 +87,6 @@
   <main id="main-content">
     {% block content %}{% endblock %}
   </main>
-
-  <!-- Floating Help Trigger -->
-  <a href="{% url 'core:help' %}" class="lx-floating-help" title="Need Help? Visit Help Center" aria-label="Lunex Help Center">
-    <span class="lx-floating-help-icon">
-      <i class="bi bi-question-circle-fill"></i>
-    </span>
-    <span class="lx-floating-help-text">Help</span>
-  </a>
 
   <!-- Footer -->
   {% include "components/footer.html" %}
